@@ -15,7 +15,7 @@
             android:id="@+id/plusButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/green"
+            android:background="#FF00FF00"
             android:text="+"
             android:textSize="100sp" />
 
@@ -23,7 +23,7 @@
             android:id="@+id/minusButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/red"
+            android:background="#FFFF0000"
             android:text="-"
             android:textSize="125sp" />
     </LinearLayout>
