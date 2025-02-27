@@ -18,8 +18,16 @@ public class CoupState extends GameState {
 	// the value of the counter
 	private int counter;
 
+	//Player 0 is the human
+	private int player0Money;
+	//Player 1 is computer
 	private int player1Money;
-	private int player2Money;
+	//Int for player turn, from 0-max number of players
+	private int playerId;
+
+	private int gameStage;
+
+
 	
 	/**
 	 * constructor, initializing the counter value from the parameter
