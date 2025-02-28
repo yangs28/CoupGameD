@@ -1,7 +1,9 @@
 package edu.up.cs301.Coup;
 
 import edu.up.cs301.Characters.Ambassador;
+import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
+import edu.up.cs301.GameFramework.players.GamePlayer;
 
 
 /**
@@ -49,6 +51,28 @@ public class CoupState extends GameState {
 		this.player1Money = orig.player1Money;
 		this.playerId = orig.playerId;
 	}
+
+	//action methods
+
+	//generic actions
+	public boolean makeIncomeAction(GameAction action, GamePlayer player){return false;}
+	public boolean makeAideAction(GameAction action, GamePlayer player){return false;}
+	public boolean makeCoupAction(GameAction action, GamePlayer player){return false;}
+
+	//class actions
+	public boolean makeAssnAction(GameAction action, GamePlayer player){return false;}
+	public boolean makeTaxAction(GameAction action, GamePlayer player){return false;}
+	public boolean makeStealAction(GameAction action, GamePlayer player){return false;}
+	public boolean makeExcAction(GameAction action, GamePlayer player){return false;}
+
+	//reactions
+	public boolean makeBlockAction(GameAction action, GamePlayer player){return false;}
+	public boolean makeChalAction(GameAction action, GamePlayer player){return false;}
+
+
+
+
+
 
 	// Getter and Setter for player0Money
 	public int getPlayer0Money() {
