@@ -49,5 +49,41 @@ public class CoupState extends GameState {
 		this.player1Money = orig.player1Money;
 		this.playerId = orig.playerId;
 	}
+
+	// Getter and Setter for player0Money
+	public int getPlayer0Money() {
+		return player0Money;
+	}
+
+	public void setPlayer0Money(int _player0Money) {
+		this.player0Money = _player0Money;
+	}
+
+	// Getter and Setter for player1Money
+	public int getPlayer1Money() {
+		return player1Money;
+	}
+
+	public void setPlayer1Money(int _player1Money) {
+		this.player1Money = _player1Money;
+	}
+
+	// Getter and Setter for playerId
+	public int getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(int _playerId) {
+		this.playerId = _playerId;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Player 0 has " + String.valueOf(player0Money) + " dabloons." +
+				"Player 1 has " + String.valueOf(player1Money) + " dabloons" +
+				"It is currently player " + String.valueOf(getPlayerId()) + "'s turn";
+	}
 }
 
