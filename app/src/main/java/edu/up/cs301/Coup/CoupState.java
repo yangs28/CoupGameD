@@ -44,8 +44,10 @@ public class CoupState extends GameState {
 	 * @param orig the object from which the copy should be made
 	 */
 	public CoupState(CoupState orig) {
-		// set the counter to that of the original
-		//this.counter = orig.counter;
+		//Sets currencies and ID of the players to be the copy of Orig
+		this.player0Money = orig.player0Money;
+		this.player1Money = orig.player1Money;
+		this.playerId = orig.playerId;
 	}
 }
 
