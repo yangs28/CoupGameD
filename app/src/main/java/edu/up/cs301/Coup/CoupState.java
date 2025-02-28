@@ -1,5 +1,6 @@
 package edu.up.cs301.Coup;
 
+import edu.up.cs301.Characters.Ambassador;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 
 
@@ -11,12 +12,9 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
  * @version July 2013
  */
 public class CoupState extends GameState {
-	
+
 	// to satisfy Serializable interface
 	private static final long serialVersionUID = 7737393762469851826L;
-
-	// the value of the counter
-	private int counter;
 
 	//Player 0 is the human
 	private int player0Money;
@@ -28,45 +26,26 @@ public class CoupState extends GameState {
 	private int gameStage;
 
 
-	
-	/**
-	 * constructor, initializing the counter value from the parameter
-	 * 
-	 * @param counterVal
-	 * 		the value to which the counter's value should be initialized
-	 */
-	public CoupState(int counterVal) {
-		counter = counterVal;
+	public CoupState() {
+		player0Money = 0;
+		player1Money = 0;
+		playerId = 0;
 	}
-	
-	/**
-	 * copy constructor; makes a copy of the original object
-	 * 
-	 * @param orig
-	 * 		the object from which the copy should be made
-	 */
-	public CoupState(CoupState orig) {
-		// set the counter to that of the original
-		this.counter = orig.counter;
+
+	public CoupState(int _player0Money, int _player1Money, int _playerId) {
+		this.player0Money = _player0Money;
+		this.player1Money = _player1Money;
+		this.playerId = _playerId;
 	}
 
 	/**
-	 * getter method for the counter
-	 * 
-	 * @return
-	 * 		the value of the counter
+	 * copy constructor; makes a copy of the original object
+	 *
+	 * @param orig the object from which the copy should be made
 	 */
-	public int getCounter() {
-		return counter;
-	}
-	
-	/**
-	 * setter method for the counter
-	 * 
-	 * @param counter
-	 * 		the value to which the counter should be set
-	 */
-	public void setCounter(int counter) {
-		this.counter = counter;
+	public CoupState(CoupState orig) {
+		// set the counter to that of the original
+		//this.counter = orig.counter;
 	}
 }
+

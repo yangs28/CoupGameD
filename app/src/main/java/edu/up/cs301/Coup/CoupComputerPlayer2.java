@@ -90,7 +90,6 @@ public class CoupComputerPlayer2 extends CoupComputerPlayer1 {
 					new Runnable() {
 						public void run() {
 						if (counterValueTextView != null && currentGameState != null) {
-							counterValueTextView.setText("" + currentGameState.getCounter());
 						}
 					}});
 		}

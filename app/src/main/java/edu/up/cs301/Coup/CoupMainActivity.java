@@ -83,7 +83,7 @@ public class CoupMainActivity extends GameMainActivity {
 	 */
 	@Override
 	public LocalGame createLocalGame(GameState state) {
-		if (state == null) state = new CoupState(0);
+		if (state == null) state = new CoupState();
 		return new CoupLocalGame(state);
 	}
 
