@@ -1,5 +1,7 @@
 package edu.up.cs301.Coup;
 
+import android.util.Log;
+
 import edu.up.cs301.Characters.Ambassador;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
@@ -28,13 +30,15 @@ public class CoupState extends GameState {
 
 	private int gameStage;
 
-
+	//Default constructor for the game state. Initializes everything as zero
 	public CoupState() {
 		player0Money = 0;
 		player1Money = 0;
 		playerId = 0;
+		Log.d("yolo","state" + this.toString());
 	}
 
+	//Constructor that sets the values
 	public CoupState(int _player0Money, int _player1Money, int _playerId) {
 		this.player0Money = _player0Money;
 		this.player1Money = _player1Money;
@@ -103,12 +107,12 @@ public class CoupState extends GameState {
 	}
 
 
-
+	//An overwritten toString method that returns the state of the game
 	@Override
 	public String toString() {
-		return "Player 0 has " + String.valueOf(player0Money) + " dabloons." +
-				"Player 1 has " + String.valueOf(player1Money) + " dabloons" +
-				"It is currently player " + String.valueOf(getPlayerId()) + "'s turn";
+		return "Player 0 has " + (player0Money) + " dabloons." +
+				"Player 1 has " + (player1Money) + " dabloons" +
+				"It is currently player " + (getPlayerId()) + "'s turn";
 	}
 }
 
