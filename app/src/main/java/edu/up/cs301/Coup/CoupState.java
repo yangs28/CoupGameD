@@ -5,13 +5,14 @@ import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 
-
 /**
- * This contains the state for the Counter game. The state consist of simply
- * the value of the counter.
+ * This contains the state for the Coup game. This stores the current state of the
+ * game as well as all possible executable actions
+ *
+ * SPEEDRUN: To win quickly, you can
  * 
- * @author Steven R. Vegdahl
- * @version July 2013
+ * @author Sean Yang, Clint Sizemore, Kanoa Martin
+ * @version 2-28-25
  */
 public class CoupState extends GameState {
 
