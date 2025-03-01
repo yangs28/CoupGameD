@@ -12,6 +12,10 @@ import edu.up.cs301.GameFramework.players.GamePlayer;
  * game as well as all possible executable actions
  *
  * SPEEDRUN: To win quickly, you can
+ * Draw the Assassin card
+ * Assassinate both of one players cards over 2 turns
+ * Assasinate the other players two cards in your next two
+ * Win game after 4 turns.
  * 
  * @author Sean Yang, Clint Sizemore, Kanoa Martin
  * @version 2-28-25
