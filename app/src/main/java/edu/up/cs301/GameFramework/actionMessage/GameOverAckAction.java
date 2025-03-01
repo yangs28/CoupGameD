@@ -21,6 +21,6 @@ public class GameOverAckAction extends GameAction {
      * 		the player to sent the action
      */
     public GameOverAckAction(GamePlayer p) {
-        super(p);
+        super(p, false);
     }
 }

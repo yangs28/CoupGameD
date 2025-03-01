@@ -9,6 +9,6 @@ public class Assassin extends GameAction {
     protected GamePlayer player;
 
     public Assassin(GamePlayer player) {
-        super(player);
+        super(player, false);
     }
 }
