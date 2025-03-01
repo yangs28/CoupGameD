@@ -9,6 +9,6 @@ public class Duke extends GameAction {
     protected GamePlayer player;
 
     public Duke(GamePlayer player) {
-        super(player);
+        super(player, false);
     }
 }

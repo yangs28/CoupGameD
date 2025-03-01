@@ -9,6 +9,6 @@ public class Ambassador extends GameAction {
     protected GamePlayer player;
 
     public Ambassador(GamePlayer player) {
-        super(player);
+        super(player, false);
     }
 }

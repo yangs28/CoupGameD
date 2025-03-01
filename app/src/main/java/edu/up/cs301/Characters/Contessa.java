@@ -9,6 +9,6 @@ public class Contessa extends GameAction {
     protected GamePlayer player;
 
     public Contessa(GamePlayer player) {
-        super(player);
+        super(player, false);
     }
 }
