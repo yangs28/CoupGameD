@@ -3,6 +3,7 @@ package edu.up.cs301.Coup;
 import android.util.Log;
 
 import edu.up.cs301.Characters.Ambassador;
+import edu.up.cs301.GameFramework.Game;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
@@ -31,6 +32,10 @@ public class CoupState extends GameState {
 	private int player1Money;
 	//Int for player turn, from 0-max number of players
 	private int playerId;
+	//Initializes the deck
+	private GameAction[] deck;
+	private GameAction[] player0Hand;
+	private GameAction[] player1Hand;
 
 	private int gameStage;
 
@@ -39,13 +44,23 @@ public class CoupState extends GameState {
 		player0Money = 0;
 		player1Money = 0;
 		playerId = 0;
+
+		player0Hand = new GameAction[1];
+		player1Hand = new GameAction[1];
+		deck = new GameAction[14];
+
 	}
 
 	//Constructor that sets the values
-	public CoupState(int _player0Money, int _player1Money, int _playerId) {
+	public CoupState(int _player0Money, int _player1Money, int _playerId, GameAction[] _player0Hand, GameAction[] _player1Hand, GameAction[] _deck) {
+		//Initializes ID and money
 		this.player0Money = _player0Money;
 		this.player1Money = _player1Money;
 		this.playerId = _playerId;
+		//Initializes the hand and deck
+		this.player0Hand = _player0Hand.clone();
+		this.player1Hand = _player1Hand.clone();
+		this.deck = _deck.clone();
 	}
 
 	/**
@@ -58,6 +73,24 @@ public class CoupState extends GameState {
 		this.player0Money = orig.player0Money;
 		this.player1Money = orig.player1Money;
 		this.playerId = orig.playerId;
+
+		//These if statements initializes the arrays and copies each position within the array
+		this.player0Hand = new GameAction[orig.player0Hand.length];
+		for (int i = 0; i < orig.player0Hand.length; i++) {
+			this.player0Hand[i] = orig.player0Hand[i];
+		}
+
+		this.player1Hand = new GameAction[orig.player1Hand.length];
+		for (int i = 0; i < orig.player1Hand.length; i++) {
+			this.player1Hand[i] = orig.player1Hand[i];
+		}
+
+		this.deck = new GameAction[orig.deck.length];
+		for (int i = 0; i < orig.deck.length; i++) {
+			this.deck[i] = orig.deck[i];
+		}
+
+
 	}
 
 	//action methods
