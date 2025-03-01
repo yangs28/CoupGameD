@@ -39,7 +39,6 @@ public class CoupState extends GameState {
 		player0Money = 0;
 		player1Money = 0;
 		playerId = 0;
-		Log.d("yolo","state" + this.toString());
 	}
 
 	//Constructor that sets the values
@@ -115,8 +114,8 @@ public class CoupState extends GameState {
 	@Override
 	public String toString() {
 		return "Player 0 has " + (player0Money) + " dabloons." +
-				"Player 1 has " + (player1Money) + " dabloons" +
-				"It is currently player " + (getPlayerId()) + "'s turn";
+				" Player 1 has " + (player1Money) + " dabloons." +
+				" It is currently player " + (getPlayerId()) + "'s turn.";
 	}
 }
 
