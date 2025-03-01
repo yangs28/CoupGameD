@@ -5,7 +5,19 @@ import edu.up.cs301.GameFramework.players.GamePlayer;
 
 //an action to spend 7 coins and eliminate a player's influence
 public class CoupAction extends GameAction {
-    public CoupAction(GamePlayer player){
-        super(player,false);
+
+
+    private boolean isBlockable;
+
+    public CoupAction(GamePlayer player, boolean blockable){
+        super(player);
+        this.isBlockable = blockable;
+    }
+
+    public boolean getIsBlockable() {
+        return isBlockable;
+    }
+    public void setIsBlockable(boolean b) {
+        this.isBlockable = b;
     }
 }

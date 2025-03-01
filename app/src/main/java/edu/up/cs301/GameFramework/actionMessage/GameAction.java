@@ -29,7 +29,6 @@ public abstract class GameAction implements Serializable {
 
     // the player who generated the request
     private GamePlayer player;
-    private boolean isBlockable;
 
     /**
      * constructor for GameAction
@@ -37,10 +36,9 @@ public abstract class GameAction implements Serializable {
      * @param player
      * 		the player who created the action
      */
-    public GameAction(GamePlayer player, boolean blockable) {
+    public GameAction(GamePlayer player) {
 
         this.player = player;
-        this.isBlockable = blockable;
     }
 
     /**
@@ -61,12 +59,6 @@ public abstract class GameAction implements Serializable {
      */
     public void setPlayer(GamePlayer p) {
         this.player = p;
-    }
-    public boolean getIsBlockable() {
-        return isBlockable;
-    }
-    public void setIsBlockable(boolean b) {
-        this.isBlockable = b;
     }
 
 

@@ -55,12 +55,49 @@ public class CoupState extends GameState {
 	//action methods
 
 	//generic actions
-	public boolean makeIncomeAction(GameAction action, GamePlayer player){return false;}
-	public boolean makeAideAction(GameAction action, GamePlayer player){return false;}
-	public boolean makeCoupAction(GameAction action, GamePlayer player){return false;}
+	public boolean makeIncomeAction(GameAction action, GamePlayer player){
+		if(playerId == 0 && getPlayer0Money() <10){
+			setPlayer0Money(getPlayer0Money()+1);
+		}
+		else if(playerId == 1 && getPlayer1Money() <10){
+			setPlayer1Money(getPlayer1Money()+1);
+		}
+		else{return false;}
+		return true;
+	}
+	public boolean makeAideAction(GameAction action, GamePlayer player){
+
+		if(playerId == 0 && getPlayer0Money() <10){
+			setPlayer0Money(getPlayer0Money()+2);
+		}
+		else if(playerId == 1 && getPlayer1Money() <10){
+			setPlayer1Money(getPlayer1Money()+2);
+		}
+		else{return false;}
+		return true;
+	}
+	public boolean makeCoupAction(GameAction action, GamePlayer player){
+
+		if(playerId == 0 && getPlayer0Money() >=7){
+			setPlayer0Money(getPlayer0Money()-7);
+		}
+		else if(playerId == 1 && getPlayer1Money() >=7){
+			setPlayer1Money(getPlayer1Money()-7);
+		}
+		else{return false;}
+		return true;
+	}
 
 	//class actions
-	public boolean makeAssnAction(GameAction action, GamePlayer player){return false;}
+	public boolean makeAssnAction(GameAction action, GamePlayer player){
+		if(playerId == 0 && getPlayer0Money() >=7){
+			setPlayer0Money(getPlayer0Money()-7);
+		}
+		else if(playerId == 1 && getPlayer1Money() >=7){
+			setPlayer1Money(getPlayer1Money()-7);
+		}
+		else{return false;}
+		return true;	}
 	public boolean makeTaxAction(GameAction action, GamePlayer player){return false;}
 	public boolean makeStealAction(GameAction action, GamePlayer player){return false;}
 	public boolean makeExcAction(GameAction action, GamePlayer player){return false;}
