@@ -17,7 +17,7 @@ import edu.up.cs301.GameFramework.players.GamePlayer;
  * Assassinate both of one players cards over 2 turns
  * Assasinate the other players two cards in your next two
  * Win game after 4 turns.
- * 
+ *
  * @author Sean Yang, Clint Sizemore, Kanoa Martin
  * @version 2-28-25
  */
@@ -93,10 +93,12 @@ public class CoupState extends GameState {
 
 	}
 
-	//action methods
 
 	//generic actions
+	//every action can only be performed if you have less than 10 coins, otherwise yomi coup
+	//actions that affect other players than the player performing it take an additional player variable
 	public boolean makeIncomeAction(GameAction action, GamePlayer player){
+		//gain one coin
 		if(playerId == 0 && getPlayer0Money() <10){
 			setPlayer0Money(getPlayer0Money()+1);
 		}
@@ -106,8 +108,9 @@ public class CoupState extends GameState {
 		else{return false;}
 		return true;
 	}
-	public boolean makeAideAction(GameAction action, GamePlayer player){
 
+	public boolean makeAideAction(GameAction action, GamePlayer player){
+		//gain 2 coins
 		if(playerId == 0 && getPlayer0Money() <10){
 			setPlayer0Money(getPlayer0Money()+2);
 		}
@@ -118,7 +121,7 @@ public class CoupState extends GameState {
 		return true;
 	}
 	public boolean makeCoupAction(GameAction action, GamePlayer player, GamePlayer victim){
-
+		//pay 7 coins
 		if(playerId == 0 && getPlayer0Money() >=7){
 			setPlayer0Money(getPlayer0Money()-7);
 		}
@@ -131,8 +134,9 @@ public class CoupState extends GameState {
 
 	//class actions
 	public boolean makeAssnAction(GameAction action, GamePlayer player, GamePlayer victim){
+		//pay 3 coins
 		if(playerId == 0 && getPlayer0Money() >=3 && getPlayer0Money() <10){
-			setPlayer0Money(getPlayer0Money()-7);
+			setPlayer0Money(getPlayer0Money()-3);
 		}
 		else if(playerId == 1 && getPlayer1Money() >=3 && getPlayer1Money() < 10){
 			setPlayer1Money(getPlayer1Money()-3);
@@ -141,6 +145,7 @@ public class CoupState extends GameState {
 		return true;
 	}
 	public boolean makeTaxAction(GameAction action, GamePlayer player){
+		//gain 2 coins
 		if(playerId == 0 && getPlayer0Money() <10){
 			setPlayer0Money(getPlayer0Money()+2);
 		}
@@ -151,6 +156,7 @@ public class CoupState extends GameState {
 		return true;
 	}
 	public boolean makeStealAction(GameAction action, GamePlayer player, GamePlayer victim){
+		//remove 2 coins from another player, gain 2 coins
 		if(playerId == 0 && getPlayer0Money() <10){
 			setPlayer0Money(getPlayer0Money()+2);
 			setPlayer1Money(getPlayer1Money()-2);
@@ -163,16 +169,15 @@ public class CoupState extends GameState {
 		}
 		else{return false;}
 		return true;}
-	}
+
 	public boolean makeExcAction(GameAction action, GamePlayer player){
-
 		if(playerId == 0 && getPlayer0Money() <10){
-
+			return false;
 		}
 		else if(playerId == 1 && getPlayer1Money() < 10){
+			return false;
 		}
-		else{return false;}
-		return true;
+		else{return true;}
 	}
 
 	//reactions
