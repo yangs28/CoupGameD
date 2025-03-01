@@ -21,6 +21,11 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
      * @param name
      * 		the player's name
      */
+
+	//monies
+
+
+
     public CoupComputerPlayer1(String name) {
         // invoke superclass constructor
         super(name);
