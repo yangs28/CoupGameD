@@ -28,7 +28,7 @@ public class CoupMoveAction extends GameAction {
 	 *            value to initialize this.isPlus
 	 */
 	public CoupMoveAction(GamePlayer player, boolean isPlus) {
-		super(player, false);
+		super(player);
 		this.isPlus = isPlus;
 	}
 	

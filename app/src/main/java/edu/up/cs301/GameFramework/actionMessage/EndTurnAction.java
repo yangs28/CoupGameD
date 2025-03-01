@@ -13,6 +13,6 @@ public class EndTurnAction extends GameAction implements Serializable {
     private static final long serialVersionUID = 3067264564645016L;
 
     public EndTurnAction(GamePlayer player){
-        super(player, false);
+        super(player);
     }
 }

@@ -26,7 +26,7 @@ public class MyNameIsAction extends GameAction {
      * 		the player's name
      */
     public MyNameIsAction(GamePlayer p, String name) {
-        super(p, false); // invoke superclass constructor
+        super(p); // invoke superclass constructor
         this.name = name; // set the name
     }
 

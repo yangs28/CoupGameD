@@ -9,6 +9,6 @@ public class Captain extends GameAction {
     protected GamePlayer player;
 
     public Captain(GamePlayer player) {
-        super(player, false);
+        super(player);
     }
 }

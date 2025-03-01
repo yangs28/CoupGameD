@@ -21,6 +21,6 @@ public class ReadyAction extends GameAction {
      * 		the player who sent the action
      */
     public ReadyAction(GamePlayer p) {
-        super(p,false);
+        super(p);
     }
 }
