@@ -1,6 +1,7 @@
 package edu.up.cs301.Coup;
 
 import edu.up.cs301.Characters.Ambassador;
+import edu.up.cs301.GameFramework.Game;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
@@ -76,7 +77,7 @@ public class CoupState extends GameState {
 		else{return false;}
 		return true;
 	}
-	public boolean makeCoupAction(GameAction action, GamePlayer player){
+	public boolean makeCoupAction(GameAction action, GamePlayer player, GamePlayer victim){
 
 		if(playerId == 0 && getPlayer0Money() >=7){
 			setPlayer0Money(getPlayer0Money()-7);
@@ -89,18 +90,50 @@ public class CoupState extends GameState {
 	}
 
 	//class actions
-	public boolean makeAssnAction(GameAction action, GamePlayer player){
-		if(playerId == 0 && getPlayer0Money() >=7){
+	public boolean makeAssnAction(GameAction action, GamePlayer player, GamePlayer victim){
+		if(playerId == 0 && getPlayer0Money() >=3 && getPlayer0Money() <10){
 			setPlayer0Money(getPlayer0Money()-7);
 		}
-		else if(playerId == 1 && getPlayer1Money() >=7){
-			setPlayer1Money(getPlayer1Money()-7);
+		else if(playerId == 1 && getPlayer1Money() >=3 && getPlayer1Money() < 10){
+			setPlayer1Money(getPlayer1Money()-3);
 		}
 		else{return false;}
-		return true;	}
-	public boolean makeTaxAction(GameAction action, GamePlayer player){return false;}
-	public boolean makeStealAction(GameAction action, GamePlayer player){return false;}
-	public boolean makeExcAction(GameAction action, GamePlayer player){return false;}
+		return true;
+	}
+	public boolean makeTaxAction(GameAction action, GamePlayer player){
+		if(playerId == 0 && getPlayer0Money() <10){
+			setPlayer0Money(getPlayer0Money()+2);
+		}
+		else if(playerId == 1 && getPlayer1Money() < 10){
+			setPlayer1Money(getPlayer1Money()+2);
+		}
+		else{return false;}
+		return true;
+	}
+	public boolean makeStealAction(GameAction action, GamePlayer player, GamePlayer victim){
+		if(playerId == 0 && getPlayer0Money() <10){
+			setPlayer0Money(getPlayer0Money()+2);
+			setPlayer1Money(getPlayer1Money()-2);
+
+		}
+		else if(playerId == 1 && getPlayer1Money() < 10){
+			setPlayer1Money(getPlayer1Money()+2);
+			setPlayer0Money(getPlayer0Money()-2);
+
+		}
+		else{return false;}
+		return true;}
+	}
+	public boolean makeExcAction(GameAction action, GamePlayer player){
+
+		if(playerId == 0 && getPlayer0Money() <10){
+
+		}
+		else if(playerId == 1 && getPlayer1Money() < 10){
+		}
+		else{return false;}
+		return true;
+	}
 
 	//reactions
 	public boolean makeBlockAction(GameAction action, GamePlayer player){return false;}
