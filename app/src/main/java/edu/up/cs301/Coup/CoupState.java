@@ -39,6 +39,7 @@ public class CoupState extends GameState {
 
 	private int gameStage;
 
+
 	//Default constructor for the game state. Initializes everything as zero
 	public CoupState() {
 		player0Money = 0;
@@ -225,4 +226,5 @@ public class CoupState extends GameState {
 				" It is currently player " + (getPlayerId()) + "'s turn.";
 	}
 }
+
 
