@@ -70,11 +70,11 @@ public class CoupComputerPlayer2 extends CoupComputerPlayer1 {
 		if (game == null) {
 			return;
 		}
-		else if (info instanceof CoupState) {
+		//else if (info instanceof CoupState) {
 			// if we indeed have a counter-state, update the GUI
-			currentGameState = (CoupState)info;
-			updateDisplay();
-		}
+			//currentGameState = (CoupState)info;
+			//updateDisplay();
+		//}
 	}
 	
 	
@@ -123,16 +123,6 @@ public class CoupComputerPlayer2 extends CoupComputerPlayer1 {
 		
 		// Load the layout resource for the our GUI's configuration
 		activityForGui.setContentView(R.layout.counter_human_player);
-
-		// remember who our text view is, for updating the counter value
-		this.counterValueTextView =
-				(TextView) activityForGui.findViewById(R.id.counterValueTextView);
-		
-		// disable the buttons, since they will have no effect anyway
-		Button plusButton = (Button)activityForGui.findViewById(R.id.plusButton);
-		plusButton.setEnabled(false);
-		Button minusButton = (Button)activityForGui.findViewById(R.id.minusButton);
-		minusButton.setEnabled(false);
 		
 		// if the state is non=null, update the display
 		if (currentGameState != null) {

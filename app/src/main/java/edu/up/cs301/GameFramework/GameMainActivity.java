@@ -162,7 +162,7 @@ public abstract class GameMainActivity extends Activity implements
         Logger.setContext(getApplicationContext());
 
         // Initialize the layout
-        setContentView(R.layout.game_config_main);
+        setContentView(R.layout.counter_human_player);
 
         // create the default configuration for this game
         this.config = createDefaultConfig();

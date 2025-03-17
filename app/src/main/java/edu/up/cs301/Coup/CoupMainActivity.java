@@ -1,5 +1,7 @@
 package edu.up.cs301.Coup;
 
+import android.os.Bundle;
+
 import java.util.ArrayList;
 
 import edu.up.cs301.GameFramework.GameMainActivity;
@@ -86,5 +88,6 @@ public class CoupMainActivity extends GameMainActivity {
 		if (state == null) state = new CoupState();
 		return new CoupLocalGame(state);
 	}
+
 
 }
