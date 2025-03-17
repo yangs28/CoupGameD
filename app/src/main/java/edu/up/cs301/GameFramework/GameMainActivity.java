@@ -162,7 +162,7 @@ public abstract class GameMainActivity extends Activity implements
         Logger.setContext(getApplicationContext());
 
         // Initialize the layout
-        setContentView(R.layout.counter_human_player);
+        setContentView(R.layout.game_config_main);
 
         // create the default configuration for this game
         this.config = createDefaultConfig();
@@ -291,7 +291,6 @@ public abstract class GameMainActivity extends Activity implements
 
         // Set the title text with the game's name
         this.setTitle(config.getGameName());
-
         // create the game if it's local (we defer remote game creation
         // until further down so that we do not attempt to make the
         // network connection until other errors are checked)

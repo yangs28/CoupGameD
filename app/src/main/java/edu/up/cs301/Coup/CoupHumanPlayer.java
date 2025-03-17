@@ -1,5 +1,11 @@
 package edu.up.cs301.Coup;
 
+import edu.up.cs301.CoupActions.AssassinateAction;
+import edu.up.cs301.CoupActions.ExchangeAction;
+import edu.up.cs301.CoupActions.ForeignAideAction;
+import edu.up.cs301.CoupActions.IncomeAction;
+import edu.up.cs301.CoupActions.StealAction;
+import edu.up.cs301.CoupActions.TaxAction;
 import edu.up.cs301.GameFramework.players.GameHumanPlayer;
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
@@ -76,6 +82,20 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		// Construct the action and send it to the game
 		GameAction action = null;
+
+		if (button.getId() == R.id.taxButton) {
+			action = new TaxAction(this);
+		} else if (button.getId() == R.id.incomeButton) {
+			action = new IncomeAction(this);
+		} else if (button.getId() == R.id.foreignAidButton) {
+			action = new ForeignAideAction(this);
+		} else if (button.getId() == R.id.assassinateButton) {
+			action = new AssassinateAction(this);
+		} else if (button.getId() == R.id.stealButton) {
+			action = new StealAction(this);
+		} else if (button.getId() == R.id.exchangeButton) {
+			action = new ExchangeAction(this);
+		}
 		
 		game.sendAction(action); // send action to the game
 	}// onClick

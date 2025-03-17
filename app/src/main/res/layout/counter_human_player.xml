@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -153,51 +154,46 @@
                 android:paddingLeft="50dp">
 
                 <Button
+                    android:id="@+id/incomeButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Income"
-                    android:textSize="10sp"
-                    />
+                    android:textSize="10sp" />
 
                 <Button
+                    android:id="@+id/foreignAidButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Foreign Aid"                android:textSize="10sp"
-
-
-                    />
+                    android:text="Foreign Aid"
+                    android:textSize="10sp" />
 
                 <Button
+                    android:id="@+id/taxButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tax"
-                    android:textSize="10sp"
-
-                    />
+                    android:textSize="10sp" />
 
                 <Button
+                    android:id="@+id/assassinateButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Assasinate"
-                    android:textSize="10sp"
-
-                    />
+                    android:text="Assassinate"
+                    android:textSize="10sp" />
 
                 <Button
+                    android:id="@+id/stealButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Steal"
-                    android:textSize="10sp"
-
-                    />
+                    android:textSize="10sp" />
 
                 <Button
+                    android:id="@+id/exchangeButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Exchange"
-                    android:textSize="10sp"
-
-                    />
+                    android:textSize="10sp" />
 
             </LinearLayout>
 

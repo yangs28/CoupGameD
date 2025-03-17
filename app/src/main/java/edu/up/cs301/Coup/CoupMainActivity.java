@@ -86,6 +86,7 @@ public class CoupMainActivity extends GameMainActivity {
 	@Override
 	public LocalGame createLocalGame(GameState state) {
 		if (state == null) state = new CoupState();
+		//setContentView(R.layout.counter_human_player);
 		return new CoupLocalGame(state);
 	}
 
