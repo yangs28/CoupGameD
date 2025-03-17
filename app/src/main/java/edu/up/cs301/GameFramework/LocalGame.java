@@ -138,6 +138,7 @@ public abstract class LocalGame implements Game, Tickable {
     protected abstract void sendUpdatedStateTo(GamePlayer p);
 
 
+
     /**
      * Notify all players that the game's state has changed. Typically this simply
      * calls the 'notifyStateChanged' method for each player.
@@ -315,6 +316,10 @@ public abstract class LocalGame implements Game, Tickable {
             if(this.state.getCurrentSetupTurn() >= this.state.getNumSetupTurns()){
                 this.gameStage = GameStage.DURING_GAME;
             }
+        }
+
+        if(action != null) {
+            this.sendAction(action);
         }
 
         // The move was a legal one, so presumably the state of the game was

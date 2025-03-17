@@ -128,6 +128,9 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		// remember the activity
 		this.myActivity = activity;
 
+		// Load the layout resource for our GUI
+		activity.setContentView(R.layout.counter_human_player);
+
 		// Set this object as the listener for all buttons
 		Button taxButton = (Button) activity.findViewById(R.id.taxButton);
 		taxButton.setOnClickListener(this);
@@ -146,9 +149,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		Button exchangeButton = (Button) activity.findViewById(R.id.exchangeButton);
 		exchangeButton.setOnClickListener(this);
-		
-	    // Load the layout resource for our GUI
-		activity.setContentView(R.layout.counter_human_player);
+
 
 	}
 
