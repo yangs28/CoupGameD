@@ -318,10 +318,6 @@ public abstract class LocalGame implements Game, Tickable {
             }
         }
 
-        if(action != null) {
-            this.sendAction(action);
-        }
-
         // The move was a legal one, so presumably the state of the game was
         // changed. Send all players the updated state.
         sendAllUpdatedState();
