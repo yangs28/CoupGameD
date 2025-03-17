@@ -10,6 +10,8 @@ import edu.up.cs301.GameFramework.players.GameHumanPlayer;
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -85,18 +87,23 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		if (button.getId() == R.id.taxButton) {
 			action = new TaxAction(this);
+			Log.d("Click", "Tax action was called");
 		} else if (button.getId() == R.id.incomeButton) {
 			action = new IncomeAction(this);
+			Log.d("Click", "Income action was called");
 		} else if (button.getId() == R.id.foreignAidButton) {
 			action = new ForeignAideAction(this);
+			Log.d("Click", "Foreign Aid action was called");
 		} else if (button.getId() == R.id.assassinateButton) {
 			action = new AssassinateAction(this);
+			Log.d("Click", "Assassinate action was called");
 		} else if (button.getId() == R.id.stealButton) {
 			action = new StealAction(this);
+			Log.d("Click", "Steal action was called");
 		} else if (button.getId() == R.id.exchangeButton) {
 			action = new ExchangeAction(this);
+			Log.d("Click", "Exchange action was called");
 		}
-		
 		game.sendAction(action); // send action to the game
 	}// onClick
 	
