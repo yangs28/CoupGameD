@@ -127,6 +127,25 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		
 		// remember the activity
 		this.myActivity = activity;
+
+		// Set this object as the listener for all buttons
+		Button taxButton = (Button) activity.findViewById(R.id.taxButton);
+		taxButton.setOnClickListener(this);
+
+		Button incomeButton = (Button) activity.findViewById(R.id.incomeButton);
+		incomeButton.setOnClickListener(this);
+
+		Button foreignAidButton = (Button) activity.findViewById(R.id.foreignAidButton);
+		foreignAidButton.setOnClickListener(this);
+
+		Button assassinateButton = (Button) activity.findViewById(R.id.assassinateButton);
+		assassinateButton.setOnClickListener(this);
+
+		Button stealButton = (Button) activity.findViewById(R.id.stealButton);
+		stealButton.setOnClickListener(this);
+
+		Button exchangeButton = (Button) activity.findViewById(R.id.exchangeButton);
+		exchangeButton.setOnClickListener(this);
 		
 	    // Load the layout resource for our GUI
 		activity.setContentView(R.layout.counter_human_player);
