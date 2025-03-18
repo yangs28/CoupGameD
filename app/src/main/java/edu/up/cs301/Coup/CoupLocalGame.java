@@ -1,10 +1,21 @@
 package edu.up.cs301.Coup;
 
+import edu.up.cs301.CoupActions.AssassinateAction;
+import edu.up.cs301.CoupActions.BlockAction;
+import edu.up.cs301.CoupActions.ChallengeAction;
+import edu.up.cs301.CoupActions.CoupAction;
+import edu.up.cs301.CoupActions.ExchangeAction;
+import edu.up.cs301.CoupActions.ForeignAideAction;
+import edu.up.cs301.CoupActions.IncomeAction;
+import edu.up.cs301.CoupActions.StealAction;
+import edu.up.cs301.CoupActions.TaxAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import android.util.Log;
+
+import java.util.Random;
 
 /**
  * A class that represents the state of a game. In our counter game, the only
@@ -57,15 +68,88 @@ public class CoupLocalGame extends LocalGame {
 	@Override
 	protected boolean makeMove(GameAction action) {
 		Log.i("action", action.getClass().toString());
-		
+
+		// Create a new Random instance
+		Random rand = new Random();
+
+		// Generate a random amount for player0Money (adjust range as needed)
+		int randomMoney = rand.nextInt(10) + 1; // Generates a number between 1 and 10
+
+
+
+		if (action instanceof AssassinateAction) {
+			AssassinateAction aa = (AssassinateAction) action;
+			gameState.setPlayer0Money(randomMoney);
+			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			// Additional logic for AssassinateAction
+		}
+
+		if (action instanceof BlockAction) {
+			BlockAction ba = (BlockAction) action;
+			gameState.setPlayer0Money(randomMoney);
+			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			// Additional logic for BlockAction
+		}
+
+		if (action instanceof ChallengeAction) {
+			ChallengeAction ca = (ChallengeAction) action;
+			gameState.setPlayer0Money(randomMoney);
+			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			// Additional logic for ChallengeAction
+		}
+
+		if (action instanceof CoupAction) {
+			CoupAction coa = (CoupAction) action;
+			gameState.setPlayer0Money(randomMoney);
+			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			// Additional logic for CoupAction
+		}
+
+		if (action instanceof ExchangeAction) {
+			ExchangeAction ea = (ExchangeAction) action;
+			gameState.setPlayer0Money(randomMoney);
+			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			// Additional logic for ExchangeAction
+		}
+
+		if (action instanceof ForeignAideAction) {
+			ForeignAideAction faa = (ForeignAideAction) action;
+			gameState.setPlayer0Money(randomMoney);
+			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			// Additional logic for ForeignAideAction
+		}
+
+		if (action instanceof IncomeAction) {
+			IncomeAction ia = (IncomeAction) action;
+			gameState.setPlayer0Money(randomMoney);
+			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			// Additional logic for IncomeAction
+		}
+
+		if (action instanceof StealAction) {
+			StealAction sa = (StealAction) action;
+			gameState.setPlayer0Money(randomMoney);
+			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			// Additional logic for StealAction
+		}
+
+		if (action instanceof TaxAction) {
+			TaxAction ta = (TaxAction) action;
+			gameState.setPlayer0Money(randomMoney);
+			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			// Additional logic for TaxAction
+		}
+
 		if (action instanceof CoupMoveAction) {
-		
-			// cast so that we Java knows it's a CounterMoveAction
-			CoupMoveAction cma = (CoupMoveAction)action;
-			
-			// denote that this was a legal/successful move
+			CoupMoveAction cma = (CoupMoveAction) action;
+			gameState.setPlayer0Money(randomMoney);
+			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			// Denote that this was a legal/successful move
 			return true;
 		}
+
+
+
 		else {
 			// denote that this was an illegal move
 			return false;
