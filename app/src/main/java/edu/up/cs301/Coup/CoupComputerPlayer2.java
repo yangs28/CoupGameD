@@ -70,11 +70,11 @@ public class CoupComputerPlayer2 extends CoupComputerPlayer1 {
 		if (game == null) {
 			return;
 		}
-		//else if (info instanceof CoupState) {
+		else if (info instanceof CoupState) {
 			// if we indeed have a counter-state, update the GUI
-			//currentGameState = (CoupState)info;
-			//updateDisplay();
-		//}
+			currentGameState = (CoupState)info;
+			updateDisplay();
+		}
 	}
 	
 	

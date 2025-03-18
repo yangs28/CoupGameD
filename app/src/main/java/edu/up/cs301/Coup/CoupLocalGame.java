@@ -80,75 +80,82 @@ public class CoupLocalGame extends LocalGame {
 		if (action instanceof AssassinateAction) {
 			AssassinateAction aa = (AssassinateAction) action;
 			gameState.setPlayer0Money(randomMoney);
-			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for AssassinateAction
+			return true;
 		}
 
 		if (action instanceof BlockAction) {
 			BlockAction ba = (BlockAction) action;
 			gameState.setPlayer0Money(randomMoney);
-			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			Log.d("Money", "Block action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for BlockAction
+			return true;
 		}
 
 		if (action instanceof ChallengeAction) {
 			ChallengeAction ca = (ChallengeAction) action;
 			gameState.setPlayer0Money(randomMoney);
-			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for ChallengeAction
+			return true;
 		}
 
 		if (action instanceof CoupAction) {
 			CoupAction coa = (CoupAction) action;
 			gameState.setPlayer0Money(randomMoney);
-			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for CoupAction
+			return true;
 		}
 
 		if (action instanceof ExchangeAction) {
 			ExchangeAction ea = (ExchangeAction) action;
 			gameState.setPlayer0Money(randomMoney);
-			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for ExchangeAction
+			return true;
 		}
 
 		if (action instanceof ForeignAideAction) {
 			ForeignAideAction faa = (ForeignAideAction) action;
 			gameState.setPlayer0Money(randomMoney);
-			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for ForeignAideAction
+			return true;
 		}
 
 		if (action instanceof IncomeAction) {
 			IncomeAction ia = (IncomeAction) action;
 			gameState.setPlayer0Money(randomMoney);
-			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			Log.d("Money", "Income action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for IncomeAction
+			return true;
 		}
 
 		if (action instanceof StealAction) {
 			StealAction sa = (StealAction) action;
 			gameState.setPlayer0Money(randomMoney);
-			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for StealAction
+			return true;
 		}
 
 		if (action instanceof TaxAction) {
 			TaxAction ta = (TaxAction) action;
 			gameState.setPlayer0Money(randomMoney);
-			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for TaxAction
+			return true;
 		}
 
 		if (action instanceof CoupMoveAction) {
 			CoupMoveAction cma = (CoupMoveAction) action;
 			gameState.setPlayer0Money(randomMoney);
-			Log.d("Money", "Money is " + gameState.getPlayer0Money());
+			Log.d("Money", "Coup Move action was called. Money is " + gameState.getPlayer0Money());
 			// Denote that this was a legal/successful move
 			return true;
 		}
-
-
 
 		else {
 			// denote that this was an illegal move
