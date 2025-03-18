@@ -10,29 +10,35 @@
     android:gravity="bottom"
     android:orientation="vertical"
     android:background="@color/black"
-    >
+    android:clipToOutline="false"
+    android:clipToPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:clipToPadding="false">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:clipToPadding="false"
+                android:clipToOutline="false">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:clipToPadding="false">
 
                     <ImageView
                         android:id="@+id/cardBackLeft"
@@ -40,6 +46,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="10dp"
+                        android:clipToOutline="false"
                         android:src="@drawable/bcardback" />
 
                     <ImageView
@@ -48,6 +55,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="10dp"
+                        android:clipToOutline="false"
                         android:src="@drawable/bcardback" />
 
                 </LinearLayout>
@@ -56,7 +64,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:clipToPadding="false">
 
                     <TextView
                         android:id="@+id/secondPlayerText"
@@ -75,6 +84,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="9"
                 android:orientation="vertical"
+                android:clipToPadding="false"
                 tools:ignore="VisualLintBounds">
 
                 <ImageView
@@ -100,9 +110,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
+                android:clipToPadding="false"
                 tools:ignore="VisualLintBounds">
-
-
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -111,8 +120,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:orientation="vertical"
         android:clipToPadding="false"
-        android:orientation="vertical">
+        android:clipToOutline="false">
 
         <ImageView
             android:id="@+id/cardBackCenter"
@@ -120,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_weight="1"
+            android:clipToOutline="false"
             android:src="@drawable/bcardback" />
 
         <TextView
@@ -131,28 +142,35 @@
             android:minHeight="55sp"
             android:text="Deck"
             android:textSize="24sp" />
-
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:clipToOutline="false"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="3"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:clipToOutline="false"
+            android:clipToPadding="false">
 
             <LinearLayout
+                android:layout_weight="1"
+                android:minHeight="10000dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingLeft="50dp">
+                android:paddingLeft="50dp"
+                android:layout_gravity="top"
+                android:layout_marginVertical="-10dp"
+                android:clipToOutline="false"
+                android:clipToPadding="false">
 
                 <Button
                     android:id="@+id/incomeButton"
@@ -195,22 +213,22 @@
                     android:layout_height="wrap_content"
                     android:text="Exchange"
                     android:textSize="10sp" />
-
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:clipToPadding="false">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:clipToPadding="false">
 
                 <ImageView
                     android:id="@+id/coinBottom"
@@ -229,7 +247,6 @@
                     android:text="69 Dabloons"
                     android:textAlignment="center"
                     android:textSize="30dp" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -237,7 +254,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:paddingStart="400dp">
+                android:paddingStart="400dp"
+                android:clipToPadding="false">
 
                 <ImageView
                     android:id="@+id/playerCharacterCardLeft"
@@ -257,9 +275,6 @@
                     android:src="@drawable/bambassador"
                     tools:ignore="VisualLintBounds" />
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
-
 </LinearLayout>
