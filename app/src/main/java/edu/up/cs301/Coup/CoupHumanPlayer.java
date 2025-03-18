@@ -43,8 +43,11 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 	// the android activity that we are running
 	private GameMainActivity myActivity;
 
+	private TextView deckText = null;
 
-	
+
+
+
 	/**
 	 * constructor
 	 * @param name
@@ -117,10 +120,18 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 	public void receiveInfo(GameInfo info) {
 		// ignore the message if it's not a CounterState message
 		if (!(info instanceof CoupState)) return;
-		
+
+		if(state != null) {
+			deckText.setText(String.valueOf(state.getPlayer0Money()));
+		}
+
 		// update our state; then update the display
 		this.state = (CoupState)info;
 		updateDisplay();
+
+		if(state != null) {
+			deckText.setText(String.valueOf(state.getPlayer0Money()));
+		}
 	}
 	
 	/**
@@ -136,7 +147,9 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		this.myActivity = activity;
 
 		// Load the layout resource for our GUI
-		activity.setContentView(R.layout.counter_human_player);
+		activity.setContentView(R.layout.coup_layout);
+
+		this.deckText = (TextView)activity.findViewById(R.id.deckText);
 
 		// Set this object as the listener for all buttons
 		Button taxButton = (Button) activity.findViewById(R.id.taxButton);
