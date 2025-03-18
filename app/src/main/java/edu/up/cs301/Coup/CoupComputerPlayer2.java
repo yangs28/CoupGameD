@@ -127,7 +127,7 @@ public class CoupComputerPlayer2 extends CoupComputerPlayer1 {
 		this.guiHandler = new Handler();
 		
 		// Load the layout resource for the our GUI's configuration
-		//activityForGui.setContentView(R.layout.coup_layout);
+		activityForGui.setContentView(R.layout.coup_layout);
 		
 		// if the state is non=null, update the display
 		if (currentGameState != null) {
