@@ -129,9 +129,9 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		this.state = (CoupState)info;
 		updateDisplay();
 
-		if(state != null) {
-			deckText.setText(String.valueOf(state.getPlayer0Money()));
-		}
+		//if(state != null) {
+		//	deckText.setText(String.valueOf(state.getPlayer0Money()));
+		//}
 	}
 	
 	/**
@@ -142,7 +142,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 	 * 		the activity under which we are running
 	 */
 	public void setAsGui(GameMainActivity activity) {
-		
+
 		// remember the activity
 		this.myActivity = activity;
 
@@ -169,7 +169,6 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		Button exchangeButton = (Button) activity.findViewById(R.id.exchangeButton);
 		exchangeButton.setOnClickListener(this);
-
 
 	}
 

@@ -39,7 +39,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="10dp"
-                        app:srcCompat="@drawable/bcardback" />
+                        android:src="@drawable/bcardback" />
 
                     <ImageView
                         android:id="@+id/cardBackRight"
@@ -47,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="10dp"
-                        app:srcCompat="@drawable/bcardback" />
+                        android:src="@drawable/bcardback" />
 
                 </LinearLayout>
 
@@ -81,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
-                    app:srcCompat="@drawable/bcoin" />
+                    android:src="@drawable/bcoin" />
 
                 <TextView
                     android:id="@+id/secondPlayerDabloonsText"
@@ -119,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_weight="1"
-            app:srcCompat="@drawable/bcardback" />
+            android:src="@drawable/bcardback" />
 
         <TextView
             android:id="@+id/deckText"
@@ -216,7 +216,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
-                    app:srcCompat="@drawable/bcoin" />
+                    android:src="@drawable/bcoin" />
 
                 <TextView
                     android:id="@+id/playerDabloonsText"
@@ -244,7 +244,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:padding="5dp"
-                    app:srcCompat="@drawable/bambassador"
+                    android:src="@drawable/bambassador"
                     tools:ignore="VisualLintBounds" />
 
                 <ImageView
@@ -253,7 +253,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:padding="5dp"
-                    app:srcCompat="@drawable/bambassador"
+                    android:src="@drawable/bambassador"
                     tools:ignore="VisualLintBounds" />
             </LinearLayout>
 

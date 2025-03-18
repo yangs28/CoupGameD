@@ -2,6 +2,11 @@ package edu.up.cs301.Coup;
 
 import android.os.Bundle;
 
+import androidx.activity.EdgeToEdge;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 import java.util.ArrayList;
 
 import edu.up.cs301.GameFramework.GameMainActivity;
@@ -17,8 +22,9 @@ import edu.up.cs301.GameFramework.gameConfiguration.*;
  * @author Steven R. Vegdahl
  * @version July 2013
  */
+
 public class CoupMainActivity extends GameMainActivity {
-	
+
 	// the port number that this game will use when playing over the network
 	private static final int PORT_NUMBER = 2234;
 
@@ -33,7 +39,6 @@ public class CoupMainActivity extends GameMainActivity {
 	 */
 	@Override
 	public GameConfig createDefaultConfig() {
-		
 		// Define the allowed player types
 		ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
 		
