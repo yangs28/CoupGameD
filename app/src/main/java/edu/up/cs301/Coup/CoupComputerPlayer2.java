@@ -1,5 +1,6 @@
 package edu.up.cs301.Coup;
 
+import edu.up.cs301.CoupActions.AssassinateAction;
 import edu.up.cs301.GameFramework.GameMainActivity;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import android.app.Activity;
@@ -51,6 +52,10 @@ public class CoupComputerPlayer2 extends CoupComputerPlayer1 {
 	 */
 	public CoupComputerPlayer2(String name) {
 		super(name);
+
+		AssassinateAction ass = new AssassinateAction(this);
+		this.game.sendAction(ass);
+
 	}
 	
     /**

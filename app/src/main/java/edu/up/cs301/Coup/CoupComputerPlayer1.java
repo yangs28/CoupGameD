@@ -1,5 +1,6 @@
 package edu.up.cs301.Coup;
 
+import edu.up.cs301.CoupActions.AssassinateAction;
 import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.GameFramework.utilities.Tickable;
@@ -29,10 +30,10 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
     public CoupComputerPlayer1(String name) {
         // invoke superclass constructor
         super(name);
-        
         // start the timer, ticking 20 times per second
         getTimer().setInterval(50);
         getTimer().start();
+
     }
     
     /**
