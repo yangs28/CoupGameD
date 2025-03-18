@@ -52,13 +52,16 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
 	 * callback method: the timer ticked
 	 */
 	protected void timerTicked() {
+
+		//CLINT REMOVED THIS SO IT STOP MOVING RANDOMLY
+
 		// 5% of the time, increment or decrement the counter
-		if (Math.random() >= 0.05) return; // do nothing 95% of the time
+		/*if (Math.random() >= 0.05) return; // do nothing 95% of the time
 
 		// "flip a coin" to determine whether to increment or decrement
 		boolean move = Math.random() >= 0.5;
 		
 		// send the move-action to the game
-		game.sendAction(new CoupMoveAction(this, move));
+		game.sendAction(new CoupMoveAction(this, move));*/
 	}
 }
