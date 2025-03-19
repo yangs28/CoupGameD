@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
 
 
+    android:id="@+id/coup_New_Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
@@ -22,6 +23,7 @@
         />
 
     <Button
+        android:id="@+id/testButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="10sp"

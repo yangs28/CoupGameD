@@ -64,7 +64,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 	 * 		the top object in the GUI's view heirarchy
 	 */
 	public View getTopView() {
-		return myActivity.findViewById(R.id.coinTop);
+		return myActivity.findViewById(R.id.coup_New_Layout);
 	}
 	
 	/**
@@ -107,7 +107,6 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 			action = new ExchangeAction(this);
 			Log.d("Click", "Exchange action was called");
 		}
-		game.sendAction(action); // send action to the game
 	}// onClick
 	
 	/**
@@ -147,28 +146,32 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		this.myActivity = activity;
 
 		// Load the layout resource for our GUI
-		activity.setContentView(R.layout.coup_layout);
+		activity.setContentView(R.layout.coup_test_layout);
 
-		this.deckText = (TextView)activity.findViewById(R.id.deckText);
+		testResultsTextView = activity.findViewById(R.id.edit_text);
 
-		// Set this object as the listener for all buttons
-		Button taxButton = (Button) activity.findViewById(R.id.taxButton);
-		taxButton.setOnClickListener(this);
+		Button testButton = (Button) activity.findViewById(R.id.testButton);
 
-		Button incomeButton = (Button) activity.findViewById(R.id.incomeButton);
-		incomeButton.setOnClickListener(this);
-
-		Button foreignAidButton = (Button) activity.findViewById(R.id.foreignAidButton);
-		foreignAidButton.setOnClickListener(this);
-
-		Button assassinateButton = (Button) activity.findViewById(R.id.assassinateButton);
-		assassinateButton.setOnClickListener(this);
-
-		Button stealButton = (Button) activity.findViewById(R.id.stealButton);
-		stealButton.setOnClickListener(this);
-
-		Button exchangeButton = (Button) activity.findViewById(R.id.exchangeButton);
-		exchangeButton.setOnClickListener(this);
+//		this.deckText = (TextView)activity.findViewById(R.id.deckText);
+//
+//		// Set this object as the listener for all buttons
+//		Button taxButton = (Button) activity.findViewById(R.id.taxButton);
+//		taxButton.setOnClickListener(this);
+//
+//		Button incomeButton = (Button) activity.findViewById(R.id.incomeButton);
+//		incomeButton.setOnClickListener(this);
+//
+//		Button foreignAidButton = (Button) activity.findViewById(R.id.foreignAidButton);
+//		foreignAidButton.setOnClickListener(this);
+//
+//		Button assassinateButton = (Button) activity.findViewById(R.id.assassinateButton);
+//		assassinateButton.setOnClickListener(this);
+//
+//		Button stealButton = (Button) activity.findViewById(R.id.stealButton);
+//		stealButton.setOnClickListener(this);
+//
+//		Button exchangeButton = (Button) activity.findViewById(R.id.exchangeButton);
+//		exchangeButton.setOnClickListener(this);
 
 	}
 
