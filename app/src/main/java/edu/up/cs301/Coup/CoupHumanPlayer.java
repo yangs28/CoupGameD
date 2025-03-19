@@ -35,7 +35,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 	/* instance variables */
 	
 	// The TextView the displays the current counter value
-	private TextView counterValueTextView;
+	private TextView testResultsTextView;
 	
 	// the most recent game state, as given to us by the CounterLocalGame
 	private CoupState state;
