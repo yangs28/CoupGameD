@@ -99,6 +99,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		//Player must draw assassin card otherwise they should restart
 		//Use assasinate action on the other player twice to remove both their cards
 		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
+		testResultsTextView.append("lmao we made an assasinate action");
 		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
 		//if there are 3 players repeat
 		CoupHumanPlayer player3 = new CoupHumanPlayer("player3");
