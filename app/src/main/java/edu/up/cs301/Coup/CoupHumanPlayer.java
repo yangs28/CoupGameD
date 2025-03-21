@@ -120,11 +120,13 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		CoupState secondInstance = new CoupState();
 		CoupState secondCopy = new CoupState(secondInstance);
 
-		//Sends the String states to logcat
+		//turns both original instances into strings
 		String state1 = firstInstance.toString();
 		String state2 = secondInstance.toString();
+		//Sends the String states to logcat to check
 		Log.d("state1", state1);
 		Log.d("state2", state2);
+		//pushes strings to the Text View
 		describeAction(testResultsTextView, state1+"\n");
 		describeAction(testResultsTextView, state2+"\n");
 
