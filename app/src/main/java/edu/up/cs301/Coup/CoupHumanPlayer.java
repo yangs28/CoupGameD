@@ -103,7 +103,8 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
 		testResultsTextView.append("lmao we made an assasinate action\n");
 		String existingText = testResultsTextView.getText().toString();
-		describeAction(testResultsTextView, "lmao test");
+		describeAction(testResultsTextView, "lmao test\n");
+		describeAction(testResultsTextView, "lmao test\n");
 
 
 		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
@@ -172,7 +173,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 	public void describeAction(TextView test, String event) {
 		String tempText = test.getText().toString();
-		test.append(tempText + event);
+		test.append("" + event);
 	}
 	
 	/**
