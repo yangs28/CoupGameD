@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
+import org.w3c.dom.Text;
+
 /**
  * A GUI of a counter-player. The GUI displays the current value of the counter,
  * and allows the human player to press the '+' and '-' buttons in order to
@@ -99,7 +101,11 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		//Player must draw assassin card otherwise they should restart
 		//Use assasinate action on the other player twice to remove both their cards
 		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
-		testResultsTextView.append("lmao we made an assasinate action");
+		testResultsTextView.append("lmao we made an assasinate action\n");
+		String existingText = testResultsTextView.getText().toString();
+		describeAction(testResultsTextView, "lmao test");
+
+
 		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
 		//if there are 3 players repeat
 		CoupHumanPlayer player3 = new CoupHumanPlayer("player3");
@@ -162,6 +168,11 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		//if(state != null) {
 		//	deckText.setText(String.valueOf(state.getPlayer0Money()));
 		//}
+	}
+
+	public void describeAction(TextView test, String event) {
+		String tempText = test.getText().toString();
+		test.append(tempText + event);
 	}
 	
 	/**
