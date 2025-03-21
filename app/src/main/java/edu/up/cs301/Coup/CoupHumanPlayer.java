@@ -87,6 +87,8 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		Log.d("Click", "Run was called!");
 
+		testResultsTextView.setText("");
+
 
 //		if (button.getId() == R.id.taxButton) {
 //			action = new TaxAction(this);
