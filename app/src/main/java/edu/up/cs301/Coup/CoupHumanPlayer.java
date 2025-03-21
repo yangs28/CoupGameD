@@ -174,6 +174,14 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		//}
 	}
 
+	/**
+	 * A method to append a new description of an event to a TextView.
+	 *
+	 * @param test
+	 * 		The textview to use as a reference
+	 * @param event
+	 * 	 * 	The text event that is happening. Use this to append to the target TextView
+	 */
 	public void describeAction(TextView test, String event) {
 		String tempText = test.getText().toString();
 		test.append("" + event);
