@@ -101,17 +101,20 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		//Player must draw assassin card otherwise they should restart
 		//Use assasinate action on the other player twice to remove both their cards
 		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
-		testResultsTextView.append("lmao we made an assasinate action\n");
-		String existingText = testResultsTextView.getText().toString();
-		describeAction(testResultsTextView, "lmao test\n");
-
-
+		describeAction(testResultsTextView, "Used Assasin Action on first player\n");
+		//2nd time
 		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
+		describeAction(testResultsTextView, "Used Assasin Action on first player\n");
+
 		//if there are 3 players repeat
 		CoupHumanPlayer player3 = new CoupHumanPlayer("player3");
+		//first
 		firstInstance.makeAssnAction(new AssassinateAction(this), player3,this);
+		describeAction(testResultsTextView, "Used Assasin Action on second player\n");
+		//2nd
 		firstInstance.makeAssnAction(new AssassinateAction(this), player3,this);
-		//Player 1 wins!
+		describeAction(testResultsTextView, "Used Assasin Action on second player\n");
+		//Player 1 wins! In 4 Turns!!!!
 
 		//Makes a second base instance
 		CoupState secondInstance = new CoupState();
@@ -122,7 +125,8 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		String state2 = secondInstance.toString();
 		Log.d("state1", state1);
 		Log.d("state2", state2);
-
+		describeAction(testResultsTextView, state1+"\n");
+		describeAction(testResultsTextView, state2+"\n");
 
 		//General
 		/*if (button.getId() == R.id.taxButton) {
