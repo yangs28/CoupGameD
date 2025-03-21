@@ -182,7 +182,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		Button testButton = (Button) activity.findViewById(R.id.testButton);
 
-
+		testButton.setOnClickListener(this);
 
 		//deez nuts lmao
 
