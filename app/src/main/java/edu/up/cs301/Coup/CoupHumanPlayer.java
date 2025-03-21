@@ -136,7 +136,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		} else if (button.getId() == R.id.exchangeButton) {
 			action = new ExchangeAction(this);
 			Log.d("Click", "Exchange action was called");
-		}
+		}*/
 	}// onClick
 	
 	/**
@@ -181,6 +181,8 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		testResultsTextView = activity.findViewById(R.id.edit_text);
 
 		Button testButton = (Button) activity.findViewById(R.id.testButton);
+
+
 
 		//deez nuts lmao
 
