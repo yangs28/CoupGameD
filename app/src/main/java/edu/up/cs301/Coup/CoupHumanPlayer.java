@@ -89,7 +89,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		GameAction action = null;
 
 		//Clear Text From TextView
-		testResultsTextView = new TextView(null);
+		testResultsTextView.setText("");
 		CoupState firstInstance = new CoupState();
 		CoupState firstCopy = new CoupState(firstInstance);
 
