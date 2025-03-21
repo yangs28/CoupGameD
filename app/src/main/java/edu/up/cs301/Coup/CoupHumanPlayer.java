@@ -88,7 +88,37 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		// Construct the action and send it to the game
 		GameAction action = null;
 
-		if (button.getId() == R.id.taxButton) {
+		//Clear Text From TextView
+		testResultsTextView = new TextView(null);
+		CoupState firstInstance = new CoupState();
+		CoupState firstCopy = new CoupState(firstInstance);
+
+		//Methods that Speedrun the game
+		//creates the other player
+		CoupHumanPlayer player2 = new CoupHumanPlayer("player2");
+		//Player must draw assassin card otherwise they should restart
+		//Use assasinate action on the other player twice to remove both their cards
+		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
+		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
+		//if there are 3 players repeat
+		CoupHumanPlayer player3 = new CoupHumanPlayer("player3");
+		firstInstance.makeAssnAction(new AssassinateAction(this), player3,this);
+		firstInstance.makeAssnAction(new AssassinateAction(this), player3,this);
+		//Player 1 wins!
+
+		//Makes a second base instance
+		CoupState secondInstance = new CoupState();
+		CoupState secondCopy = new CoupState(secondInstance);
+
+		//Sends the String states to logcat
+		String state1 = firstInstance.toString();
+		String state2 = secondInstance.toString();
+		Log.d("state1", state1);
+		Log.d("state2", state2);
+
+
+		//General
+		/*if (button.getId() == R.id.taxButton) {
 			action = new TaxAction(this);
 			Log.d("Click", "Tax action was called");
 		} else if (button.getId() == R.id.incomeButton) {
@@ -106,7 +136,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		} else if (button.getId() == R.id.exchangeButton) {
 			action = new ExchangeAction(this);
 			Log.d("Click", "Exchange action was called");
-		}
+		}*/
 	}// onClick
 	
 	/**
