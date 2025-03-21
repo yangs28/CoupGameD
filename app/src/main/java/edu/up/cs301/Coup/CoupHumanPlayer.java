@@ -85,28 +85,29 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		// if we are not yet connected to a game, ignore
 		if (game == null) return;
 
-		// Construct the action and send it to the game
-		GameAction action = null;
+		Log.d("Click", "Run was called!");
 
-		if (button.getId() == R.id.taxButton) {
-			action = new TaxAction(this);
-			Log.d("Click", "Tax action was called");
-		} else if (button.getId() == R.id.incomeButton) {
-			action = new IncomeAction(this);
-			Log.d("Click", "Income action was called");
-		} else if (button.getId() == R.id.foreignAidButton) {
-			action = new ForeignAideAction(this);
-			Log.d("Click", "Foreign Aid action was called");
-		} else if (button.getId() == R.id.assassinateButton) {
-			action = new AssassinateAction(this);
-			Log.d("Click", "Assassinate action was called");
-		} else if (button.getId() == R.id.stealButton) {
-			action = new StealAction(this);
-			Log.d("Click", "Steal action was called");
-		} else if (button.getId() == R.id.exchangeButton) {
-			action = new ExchangeAction(this);
-			Log.d("Click", "Exchange action was called");
-		}
+
+//		if (button.getId() == R.id.taxButton) {
+//			action = new TaxAction(this);
+//			Log.d("Click", "Tax action was called");
+//		} else if (button.getId() == R.id.incomeButton) {
+//			action = new IncomeAction(this);
+//			Log.d("Click", "Income action was called");
+//		} else if (button.getId() == R.id.foreignAidButton) {
+//			action = new ForeignAideAction(this);
+//			Log.d("Click", "Foreign Aid action was called");
+//		} else if (button.getId() == R.id.assassinateButton) {
+//			action = new AssassinateAction(this);
+//			Log.d("Click", "Assassinate action was called");
+//		} else if (button.getId() == R.id.stealButton) {
+//			action = new StealAction(this);
+//			Log.d("Click", "Steal action was called");
+//		} else if (button.getId() == R.id.exchangeButton) {
+//			action = new ExchangeAction(this);
+//			Log.d("Click", "Exchange action was called");
+//		}
+
 	}// onClick
 	
 	/**
@@ -151,6 +152,8 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		testResultsTextView = activity.findViewById(R.id.edit_text);
 
 		Button testButton = (Button) activity.findViewById(R.id.testButton);
+
+		testButton.setOnClickListener(this);
 
 		//deez nuts lmao
 
