@@ -1,0 +1,58 @@
+Subject: [PATCH] Most of the 60% thing
+---
+Index: app/src/main/java/edu/up/cs301/Coup/CoupHumanPlayer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/edu/up/cs301/Coup/CoupHumanPlayer.java b/app/src/main/java/edu/up/cs301/Coup/CoupHumanPlayer.java
+--- a/app/src/main/java/edu/up/cs301/Coup/CoupHumanPlayer.java	(revision ace80912eeb9f9c631d0e12f16fe49ce60669663)
++++ b/app/src/main/java/edu/up/cs301/Coup/CoupHumanPlayer.java	(revision dd12c655878fb28ed583d5c8a69f7d69a9415d17)
+@@ -88,7 +88,37 @@
+ 		// Construct the action and send it to the game
+ 		GameAction action = null;
+ 
+-		if (button.getId() == R.id.taxButton) {
++		//Clear Text From TextView
++		testResultsTextView = new TextView(null);
++		CoupState firstInstance = new CoupState();
++		CoupState firstCopy = new CoupState(firstInstance);
++
++		//Methods that Speedrun the game
++		//creates the other player
++		CoupHumanPlayer player2 = new CoupHumanPlayer("player2");
++		//Player must draw assassin card otherwise they should restart
++		//Use assasinate action on the other player twice to remove both their cards
++		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
++		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
++		//if there are 3 players repeat
++		CoupHumanPlayer player3 = new CoupHumanPlayer("player3");
++		firstInstance.makeAssnAction(new AssassinateAction(this), player3,this);
++		firstInstance.makeAssnAction(new AssassinateAction(this), player3,this);
++		//Player 1 wins!
++
++		//Makes a second base instance
++		CoupState secondInstance = new CoupState();
++		CoupState secondCopy = new CoupState(secondInstance);
++
++		//Sends the String states to logcat
++		String state1 = firstInstance.toString();
++		String state2 = secondInstance.toString();
++		Log.d("state1", state1);
++		Log.d("state2", state2);
++
++
++		//General
++		/*if (button.getId() == R.id.taxButton) {
+ 			action = new TaxAction(this);
+ 			Log.d("Click", "Tax action was called");
+ 		} else if (button.getId() == R.id.incomeButton) {
+@@ -106,7 +136,7 @@
+ 		} else if (button.getId() == R.id.exchangeButton) {
+ 			action = new ExchangeAction(this);
+ 			Log.d("Click", "Exchange action was called");
+-		}
++		}*/
+ 	}// onClick
+ 	
+ 	/**
