@@ -104,7 +104,6 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		testResultsTextView.append("lmao we made an assasinate action\n");
 		String existingText = testResultsTextView.getText().toString();
 		describeAction(testResultsTextView, "lmao test\n");
-		describeAction(testResultsTextView, "lmao test\n");
 
 
 		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
