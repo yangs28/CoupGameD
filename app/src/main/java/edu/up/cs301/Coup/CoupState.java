@@ -3,6 +3,10 @@ package edu.up.cs301.Coup;
 import android.util.Log;
 
 import edu.up.cs301.Characters.Ambassador;
+import edu.up.cs301.Characters.Assassin;
+import edu.up.cs301.Characters.Captain;
+import edu.up.cs301.Characters.Contessa;
+import edu.up.cs301.Characters.Duke;
 import edu.up.cs301.GameFramework.Game;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
@@ -46,11 +50,19 @@ public class CoupState extends GameState {
 		player1Money = 0;
 		playerId = 0;
 
-		player0Hand = new GameAction[1];
-		player1Hand = new GameAction[1];
-		deck = new GameAction[14];
+		player0Hand = new GameAction[2];
+		player1Hand = new GameAction[2];
+		deck = new GameAction[15];
 
+		/*for(int k = 0; k<15;k++){
+			if(k<=2){deck[k]=new Ambassador(null);}
+			else if(3<=k&&k<=5){deck[k]=new Assassin(null);}
+			else if(6<=k&&k<=8){deck[k]=new Captain(null);}
+			else if(9<=k&&k<=11){deck[k]=new Contessa(null);}
+			else{deck[k]=new Duke(null);}
+		}*/
 	}
+
 
 	//Constructor that sets the values
 	public CoupState(int _player0Money, int _player1Money, int _playerId, GameAction[] _player0Hand, GameAction[] _player1Hand, GameAction[] _deck) {

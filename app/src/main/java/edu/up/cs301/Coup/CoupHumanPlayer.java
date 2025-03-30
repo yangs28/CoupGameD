@@ -23,11 +23,11 @@ import org.w3c.dom.Text;
  * A GUI of a counter-player. The GUI displays the current value of the counter,
  * and allows the human player to press the '+' and '-' buttons in order to
  * send moves to the game.
- * 
+ *
  * Just for fun, the GUI is implemented so that if the player presses either button
  * when the counter-value is zero, the screen flashes briefly, with the flash-color
  * being dependent on whether the player is player 0 or player 1.
- * 
+ *
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
  * @version July 2013
@@ -35,17 +35,19 @@ import org.w3c.dom.Text;
 public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener {
 
 	/* instance variables */
-	
+
 	// The TextView the displays the current counter value
 	private TextView testResultsTextView;
-	
+
 	// the most recent game state, as given to us by the CounterLocalGame
 	private CoupState state;
-	
+
 	// the android activity that we are running
 	private GameMainActivity myActivity;
 
 	private TextView deckText = null;
+	private TextView player1DabloonsText = null;
+	private TextView player2DabloonsText = null;
 
 
 
@@ -61,14 +63,14 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 	/**
 	 * Returns the GUI's top view object
-	 * 
+	 *
 	 * @return
 	 * 		the top object in the GUI's view heirarchy
 	 */
 	public View getTopView() {
 		return myActivity.findViewById(R.id.coup_New_Layout);
 	}
-	
+
 	/**
 	 * sets the counter value in the text view
 	 */
@@ -79,7 +81,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 	/**
 	 * this method gets called when the user clicks the '+' or '-' button. It
 	 * creates a new CounterMoveAction to return to the parent activity.
-	 * 
+	 *
 	 * @param button
 	 * 		the button that was clicked
 	 */
@@ -90,49 +92,11 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		// Construct the action and send it to the game
 		GameAction action = null;
 
-		//Clear Text From TextView
-		testResultsTextView.setText("");
-		CoupState firstInstance = new CoupState();
-		CoupState firstCopy = new CoupState(firstInstance);
 
-		//Methods that Speedrun the game
-		//creates the other player
-		CoupHumanPlayer player2 = new CoupHumanPlayer("player2");
-		//Player must draw assassin card otherwise they should restart
-		//Use assasinate action on the other player twice to remove both their cards
-		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
-		describeAction(testResultsTextView, "Used Assasin Action on first player\n");
-		//2nd time
-		firstInstance.makeAssnAction(new AssassinateAction(this), player2,this);
-		describeAction(testResultsTextView, "Used Assasin Action on first player\n");
-
-		//if there are 3 players repeat
-		CoupHumanPlayer player3 = new CoupHumanPlayer("player3");
-		//first
-		firstInstance.makeAssnAction(new AssassinateAction(this), player3,this);
-		describeAction(testResultsTextView, "Used Assasin Action on second player\n");
-		//2nd
-		firstInstance.makeAssnAction(new AssassinateAction(this), player3,this);
-		describeAction(testResultsTextView, "Used Assasin Action on second player\n");
-		//Player 1 wins! In 4 Turns!!!!
-
-		//Makes a second base instance
-		CoupState secondInstance = new CoupState();
-		CoupState secondCopy = new CoupState(secondInstance);
-
-		//turns both original instances into strings
-		String state1 = firstInstance.toString();
-		String state2 = secondInstance.toString();
-		//Sends the String states to logcat to check
-		Log.d("state1", state1);
-		Log.d("state2", state2);
-		//pushes strings to the Text View
-		describeAction(testResultsTextView, state1+"\n");
-		describeAction(testResultsTextView, state2+"\n");
 
 		//General
-		/*if (button.getId() == R.id.taxButton) {
-			action = new TaxAction(this);
+		if (button.getId() == R.id.taxButton) {
+			game.sendAction(new TaxAction(this));
 			Log.d("Click", "Tax action was called");
 		} else if (button.getId() == R.id.incomeButton) {
 			action = new IncomeAction(this);
@@ -149,14 +113,13 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		} else if (button.getId() == R.id.exchangeButton) {
 			action = new ExchangeAction(this);
 			Log.d("Click", "Exchange action was called");
-		}*/
+		}
 	}// onClick
-	
+
 	/**
 	 * callback method when we get a message (e.g., from the game)
-	 * 
-	 * @param info
-	 * 		the message
+	 *
+	 * @param info* 		the message
 	 */
 	@Override
 	public void receiveInfo(GameInfo info) {
@@ -164,7 +127,8 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		if (!(info instanceof CoupState)) return;
 
 		if(state != null) {
-			deckText.setText(String.valueOf(state.getPlayer0Money()));
+			player1DabloonsText.setText(String.valueOf(state.getPlayer0Money()) + " francs");
+			//deckText.setText(String.valueOf(state.getPlayer0Money()));
 		}
 
 		// update our state; then update the display
@@ -188,11 +152,11 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		String tempText = test.getText().toString();
 		test.append("" + event);
 	}
-	
+
 	/**
 	 * callback method--our game has been chosen/rechosen to be the GUI,
 	 * called from the GUI thread
-	 * 
+	 *
 	 * @param activity
 	 * 		the activity under which we are running
 	 */
@@ -202,36 +166,39 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		this.myActivity = activity;
 
 		// Load the layout resource for our GUI
-		activity.setContentView(R.layout.coup_test_layout);
+		activity.setContentView(R.layout.coup_layout);
 
-		testResultsTextView = activity.findViewById(R.id.edit_text);
+		//testResultsTextView = activity.findViewById(R.id.edit_text);
 
-		Button testButton = (Button) activity.findViewById(R.id.testButton);
+		//Button testButton = (Button) activity.findViewById(R.id.testButton);
 
-		testButton.setOnClickListener(this);
+		//testButton.setOnClickListener(this);
 
 		//deez nuts lmao
 
-//		this.deckText = (TextView)activity.findViewById(R.id.deckText);
+		deckText = (TextView)activity.findViewById(R.id.deckText);
+		player1DabloonsText = (TextView)activity.findViewById((R.id.playerDabloonsText));
+		player2DabloonsText = (TextView)activity.findViewById((R.id.secondPlayerDabloonsText));
+
 //
-//		// Set this object as the listener for all buttons
-//		Button taxButton = (Button) activity.findViewById(R.id.taxButton);
-//		taxButton.setOnClickListener(this);
+		// Set this object as the listener for all buttons
+		Button taxButton = (Button) activity.findViewById(R.id.taxButton);
+		taxButton.setOnClickListener(this);
 //
-//		Button incomeButton = (Button) activity.findViewById(R.id.incomeButton);
-//		incomeButton.setOnClickListener(this);
+		Button incomeButton = (Button) activity.findViewById(R.id.incomeButton);
+		incomeButton.setOnClickListener(this);
 //
-//		Button foreignAidButton = (Button) activity.findViewById(R.id.foreignAidButton);
-//		foreignAidButton.setOnClickListener(this);
+		Button foreignAidButton = (Button) activity.findViewById(R.id.foreignAidButton);
+		foreignAidButton.setOnClickListener(this);
 //
-//		Button assassinateButton = (Button) activity.findViewById(R.id.assassinateButton);
-//		assassinateButton.setOnClickListener(this);
-//
-//		Button stealButton = (Button) activity.findViewById(R.id.stealButton);
-//		stealButton.setOnClickListener(this);
-//
-//		Button exchangeButton = (Button) activity.findViewById(R.id.exchangeButton);
-//		exchangeButton.setOnClickListener(this);
+		Button assassinateButton = (Button) activity.findViewById(R.id.assassinateButton);
+		assassinateButton.setOnClickListener(this);
+
+		Button stealButton = (Button) activity.findViewById(R.id.stealButton);
+		stealButton.setOnClickListener(this);
+
+		Button exchangeButton = (Button) activity.findViewById(R.id.exchangeButton);
+		exchangeButton.setOnClickListener(this);
 
 	}
 
