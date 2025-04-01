@@ -13,6 +13,9 @@ public class CoupAction extends GameAction {
         super(player);
         this.isBlockable = blockable;
     }
+    public boolean isBlockable(){
+        return isBlockable;
+    }
 
     public boolean getIsBlockable() {
         return isBlockable;
