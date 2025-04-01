@@ -4,6 +4,7 @@ import edu.up.cs301.CoupActions.AssassinateAction;
 import edu.up.cs301.CoupActions.BlockAction;
 import edu.up.cs301.CoupActions.ChallengeAction;
 import edu.up.cs301.CoupActions.CoupAction;
+import edu.up.cs301.CoupActions.CoupDeteAction;
 import edu.up.cs301.CoupActions.ExchangeAction;
 import edu.up.cs301.CoupActions.ForeignAideAction;
 import edu.up.cs301.CoupActions.IncomeAction;
@@ -126,6 +127,12 @@ public class CoupLocalGame extends LocalGame {
 					Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for TaxAction
 				}
+				if (action instanceof CoupDeteAction) { //todo
+					gameState.setPlayer0Money(gameState.getPlayer0Money() - 7); //correct money count
+					Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer0Money());
+					// Additional logic for CoupAction
+				}
+
 				gameState.setPlayerId(1);
 				break;
 
@@ -176,6 +183,11 @@ public class CoupLocalGame extends LocalGame {
 					gameState.setPlayer1Money(gameState.getPlayer0Money() + 3); //correct money count
 					Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for TaxAction
+				}
+				if (action instanceof CoupDeteAction) { //todo
+					gameState.setPlayer1Money(gameState.getPlayer1Money() - 7); //correct money count
+					Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer1Money());
+					// Additional logic for CoupAction
 				}
 				gameState.setPlayerId(0);
 				break;
