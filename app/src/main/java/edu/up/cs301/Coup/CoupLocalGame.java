@@ -15,6 +15,7 @@ import edu.up.cs301.GameFramework.players.GamePlayer;
 import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import android.util.Log;
+import android.widget.Button;
 
 import java.util.Random;
 
@@ -77,6 +78,7 @@ public class CoupLocalGame extends LocalGame {
 
 		// Generate a random amount for player0Money (adjust range as needed)
 		int randomMoney = rand.nextInt(10) + 1; // Generates a number between 1 and 10
+
 
 		switch(gameState.getPlayerId()) {
 			case 0:
@@ -161,6 +163,7 @@ public class CoupLocalGame extends LocalGame {
 				}
 
 				if (action instanceof ForeignAideAction) { //todo
+					//gameState.card1 =           // Trying to make the card1 visibility changable
 					gameState.setPlayer1Money(gameState.getPlayer0Money() + 2); //actually adds 2 coins
 					Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for ForeignAideAction
