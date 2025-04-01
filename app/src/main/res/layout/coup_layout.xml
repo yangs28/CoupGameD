@@ -219,6 +219,14 @@
                     android:layout_weight="1"
                     android:text="Exchange"
                     android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/coupButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Coup"
+                    android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
 
