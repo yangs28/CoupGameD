@@ -1,6 +1,8 @@
 package edu.up.cs301.Coup;
 
 import edu.up.cs301.CoupActions.AssassinateAction;
+import edu.up.cs301.CoupActions.CoupAction;
+import edu.up.cs301.CoupActions.CoupDeteAction;
 import edu.up.cs301.CoupActions.ExchangeAction;
 import edu.up.cs301.CoupActions.ForeignAideAction;
 import edu.up.cs301.CoupActions.IncomeAction;
@@ -114,6 +116,10 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 			game.sendAction(new ExchangeAction(this));
 			Log.d("Click", "Exchange action was called");
 		}
+		else if(button.getId() == R.id.coupButton){
+			game.sendAction(new CoupDeteAction(this));
+			Log.d("Click", "Coup action was called");
+		}
 	}// onClick
 
 	/**
@@ -200,6 +206,9 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		Button exchangeButton = (Button) activity.findViewById(R.id.exchangeButton);
 		exchangeButton.setOnClickListener(this);
+
+		Button coupButton = (Button) activity.findViewById(R.id.coupButton);
+		coupButton.setOnClickListener(this);
 
 	}
 
