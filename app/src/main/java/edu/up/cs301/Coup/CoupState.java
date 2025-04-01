@@ -226,6 +226,13 @@ public class CoupState extends GameState {
 		return playerId;
 	}
 
+	public GameAction[] getplayer0Hand(){
+		return player0Hand;
+	}
+	public GameAction[] getplayer1Hand(){
+		return player1Hand;
+	}
+
 	public void setPlayerId(int _playerId) {
 		this.playerId = _playerId;
 	}
