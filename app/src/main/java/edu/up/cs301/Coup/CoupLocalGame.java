@@ -115,6 +115,7 @@ public class CoupLocalGame extends LocalGame {
 				}
 
 				if (action instanceof StealAction) { //todo
+					gameState.setPlayer1Money(gameState.getPlayer1Money()-2);
 					gameState.setPlayer0Money(gameState.getPlayer0Money()+2);
 					Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for StealAction
@@ -126,8 +127,7 @@ public class CoupLocalGame extends LocalGame {
 					// Additional logic for TaxAction
 				}
 				gameState.setPlayerId(1);
-				return true;
-				//break;
+				break;
 
 
 			case 1:
@@ -166,6 +166,7 @@ public class CoupLocalGame extends LocalGame {
 				}
 
 				if (action instanceof StealAction) { //todo
+					gameState.setPlayer0Money(gameState.getPlayer0Money()-2);
 					gameState.setPlayer1Money(gameState.getPlayer1Money()+2);
 					Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for StealAction
@@ -177,10 +178,9 @@ public class CoupLocalGame extends LocalGame {
 					// Additional logic for TaxAction
 				}
 				gameState.setPlayerId(0);
-				return true;
-				//break;
+				break;
 		}
-		return false;
+		return true;
 	}//makeMove
 	
 	/**
