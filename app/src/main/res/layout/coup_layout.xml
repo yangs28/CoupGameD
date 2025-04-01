@@ -176,6 +176,7 @@
                     android:id="@+id/incomeButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Income"
                     android:textSize="10sp" />
 
@@ -183,6 +184,7 @@
                     android:id="@+id/foreignAidButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Foreign Aid"
                     android:textSize="10sp" />
 
@@ -190,6 +192,7 @@
                     android:id="@+id/taxButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Tax"
                     android:textSize="10sp" />
 
@@ -197,6 +200,7 @@
                     android:id="@+id/assassinateButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Assassinate"
                     android:textSize="10sp" />
 
@@ -204,6 +208,7 @@
                     android:id="@+id/stealButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Steal"
                     android:textSize="10sp" />
 
@@ -211,13 +216,14 @@
                     android:id="@+id/exchangeButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Exchange"
                     android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal"
@@ -234,7 +240,7 @@
                     android:id="@+id/coinBottom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_weight="1"
                     android:src="@drawable/bcoin" />
 
                 <TextView
@@ -250,18 +256,45 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:paddingStart="400dp"
-                android:clipToPadding="false">
+                android:orientation="vertical">
+
+
+                <Button
+                    android:id="@+id/buttonCardOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Card 1" />
+
+                <Button
+                    android:id="@+id/buttonCardTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Card 2" />
+
+                <Button
+                    android:id="@+id/buttonChallenge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Challenge" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/playerCharacterCardLeft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
+                    android:layout_weight="1"
                     android:padding="5dp"
                     android:src="@drawable/bambassador"
                     tools:ignore="VisualLintBounds" />
@@ -270,11 +303,12 @@
                     android:id="@+id/playerCharacterCardRight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
+                    android:layout_weight="1"
                     android:padding="5dp"
                     android:src="@drawable/bambassador"
                     tools:ignore="VisualLintBounds" />
             </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
