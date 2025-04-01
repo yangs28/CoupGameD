@@ -134,7 +134,7 @@ public class CoupLocalGame extends LocalGame {
 					return true;
 				}
 				gameState.setPlayerId(1);
-				break;
+				//break;
 
 
 			case 1:
@@ -193,7 +193,7 @@ public class CoupLocalGame extends LocalGame {
 					return true;
 				}
 				gameState.setPlayerId(0);
-				break;
+				//break;
 		}
 		return false;
 	}//makeMove

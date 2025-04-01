@@ -99,19 +99,19 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 			game.sendAction(new TaxAction(this));
 			Log.d("Click", "Tax action was called");
 		} else if (button.getId() == R.id.incomeButton) {
-			action = new IncomeAction(this);
+			game.sendAction(new IncomeAction(this));
 			Log.d("Click", "Income action was called");
 		} else if (button.getId() == R.id.foreignAidButton) {
-			action = new ForeignAideAction(this);
+			game.sendAction(new ForeignAideAction(this));
 			Log.d("Click", "Foreign Aid action was called");
 		} else if (button.getId() == R.id.assassinateButton) {
-			action = new AssassinateAction(this);
+			game.sendAction(new AssassinateAction(this));
 			Log.d("Click", "Assassinate action was called");
 		} else if (button.getId() == R.id.stealButton) {
-			action = new StealAction(this);
+			game.sendAction(new StealAction(this));
 			Log.d("Click", "Steal action was called");
 		} else if (button.getId() == R.id.exchangeButton) {
-			action = new ExchangeAction(this);
+			game.sendAction(new ExchangeAction(this));
 			Log.d("Click", "Exchange action was called");
 		}
 	}// onClick
@@ -128,6 +128,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		if(state != null) {
 			player1DabloonsText.setText(String.valueOf(state.getPlayer0Money()) + " francs");
+			player2DabloonsText.setText(String.valueOf(state.getPlayer1Money()) + " francs");
 			//deckText.setText(String.valueOf(state.getPlayer0Money()));
 		}
 
