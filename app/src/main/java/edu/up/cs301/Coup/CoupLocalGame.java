@@ -85,55 +85,48 @@ public class CoupLocalGame extends LocalGame {
 
 					Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for AssassinateAction
-					return true;
 				}
 
 				if (action instanceof BlockAction) { //todo
 					Log.d("Money", "Block action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for BlockAction
-					return true;
 				}
 
 				if (action instanceof ChallengeAction) { //todo
 					Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for ChallengeAction
-					return true;
 				}
 
 				if (action instanceof ExchangeAction) { //todo
 					Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for ExchangeAction
-					return true;
 				}
 
 				if (action instanceof ForeignAideAction) { //todo
 					gameState.setPlayer0Money(gameState.getPlayer0Money() + 2); //actually adds 2 coins
 					Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for ForeignAideAction
-					return true;
 				}
 
 				if (action instanceof IncomeAction) {
 					gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
 					Log.d("Money", "Income action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for IncomeAction
-					return true;
 				}
 
 				if (action instanceof StealAction) { //todo
 					gameState.setPlayer0Money(gameState.getPlayer0Money()+2);
 					Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for StealAction
-					return true;
 				}
 
 				if (action instanceof TaxAction) { //todo
 					gameState.setPlayer0Money(gameState.getPlayer0Money() + 3); //correct money count
 					Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for TaxAction
-					return true;
 				}
 				gameState.setPlayerId(1);
+				return true;
 				//break;
 
 
@@ -143,56 +136,48 @@ public class CoupLocalGame extends LocalGame {
 
 					Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for AssassinateAction
-					return true;
 				}
 
 				if (action instanceof BlockAction) { //todo
 					Log.d("Money", "Block action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for BlockAction
-					return true;
 				}
 
 				if (action instanceof ChallengeAction) { //todo
 					Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for ChallengeAction
-					return true;
 				}
 
 				if (action instanceof ExchangeAction) { //todo
 					Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for ExchangeAction
-					return true;
 				}
 
 				if (action instanceof ForeignAideAction) { //todo
 					gameState.setPlayer1Money(gameState.getPlayer0Money() + 2); //actually adds 2 coins
 					Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for ForeignAideAction
-					return true;
 				}
 
 				if (action instanceof IncomeAction) {
 					gameState.setPlayer1Money(gameState.getPlayer0Money() + 1);
 					Log.d("Money", "Income action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for IncomeAction
-					return true;
 				}
 
 				if (action instanceof StealAction) { //todo
 					gameState.setPlayer1Money(gameState.getPlayer1Money()+2);
 					Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for StealAction
-					return true;
 				}
 
 				if (action instanceof TaxAction) { //todo
-					TaxAction ta = (TaxAction) action;
 					gameState.setPlayer1Money(gameState.getPlayer0Money() + 3); //correct money count
 					Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for TaxAction
-					return true;
 				}
 				gameState.setPlayerId(0);
+				return true;
 				//break;
 		}
 		return false;
