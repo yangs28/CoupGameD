@@ -37,6 +37,8 @@ public class CoupLocalGame extends LocalGame {
 
 	// the game's state
 	private CoupState gameState;
+
+	private boolean wasBlocked = false;
 	
 	/**
 	 * can this player move
@@ -80,6 +82,10 @@ public class CoupLocalGame extends LocalGame {
 		if (action instanceof AssassinateAction) { //todo
 			AssassinateAction aa = (AssassinateAction) action;
 			gameState.setPlayer0Money(gameState.getPlayer0Money() - 3);
+			if(!wasBlocked){
+
+			}
+
 			Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for AssassinateAction
 			return true;
