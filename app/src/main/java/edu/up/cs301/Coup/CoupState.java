@@ -111,6 +111,7 @@ public class CoupState extends GameState {
 	//every action can only be performed if you have less than 10 coins, otherwise yomi coup
 	//actions that affect other players than the player performing it take an additional player variable
 	public boolean makeIncomeAction(GameAction action, GamePlayer player){
+
 		//gain one coin
 		if(playerId == 0 && getPlayer0Money() <10){
 			setPlayer0Money(getPlayer0Money()+1);

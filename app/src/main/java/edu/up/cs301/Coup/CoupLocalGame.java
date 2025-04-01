@@ -4,6 +4,7 @@ import edu.up.cs301.CoupActions.AssassinateAction;
 import edu.up.cs301.CoupActions.BlockAction;
 import edu.up.cs301.CoupActions.ChallengeAction;
 import edu.up.cs301.CoupActions.CoupAction;
+import edu.up.cs301.CoupActions.EndAction;
 import edu.up.cs301.CoupActions.ExchangeAction;
 import edu.up.cs301.CoupActions.ForeignAideAction;
 import edu.up.cs301.CoupActions.IncomeAction;
