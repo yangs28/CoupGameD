@@ -77,15 +77,15 @@ public class CoupLocalGame extends LocalGame {
 
 
 
-		if (action instanceof AssassinateAction) {
+		if (action instanceof AssassinateAction) { //todo
 			AssassinateAction aa = (AssassinateAction) action;
-			gameState.setPlayer0Money(randomMoney);
+			gameState.setPlayer0Money(gameState.getPlayer0Money() - 3);
 			Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for AssassinateAction
 			return true;
 		}
 
-		if (action instanceof BlockAction) {
+		if (action instanceof BlockAction) { //todo
 			BlockAction ba = (BlockAction) action;
 			gameState.setPlayer0Money(randomMoney);
 			Log.d("Money", "Block action was called. Money is " + gameState.getPlayer0Money());
@@ -93,7 +93,7 @@ public class CoupLocalGame extends LocalGame {
 			return true;
 		}
 
-		if (action instanceof ChallengeAction) {
+		if (action instanceof ChallengeAction) { //todo
 			ChallengeAction ca = (ChallengeAction) action;
 			gameState.setPlayer0Money(randomMoney);
 			Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer0Money());
@@ -101,15 +101,7 @@ public class CoupLocalGame extends LocalGame {
 			return true;
 		}
 
-		if (action instanceof CoupAction) {
-			CoupAction coa = (CoupAction) action;
-			gameState.setPlayer0Money(randomMoney);
-			Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer0Money());
-			// Additional logic for CoupAction
-			return true;
-		}
-
-		if (action instanceof ExchangeAction) {
+		if (action instanceof ExchangeAction) { //todo
 			ExchangeAction ea = (ExchangeAction) action;
 			gameState.setPlayer0Money(randomMoney);
 			Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer0Money());
@@ -117,9 +109,9 @@ public class CoupLocalGame extends LocalGame {
 			return true;
 		}
 
-		if (action instanceof ForeignAideAction) {
+		if (action instanceof ForeignAideAction) { //todo
 			ForeignAideAction faa = (ForeignAideAction) action;
-			gameState.setPlayer0Money(randomMoney);
+			gameState.setPlayer0Money(gameState.getPlayer0Money() + 2); //actually adds 2 coins
 			Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for ForeignAideAction
 			return true;
@@ -127,13 +119,13 @@ public class CoupLocalGame extends LocalGame {
 
 		if (action instanceof IncomeAction) {
 			IncomeAction ia = (IncomeAction) action;
-			gameState.setPlayer0Money(randomMoney);
+			gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
 			Log.d("Money", "Income action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for IncomeAction
 			return true;
 		}
 
-		if (action instanceof StealAction) {
+		if (action instanceof StealAction) { //todo
 			StealAction sa = (StealAction) action;
 			gameState.setPlayer0Money(randomMoney);
 			Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
@@ -141,15 +133,15 @@ public class CoupLocalGame extends LocalGame {
 			return true;
 		}
 
-		if (action instanceof TaxAction) {
+		if (action instanceof TaxAction) { //todo
 			TaxAction ta = (TaxAction) action;
-			gameState.setPlayer0Money(randomMoney);
+			gameState.setPlayer0Money(gameState.getPlayer0Money() + 3); //correct money count
 			Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
 			// Additional logic for TaxAction
 			return true;
 		}
 
-		if (action instanceof CoupMoveAction) {
+		if (action instanceof CoupMoveAction) { //todo
 			CoupMoveAction cma = (CoupMoveAction) action;
 			gameState.setPlayer0Money(randomMoney);
 			Log.d("Money", "Coup Move action was called. Money is " + gameState.getPlayer0Money());
