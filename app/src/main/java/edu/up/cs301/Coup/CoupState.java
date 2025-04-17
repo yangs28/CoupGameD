@@ -118,7 +118,7 @@ public class CoupState extends GameState {
 
 	}
 
-
+/*
 	//generic actions
 	//every action can only be performed if you have less than 10 coins, otherwise yomi coup
 	//actions that affect other players than the player performing it take an additional player variable
@@ -209,7 +209,7 @@ public class CoupState extends GameState {
 	//reactions
 	public boolean makeBlockAction(GameAction action, GamePlayer player){return false;}
 	public boolean makeChalAction(GameAction action, GamePlayer player){return false;}
-
+*/
 
 
 
