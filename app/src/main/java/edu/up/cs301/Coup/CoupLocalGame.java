@@ -84,10 +84,12 @@ public class CoupLocalGame extends LocalGame {
 			case 0:
 
 				if (action instanceof AssassinateAction) { //todo
-					gameState.setPlayer0Money(gameState.getPlayer0Money() - 3);
+					if(gameState.getPlayer0Money() >= 3) {
+						gameState.setPlayer0Money(gameState.getPlayer0Money() - 3);
 
-					Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for AssassinateAction
+						Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
+						// Additional logic for AssassinateAction
+					}
 				}
 
 				if (action instanceof BlockAction) { //todo
@@ -118,8 +120,14 @@ public class CoupLocalGame extends LocalGame {
 				}
 
 				if (action instanceof StealAction) { //todo
-					gameState.setPlayer1Money(gameState.getPlayer1Money()-2);
-					gameState.setPlayer0Money(gameState.getPlayer0Money()+2);
+					if(gameState.getPlayer1Money() >= 2) {
+						gameState.setPlayer1Money(gameState.getPlayer1Money() - 2);
+						gameState.setPlayer0Money(gameState.getPlayer0Money() + 2);
+					}
+					else if(gameState.getPlayer1Money()>=1){
+						gameState.setPlayer1Money(gameState.getPlayer1Money() - 1);
+						gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
+					}
 					Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for StealAction
 				}
@@ -130,9 +138,12 @@ public class CoupLocalGame extends LocalGame {
 					// Additional logic for TaxAction
 				}
 				if (action instanceof CoupDeteAction) { //todo
-					gameState.setPlayer0Money(gameState.getPlayer0Money() - 7); //correct money count
-					Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for CoupAction
+					if(gameState.getPlayer0Money() >= 7) {
+
+						gameState.setPlayer0Money(gameState.getPlayer0Money() - 7); //correct money count
+						Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer0Money());
+						// Additional logic for CoupAction
+					}
 				}
 
 				gameState.setPlayerId(1);
@@ -141,10 +152,13 @@ public class CoupLocalGame extends LocalGame {
 
 			case 1:
 				if (action instanceof AssassinateAction) { //todo
-					gameState.setPlayer1Money(gameState.getPlayer0Money() - 3);
+					if(gameState.getPlayer1Money() >= 3) {
 
-					Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for AssassinateAction
+						gameState.setPlayer1Money(gameState.getPlayer0Money() - 3);
+
+						Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
+						// Additional logic for AssassinateAction
+					}
 				}
 
 				if (action instanceof BlockAction) { //todo
@@ -176,8 +190,14 @@ public class CoupLocalGame extends LocalGame {
 				}
 
 				if (action instanceof StealAction) { //todo
-					gameState.setPlayer0Money(gameState.getPlayer0Money()-2);
-					gameState.setPlayer1Money(gameState.getPlayer1Money()+2);
+					if(gameState.getPlayer0Money() >= 2) {
+						gameState.setPlayer0Money(gameState.getPlayer0Money() - 2);
+						gameState.setPlayer1Money(gameState.getPlayer1Money() + 2);
+					}
+					else if(gameState.getPlayer0Money()>=1){
+						gameState.setPlayer0Money(gameState.getPlayer0Money() - 1);
+						gameState.setPlayer1Money(gameState.getPlayer1Money() + 1);
+					}
 					Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for StealAction
 				}
@@ -188,9 +208,12 @@ public class CoupLocalGame extends LocalGame {
 					// Additional logic for TaxAction
 				}
 				if (action instanceof CoupDeteAction) { //todo
-					gameState.setPlayer1Money(gameState.getPlayer1Money() - 7); //correct money count
-					Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer1Money());
-					// Additional logic for CoupAction
+					if(gameState.getPlayer1Money() >= 7) {
+
+						gameState.setPlayer1Money(gameState.getPlayer1Money() - 7); //correct money count
+						Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer1Money());
+						// Additional logic for CoupAction
+					}
 				}
 				gameState.setPlayerId(0);
 				break;
