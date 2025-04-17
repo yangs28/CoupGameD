@@ -2,6 +2,8 @@ package edu.up.cs301.Coup;
 
 import android.util.Log;
 
+import java.util.Random;
+
 import edu.up.cs301.Characters.Ambassador;
 import edu.up.cs301.Characters.Assassin;
 import edu.up.cs301.Characters.Captain;
@@ -54,13 +56,23 @@ public class CoupState extends GameState {
 		player1Hand = new GameAction[2];
 		deck = new GameAction[15];
 
-		/*for(int k = 0; k<15;k++){
+		for(int k = 0; k<15;k++){
 			if(k<=2){deck[k]=new Ambassador(null);}
-			else if(3<=k&&k<=5){deck[k]=new Assassin(null);}
-			else if(6<=k&&k<=8){deck[k]=new Captain(null);}
-			else if(9<=k&&k<=11){deck[k]=new Contessa(null);}
+			else if(k<=5){deck[k]=new Assassin(null);}
+			else if(k<=8){deck[k]=new Captain(null);}
+			else if(k<=11){deck[k]=new Contessa(null);}
 			else{deck[k]=new Duke(null);}
-		}*/
+		}
+		Random r = new Random();
+
+		player0Hand[0] = deck[r.nextInt(14)];
+		player0Hand[1] = deck[r.nextInt(14)];
+
+		player1Hand[0] = deck[r.nextInt(14)];
+		player1Hand[1] = deck[r.nextInt(14)];
+
+
+
 	}
 
 
