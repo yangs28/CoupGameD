@@ -85,7 +85,7 @@ public class CoupLocalGame extends LocalGame {
 		int randomMoney = rand.nextInt(10) + 1; // Generates a number between 1 and 10
 
 
-		if (gameState.getPlayerId() == getPlayerIdx(players[0])) {
+		if (gameState.getPlayerId() == getPlayerIdx(players[0]) && players[0] instanceof CoupHumanPlayer) {
 
 			if (action instanceof AssassinateAction) { //todo
 				if (gameState.getPlayer0Money() >= 3) {
@@ -151,11 +151,13 @@ public class CoupLocalGame extends LocalGame {
 			gameState.setPlayerId(getPlayerIdx(players[1]));
 			return true;
 
-		} else if (gameState.getPlayerId() == getPlayerIdx(players[1])) {
+		}
+
+		if (gameState.getPlayerId() == getPlayerIdx(players[1]) && players[1] instanceof CoupComputerPlayer1) {
 
 			if (action instanceof AssassinateAction) { //todo
 				if (gameState.getPlayer1Money() >= 3) {
-					gameState.setPlayer1Money(gameState.getPlayer0Money() - 3);
+					gameState.setPlayer1Money(gameState.getPlayer1Money() - 3);
 					Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
 					// Additional logic for AssassinateAction
 				}
@@ -177,13 +179,13 @@ public class CoupLocalGame extends LocalGame {
 			}
 
 			if (action instanceof ForeignAideAction) { //todo
-				gameState.setPlayer1Money(gameState.getPlayer0Money() + 2); //actually adds 2 coins
+				gameState.setPlayer1Money(gameState.getPlayer1Money() + 2); //actually adds 2 coins
 				Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer0Money());
 				// Additional logic for ForeignAideAction
 			}
 
 			if (action instanceof IncomeAction) {
-				gameState.setPlayer1Money(gameState.getPlayer0Money() + 1);
+				gameState.setPlayer1Money(gameState.getPlayer1Money() + 1);
 				Log.d("Money", "Income action was called. Money is " + gameState.getPlayer0Money());
 				// Additional logic for IncomeAction
 			}
@@ -201,7 +203,7 @@ public class CoupLocalGame extends LocalGame {
 			}
 
 			if (action instanceof TaxAction) { //todo
-				gameState.setPlayer1Money(gameState.getPlayer0Money() + 3); //correct money count
+				gameState.setPlayer1Money(gameState.getPlayer1Money() + 3); //correct money count
 				Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
 				// Additional logic for TaxAction
 			}
