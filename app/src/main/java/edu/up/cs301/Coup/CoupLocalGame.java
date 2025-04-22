@@ -85,146 +85,142 @@ public class CoupLocalGame extends LocalGame {
 		int randomMoney = rand.nextInt(10) + 1; // Generates a number between 1 and 10
 
 
-		switch(gameState.getPlayerId()) {
-			case 0:
+		if (gameState.getPlayerId() == getPlayerIdx(players[0])) {
 
-				if (action instanceof AssassinateAction) { //todo
-					if(gameState.getPlayer0Money() >= 3) {
-						gameState.setPlayer0Money(gameState.getPlayer0Money() - 3);
-
-						Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
-						// Additional logic for AssassinateAction
-					}
+			if (action instanceof AssassinateAction) { //todo
+				if (gameState.getPlayer0Money() >= 3) {
+					gameState.setPlayer0Money(gameState.getPlayer0Money() - 3);
+					Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
+					// Additional logic for AssassinateAction
 				}
+			}
 
-				if (action instanceof BlockAction) { //todo
-					Log.d("Money", "Block action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for BlockAction
-				}
+			if (action instanceof BlockAction) { //todo
+				Log.d("Money", "Block action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for BlockAction
+			}
 
-				if (action instanceof ChallengeAction) { //todo
-					Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for ChallengeAction
-				}
+			if (action instanceof ChallengeAction) { //todo
+				Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for ChallengeAction
+			}
 
-				if (action instanceof ExchangeAction) { //todo
-					Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for ExchangeAction
-				}
+			if (action instanceof ExchangeAction) { //todo
+				Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for ExchangeAction
+			}
 
-				if (action instanceof ForeignAideAction) { //todo
-					gameState.setPlayer0Money(gameState.getPlayer0Money() + 2); //actually adds 2 coins
-					Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for ForeignAideAction
-				}
+			if (action instanceof ForeignAideAction) { //todo
+				gameState.setPlayer0Money(gameState.getPlayer0Money() + 2); //actually adds 2 coins
+				Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for ForeignAideAction
+			}
 
-				if (action instanceof IncomeAction) {
+			if (action instanceof IncomeAction) {
+				gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
+				Log.d("Money", "Income action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for IncomeAction
+			}
+
+			if (action instanceof StealAction) { //todo
+				if (gameState.getPlayer1Money() >= 2) {
+					gameState.setPlayer1Money(gameState.getPlayer1Money() - 2);
+					gameState.setPlayer0Money(gameState.getPlayer0Money() + 2);
+				} else if (gameState.getPlayer1Money() >= 1) {
+					gameState.setPlayer1Money(gameState.getPlayer1Money() - 1);
 					gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
-					Log.d("Money", "Income action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for IncomeAction
 				}
+				Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for StealAction
+			}
 
-				if (action instanceof StealAction) { //todo
-					if(gameState.getPlayer1Money() >= 2) {
-						gameState.setPlayer1Money(gameState.getPlayer1Money() - 2);
-						gameState.setPlayer0Money(gameState.getPlayer0Money() + 2);
-					}
-					else if(gameState.getPlayer1Money()>=1){
-						gameState.setPlayer1Money(gameState.getPlayer1Money() - 1);
-						gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
-					}
-					Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for StealAction
+			if (action instanceof TaxAction) { //todo
+				gameState.setPlayer0Money(gameState.getPlayer0Money() + 3); //correct money count
+				Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for TaxAction
+			}
+
+			if (action instanceof CoupDeteAction) { //todo
+				if (gameState.getPlayer0Money() >= 7) {
+					gameState.setPlayer0Money(gameState.getPlayer0Money() - 7); //correct money count
+					Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer0Money());
+					// Additional logic for CoupAction
 				}
+			}
 
-				if (action instanceof TaxAction) { //todo
-					gameState.setPlayer0Money(gameState.getPlayer0Money() + 3); //correct money count
-					Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for TaxAction
+			gameState.setPlayerId(getPlayerIdx(players[1]));
+			return true;
+
+		} else if (gameState.getPlayerId() == getPlayerIdx(players[1])) {
+
+			if (action instanceof AssassinateAction) { //todo
+				if (gameState.getPlayer1Money() >= 3) {
+					gameState.setPlayer1Money(gameState.getPlayer0Money() - 3);
+					Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
+					// Additional logic for AssassinateAction
 				}
-				if (action instanceof CoupDeteAction) { //todo
-					if(gameState.getPlayer0Money() >= 7) {
+			}
 
-						gameState.setPlayer0Money(gameState.getPlayer0Money() - 7); //correct money count
-						Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer0Money());
-						// Additional logic for CoupAction
-					}
+			if (action instanceof BlockAction) { //todo
+				Log.d("Money", "Block action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for BlockAction
+			}
+
+			if (action instanceof ChallengeAction) { //todo
+				Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for ChallengeAction
+			}
+
+			if (action instanceof ExchangeAction) { //todo
+				Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for ExchangeAction
+			}
+
+			if (action instanceof ForeignAideAction) { //todo
+				gameState.setPlayer1Money(gameState.getPlayer0Money() + 2); //actually adds 2 coins
+				Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for ForeignAideAction
+			}
+
+			if (action instanceof IncomeAction) {
+				gameState.setPlayer1Money(gameState.getPlayer0Money() + 1);
+				Log.d("Money", "Income action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for IncomeAction
+			}
+
+			if (action instanceof StealAction) { //todo
+				if (gameState.getPlayer0Money() >= 2) {
+					gameState.setPlayer0Money(gameState.getPlayer0Money() - 2);
+					gameState.setPlayer1Money(gameState.getPlayer1Money() + 2);
+				} else if (gameState.getPlayer0Money() >= 1) {
+					gameState.setPlayer0Money(gameState.getPlayer0Money() - 1);
+					gameState.setPlayer1Money(gameState.getPlayer1Money() + 1);
 				}
+				Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for StealAction
+			}
 
-				gameState.setPlayerId(1);
-				break;
+			if (action instanceof TaxAction) { //todo
+				gameState.setPlayer1Money(gameState.getPlayer0Money() + 3); //correct money count
+				Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
+				// Additional logic for TaxAction
+			}
 
-
-			case 1:
-				if (action instanceof AssassinateAction) { //todo
-					if(gameState.getPlayer1Money() >= 3) {
-
-						gameState.setPlayer1Money(gameState.getPlayer0Money() - 3);
-
-						Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
-						// Additional logic for AssassinateAction
-					}
+			if (action instanceof CoupDeteAction) { //todo
+				if (gameState.getPlayer1Money() >= 7) {
+					gameState.setPlayer1Money(gameState.getPlayer1Money() - 7); //correct money count
+					Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer1Money());
+					// Additional logic for CoupAction
 				}
+			}
 
-				if (action instanceof BlockAction) { //todo
-					Log.d("Money", "Block action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for BlockAction
-				}
-
-				if (action instanceof ChallengeAction) { //todo
-					Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for ChallengeAction
-				}
-
-				if (action instanceof ExchangeAction) { //todo
-					Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for ExchangeAction
-				}
-
-				if (action instanceof ForeignAideAction) { //todo
-					//gameState.card1 =           // Trying to make the card1 visibility changable
-					gameState.setPlayer1Money(gameState.getPlayer0Money() + 2); //actually adds 2 coins
-					Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for ForeignAideAction
-				}
-
-				if (action instanceof IncomeAction) {
-					gameState.setPlayer1Money(gameState.getPlayer0Money() + 1);
-					Log.d("Money", "Income action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for IncomeAction
-				}
-
-				if (action instanceof StealAction) { //todo
-					if(gameState.getPlayer0Money() >= 2) {
-						gameState.setPlayer0Money(gameState.getPlayer0Money() - 2);
-						gameState.setPlayer1Money(gameState.getPlayer1Money() + 2);
-					}
-					else if(gameState.getPlayer0Money()>=1){
-						gameState.setPlayer0Money(gameState.getPlayer0Money() - 1);
-						gameState.setPlayer1Money(gameState.getPlayer1Money() + 1);
-					}
-					Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for StealAction
-				}
-
-				if (action instanceof TaxAction) { //todo
-					gameState.setPlayer1Money(gameState.getPlayer0Money() + 3); //correct money count
-					Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
-					// Additional logic for TaxAction
-				}
-				if (action instanceof CoupDeteAction) { //todo
-					if(gameState.getPlayer1Money() >= 7) {
-
-						gameState.setPlayer1Money(gameState.getPlayer1Money() - 7); //correct money count
-						Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer1Money());
-						// Additional logic for CoupAction
-					}
-				}
-				gameState.setPlayerId(0);
-				break;
+			gameState.setPlayerId(getPlayerIdx(players[0]));
+			return true;
 		}
-		return true;
-	}//makeMove
+
+		return false;
+	} // makeMove
+
 	
 	/**
 	 * send the updated state to a given player

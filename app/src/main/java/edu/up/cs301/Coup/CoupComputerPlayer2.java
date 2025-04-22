@@ -53,9 +53,6 @@ public class CoupComputerPlayer2 extends CoupComputerPlayer1 {
 	public CoupComputerPlayer2(String name) {
 		super(name);
 
-		AssassinateAction ass = new AssassinateAction(this);
-		this.game.sendAction(ass);
-
 	}
 	
     /**
