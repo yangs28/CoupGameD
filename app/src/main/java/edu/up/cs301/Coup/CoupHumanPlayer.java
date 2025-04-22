@@ -152,9 +152,11 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		this.state = (CoupState)info;
 		updateDisplay();
 
+		//Creates a temporary variable of the Left and Right card
 		GameAction tempLeft  = this.state.getplayer0Hand()[0];
 		GameAction tempRight = this.state.getplayer0Hand()[1];
 
+		//Initializes the drawable
 		// left card
 		if (tempLeft instanceof Ambassador) {
 			cardLeft.setImageResource(R.drawable.bambassador);
