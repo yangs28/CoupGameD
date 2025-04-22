@@ -73,6 +73,11 @@ public class CoupLocalGame extends LocalGame {
 	protected boolean makeMove(GameAction action) {
 		Log.i("action", action.getClass().toString());
 
+		Log.d("Player", "Player idx[0] is " + getPlayerIdx(players[0]));
+		Log.d("Player", "Player idx[1] is " + getPlayerIdx(players[1]));
+		Log.d("Player", "PLayer ID is " + gameState.getPlayerId());
+
+
 		// Create a new Random instance
 		Random rand = new Random();
 

@@ -1,6 +1,7 @@
 package edu.up.cs301.Coup;
 
 import edu.up.cs301.CoupActions.AssassinateAction;
+import edu.up.cs301.CoupActions.IncomeAction;
 import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.GameFramework.utilities.Tickable;
@@ -25,6 +26,8 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
 
 	//monies
 
+	CoupState tempState;
+
 
 
     public CoupComputerPlayer1(String name) {
@@ -46,6 +49,22 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
 	protected void receiveInfo(GameInfo info) {
 		// Do nothing, as we ignore all state in deciding our next move. It
 		// depends totally on the timer and random numbers.
+
+		tempState = (CoupState) info;
+
+		if(!(info instanceof CoupState)) {
+			return;
+		}
+
+		if(tempState.getPlayerId() != this.playerNum) {
+			return;
+		}
+
+		if(tempState.getPlayerId() == this.playerNum) {
+			IncomeAction inc = new IncomeAction(this);
+			this.game.sendAction(inc);
+		}
+
 	}
 	
 	/**
