@@ -1,5 +1,10 @@
 package edu.up.cs301.Coup;
 
+import edu.up.cs301.Characters.Ambassador;
+import edu.up.cs301.Characters.Assassin;
+import edu.up.cs301.Characters.Captain;
+import edu.up.cs301.Characters.Contessa;
+import edu.up.cs301.Characters.Duke;
 import edu.up.cs301.CoupActions.AssassinateAction;
 import edu.up.cs301.CoupActions.CoupAction;
 import edu.up.cs301.CoupActions.CoupDeteAction;
@@ -147,8 +152,35 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		this.state = (CoupState)info;
 		updateDisplay();
 
-		cardLeft.setImageResource(R.drawable.bassasin);
-		cardRight.setImageResource(R.drawable.bduke);
+		GameAction tempLeft  = this.state.getplayer0Hand()[0];
+		GameAction tempRight = this.state.getplayer0Hand()[1];
+
+		// left card
+		if (tempLeft instanceof Ambassador) {
+			cardLeft.setImageResource(R.drawable.bambassador);
+		} else if (tempLeft instanceof Contessa) {
+			cardLeft.setImageResource(R.drawable.bcontessa);
+		} else if (tempLeft instanceof Captain) {
+			cardLeft.setImageResource(R.drawable.bcaptain);
+		} else if (tempLeft instanceof Assassin) {
+			cardLeft.setImageResource(R.drawable.bassasin);
+		} else if (tempLeft instanceof Duke) {
+			cardLeft.setImageResource(R.drawable.bduke);
+		}
+
+		// right card
+		if (tempRight instanceof Ambassador) {
+			cardRight.setImageResource(R.drawable.bambassador);
+		} else if (tempRight instanceof Contessa) {
+			cardRight.setImageResource(R.drawable.bcontessa);
+		} else if (tempRight instanceof Captain) {
+			cardRight.setImageResource(R.drawable.bcaptain);
+		} else if (tempRight instanceof Assassin) {
+			cardRight.setImageResource(R.drawable.bassasin);
+		} else if (tempRight instanceof Duke) {
+			cardRight.setImageResource(R.drawable.bduke);
+		}
+
 
 
 
