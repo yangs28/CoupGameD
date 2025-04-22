@@ -16,6 +16,8 @@ import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
@@ -50,6 +52,9 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 	private TextView deckText = null;
 	private TextView player1DabloonsText = null;
 	private TextView player2DabloonsText = null;
+
+	private ImageView cardLeft = null;
+	private ImageView cardRight = null;
 
 
 
@@ -142,6 +147,11 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		this.state = (CoupState)info;
 		updateDisplay();
 
+		cardLeft.setImageResource(R.drawable.bassasin);
+		cardRight.setImageResource(R.drawable.bduke);
+
+
+
 		//if(state != null) {
 		//	deckText.setText(String.valueOf(state.getPlayer0Money()));
 		//}
@@ -218,6 +228,9 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		Button challenge = (Button) activity.findViewById(R.id.buttonChallenge);
 		challenge.setOnClickListener(this);
+
+		this.cardLeft = (ImageView) activity.findViewById(R.id.playerCharacterCardLeft);
+		this.cardRight = (ImageView) activity.findViewById(R.id.playerCharacterCardRight);
 
 	}
 

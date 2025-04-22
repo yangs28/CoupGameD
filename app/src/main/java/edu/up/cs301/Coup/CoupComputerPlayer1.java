@@ -47,10 +47,11 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
      */
 	@Override
 	protected void receiveInfo(GameInfo info) {
-		// Do nothing, as we ignore all state in deciding our next move. It
-		// depends totally on the timer and random numbers.
+		//Automatically performs an Income action for now.
+		//NOTE: Rare bug with thread.sleep. Conflicts with game and causes a turn error. Mechanism unknown.
 
 		tempState = (CoupState) info;
+
 
 		if(!(info instanceof CoupState)) {
 			return;
@@ -61,6 +62,8 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
 		}
 
 		if(tempState.getPlayerId() == this.playerNum) {
+
+
 			IncomeAction inc = new IncomeAction(this);
 			this.game.sendAction(inc);
 		}
