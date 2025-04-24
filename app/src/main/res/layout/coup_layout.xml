@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingBottom="33sp"
-                    android:text="69 Dabloons"
+                    android:text="0 francs"
                     android:textAlignment="center"
                     android:textSize="30dp" />
             </LinearLayout>
@@ -258,7 +258,7 @@
                     android:layout_weight="1"
                     android:minHeight="100sp"
                     android:paddingBottom="22dp"
-                    android:text="69 Dabloons"
+                    android:text="0 francs"
                     android:textAlignment="center"
                     android:textSize="30dp" />
             </LinearLayout>
