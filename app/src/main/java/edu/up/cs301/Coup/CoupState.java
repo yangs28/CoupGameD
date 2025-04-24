@@ -70,9 +70,6 @@ public class CoupState extends GameState {
 
 		player1Hand[0] = deck[r.nextInt(14)];
 		player1Hand[1] = deck[r.nextInt(14)];
-
-
-
 	}
 
 
@@ -241,8 +238,23 @@ public class CoupState extends GameState {
 	public GameAction[] getplayer0Hand(){
 		return player0Hand;
 	}
+
+	public void setplayer0Hand(GameAction card1, GameAction card2){
+		player0Hand[0] = card1;
+		player0Hand[1] = card2;
+	}
+
+	public GameAction[] getDeck() {
+		return deck;
+	}
+
 	public GameAction[] getplayer1Hand(){
 		return player1Hand;
+	}
+
+	public void setplayer2Hand(GameAction card1, GameAction card2){
+		player1Hand[0] = card1;
+		player1Hand[1] = card2;
 	}
 
 	public void setPlayerId(int _playerId) {

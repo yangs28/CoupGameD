@@ -8,7 +8,6 @@ import edu.up.cs301.Characters.Duke;
 import edu.up.cs301.CoupActions.AssassinateAction;
 import edu.up.cs301.CoupActions.BlockAction;
 import edu.up.cs301.CoupActions.ChallengeAction;
-import edu.up.cs301.CoupActions.CoupAction;
 import edu.up.cs301.CoupActions.CoupDeteAction;
 import edu.up.cs301.CoupActions.ExchangeAction;
 import edu.up.cs301.CoupActions.ForeignAideAction;
@@ -21,7 +20,6 @@ import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 
 import android.util.Log;
-import android.widget.Button;
 
 import java.util.Random;
 
@@ -86,10 +84,6 @@ public class CoupLocalGame extends LocalGame {
         // Create a new Random instance
         Random rand = new Random();
 
-        // Generate a random amount for player0Money (adjust range as needed)
-        int randomMoney = rand.nextInt(10) + 1; // Generates a number between 1 and 10
-
-
         if (gameState.getPlayerId() == getPlayerIdx(players[0]) && players[0] instanceof CoupHumanPlayer) {
 
             if (action instanceof AssassinateAction) { //todo
@@ -119,6 +113,26 @@ public class CoupLocalGame extends LocalGame {
             if (action instanceof ExchangeAction) { //todo
                 GameAction[] tempHand = gameState.getplayer0Hand();
                 if (tempHand[0] instanceof Ambassador || tempHand[1] instanceof Ambassador) {
+                    //Creates a copy of the original deck
+                    GameAction[] deckCopy = gameState.getDeck();
+                    int deckSize = deckCopy.length;
+
+                    // pick two random cards from the deck
+                    int randCard1 = rand.nextInt(deckSize);
+                    int randCard2 = rand.nextInt(deckSize);
+                    //Ensures we get 2 unique cards
+
+                    while (randCard2 == randCard1) {
+                        randCard2 = rand.nextInt(deckSize);
+                    }
+
+                    //draw those two cards from the deck
+                    GameAction newCard1 = deckCopy[randCard1];
+                    GameAction newCard2 = deckCopy[randCard2];
+
+                    //Uses those cards to set the player's hand with a new hand
+                    gameState.setplayer0Hand(newCard1, newCard2);
+
                     Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer0Money());
                     // Additional logic for ExchangeAction
                 }
@@ -205,8 +219,30 @@ public class CoupLocalGame extends LocalGame {
             }
 
             if (action instanceof ExchangeAction) { //todo
-                GameAction[] tempHand = gameState.getplayer1Hand();
-                if (tempHand[0] instanceof Ambassador || tempHand[1] instanceof Ambassador) {
+                    GameAction[] tempHand = gameState.getplayer0Hand();
+
+                    if (tempHand[0] instanceof Ambassador || tempHand[1] instanceof Ambassador) {
+                        //Creates a copy of the original deck
+                        GameAction[] deckCopy = gameState.getDeck();
+                        int deckSize = deckCopy.length;
+
+                        // pick two random cards from the deck
+                        int randCard1 = rand.nextInt(deckSize);
+                        int randCard2 = rand.nextInt(deckSize);
+                        //Ensures we get 2 unique cards
+
+                        while (randCard2 == randCard1) {
+                            randCard2 = rand.nextInt(deckSize);
+                        }
+
+                        //draw those two cards from the deck
+                        GameAction newCard1 = deckCopy[randCard1];
+                        GameAction newCard2 = deckCopy[randCard2];
+
+                        //Uses those cards to set the player's hand with a new hand
+                        gameState.setplayer2Hand(newCard1, newCard2);
+
+
                     Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer1Money());
                     // Additional logic for ExchangeAction
                 }
