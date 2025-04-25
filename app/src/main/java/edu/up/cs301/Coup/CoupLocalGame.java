@@ -340,9 +340,10 @@ public class CoupLocalGame extends LocalGame {
     protected String checkIfGameOver() {
         Log.d("Over", "We're so back");
 
-        if(gameState.checkDead()[0] == true && gameState.checkDead()[1] == true) {
+
+        if (gameState.checkDead()[0] == true && gameState.checkDead()[1] == true) {
             Log.d("Over", "It's so over");
-            return "The game is over! Player 1 won by assassinating all Influences! ";
+            return "The game is over! Player 1 won by killing all Influences! ";
         }
 
         return null;
