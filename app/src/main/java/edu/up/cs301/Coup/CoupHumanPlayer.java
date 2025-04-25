@@ -189,12 +189,12 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		if (state.checkDead()[0] == true) {
 				Log.d("Ass", "Updating cardLeft to bduke");
-				cardLeft.setImageResource(R.drawable.bduke);
+				cardLeft.setImageResource(R.drawable.killed);
 			}
 
 			if(state.checkDead()[1] == true) {
 				Log.d("Ass", "Updating deckButton to bduke");
-				deckButton.setImageResource(R.drawable.bduke);
+				cardRight.setImageResource(R.drawable.killed);
 			}
 
 			updateDisplay();
