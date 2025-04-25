@@ -1,7 +1,5 @@
 package edu.up.cs301.Coup;
 
-import android.util.Log;
-
 import java.util.Random;
 
 import edu.up.cs301.Characters.Ambassador;
@@ -9,10 +7,8 @@ import edu.up.cs301.Characters.Assassin;
 import edu.up.cs301.Characters.Captain;
 import edu.up.cs301.Characters.Contessa;
 import edu.up.cs301.Characters.Duke;
-import edu.up.cs301.GameFramework.Game;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
-import edu.up.cs301.GameFramework.players.GamePlayer;
 
 /**
  * This contains the state for the Coup game. This stores the current state of the
@@ -46,7 +42,9 @@ public class CoupState extends GameState {
 	private boolean[] isDrawn;
 	//This boolean checks to see if the card has been killed and can no longer be drawn
 	private boolean[] isKilled;
-	private boolean[] isDead;
+	private boolean[] player0isDead;
+	private boolean[] player1isDead;
+
 
 	int temphand1;
 	int temphand2;
@@ -68,7 +66,9 @@ public class CoupState extends GameState {
 		isDrawn = new boolean[15];
 		isKilled = new boolean[15];
 
-		this.isDead = new boolean[2];
+		this.player0isDead = new boolean[2];
+		this.player1isDead = new boolean[2];
+
 
 
 
@@ -152,8 +152,8 @@ public class CoupState extends GameState {
 		System.arraycopy(orig.isKilled, 0, this.isKilled, 0, orig.isKilled.length);
 
 		// Copy dead flags
-		this.isDead = new boolean[orig.isDead.length];
-		System.arraycopy(orig.isDead, 0, this.isDead, 0, orig.isDead.length);
+		this.player0isDead = new boolean[orig.player0isDead.length];
+		System.arraycopy(orig.player0isDead, 0, this.player0isDead, 0, orig.player0isDead.length);
 
 		// Copy temporary hand indices
 		this.temphand1 = orig.temphand1;
@@ -306,16 +306,20 @@ public class CoupState extends GameState {
 		player1Hand[1] = card2;
 	}
 
-	public void setIsDead(int x) {
-		isDead[x] = true;
+	public void make0Dead(int x) {
+		player0isDead[x] = true;
 	}
 
-	public void makeDead(int x) {
-		isDead[x] = true;
+	public void make1Dead(int x) {
+		player1isDead[x] = true;
 	}
 
-	public boolean[] checkDead() {
-		return isDead;
+	public boolean[] checkplayer0Dead() {
+		return player0isDead;
+	}
+
+	public boolean[] checkplayer1Dead() {
+		return player1isDead;
 	}
 
 	public void setPlayerId(int _playerId) {

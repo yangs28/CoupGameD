@@ -6,7 +6,6 @@ import edu.up.cs301.Characters.Captain;
 import edu.up.cs301.Characters.Contessa;
 import edu.up.cs301.Characters.Duke;
 import edu.up.cs301.CoupActions.AssassinateAction;
-import edu.up.cs301.CoupActions.CoupAction;
 import edu.up.cs301.CoupActions.CoupDeteAction;
 import edu.up.cs301.CoupActions.ExchangeAction;
 import edu.up.cs301.CoupActions.ForeignAideAction;
@@ -21,12 +20,9 @@ import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
-
-import org.w3c.dom.Text;
 
 /**
  * A GUI of a counter-player. The GUI displays the current value of the counter,
@@ -189,17 +185,27 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 			cardRight.setImageResource(R.drawable.bduke);
 		}
 
-		Log.d("Ass", "This.state.checkdead 0 is " + state.checkDead()[0]);
+		Log.d("Ass", "This.state.checkdead 0 is " + state.checkplayer0Dead()[0]);
 
-		if (state.checkDead()[0] == true) {
+		if (state.checkplayer0Dead()[0] == true) {
 				Log.d("Ass", "Updating cardLeft to bduke");
 				oppCardLeft.setImageResource(R.drawable.opponent_killed);
 			}
 
-			if(state.checkDead()[1] == true) {
+			if(state.checkplayer0Dead()[1] == true) {
 				Log.d("Ass", "Updating deckButton to bduke");
 				oppCardRight.setImageResource(R.drawable.opponent_killed);
 			}
+
+		if (state.checkplayer1Dead()[0] == true) {
+			Log.d("Ass", "Updating cardLeft to bduke");
+			cardLeft.setImageResource(R.drawable.killed);
+		}
+
+		if(state.checkplayer1Dead()[1] == true) {
+			Log.d("Ass", "Updating deckButton to bduke");
+			cardRight.setImageResource(R.drawable.killed);
+		}
 
 			updateDisplay();
 
