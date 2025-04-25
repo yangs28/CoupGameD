@@ -7,6 +7,7 @@ import edu.up.cs301.Characters.Duke;
 import edu.up.cs301.CoupActions.AssassinateAction;
 import edu.up.cs301.CoupActions.CoupDeteAction;
 import edu.up.cs301.CoupActions.ExchangeAction;
+import edu.up.cs301.CoupActions.ForeignAideAction;
 import edu.up.cs301.CoupActions.IncomeAction;
 import edu.up.cs301.CoupActions.StealAction;
 import edu.up.cs301.CoupActions.TaxAction;
@@ -75,26 +76,43 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
 			GameAction[] myHand = tempState.getplayer1Hand();
 			int myMoney = tempState.getPlayer1Money();
 
-			if (myHand[0] instanceof Duke || myHand[1] instanceof Duke) {
-				TaxAction tax = new TaxAction(this);
-				this.game.sendAction(tax);
+			// 1) Always try to Coup first
+			if (myMoney >= 7) {
+				CoupDeteAction coup = new CoupDeteAction(this);
+				this.game.sendAction(coup);
+
+			// 2) Then Assassinate if possible
 			} else if ((myHand[0] instanceof Assassin || myHand[1] instanceof Assassin)
 					&& myMoney >= 3) {
 				AssassinateAction assassinate = new AssassinateAction(this);
 				this.game.sendAction(assassinate);
-			} else if (myHand[0] instanceof Captain || myHand[1] instanceof Captain) {
-				StealAction steal = new StealAction(this);
-				this.game.sendAction(steal);
+
+			// 3) Then Exchange
 			} else if (myHand[0] instanceof Ambassador || myHand[1] instanceof Ambassador) {
 				ExchangeAction exchange = new ExchangeAction(this);
 				this.game.sendAction(exchange);
-			} else if (myMoney >= 7) {
-				CoupDeteAction coup = new CoupDeteAction(this);
-				this.game.sendAction(coup);
+
+			// 4) Then Tax
+			} else if (myHand[0] instanceof Duke || myHand[1] instanceof Duke) {
+				TaxAction tax = new TaxAction(this);
+				this.game.sendAction(tax);
+
+			// 5) Then Foreign Aid
+			} else if (myHand[0] instanceof Duke || myHand[1] instanceof Duke) {
+				ForeignAideAction foreignAide = new ForeignAideAction(this);
+				this.game.sendAction(foreignAide);
+
+			// 6) Then Steal
+			} else if (myHand[0] instanceof Captain || myHand[1] instanceof Captain) {
+				StealAction steal = new StealAction(this);
+				this.game.sendAction(steal);
+
+			// 7) Income as a last resort
 			} else {
 				IncomeAction inc = new IncomeAction(this);
 				this.game.sendAction(inc);
 			}
+
 
 		}
 
