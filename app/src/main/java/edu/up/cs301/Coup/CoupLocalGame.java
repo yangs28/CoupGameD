@@ -202,6 +202,21 @@ public class CoupLocalGame extends LocalGame {
             if (action instanceof CoupDeteAction) { //todo
                 if ( gameState.getPlayer0Money() >= 7) {
                     gameState.setPlayer0Money(gameState.getPlayer0Money() - 7);
+
+                    // Grab the current dead cards
+                    boolean[] deadInfluences = gameState.checkDead();
+
+                    // Randomly pick either 0 or 1 to kill
+                    Random random = new Random();
+                    int victim = random.nextInt(2);  // returns 0 or 1
+
+                    // Keep choosing new victims until we find somebody alive
+                    while (deadInfluences[victim]) {
+                        victim = random.nextInt(2);
+                    }
+
+                    gameState.makeDead(victim);
+
                     Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer0Money());
                     // Additional logic for CoupAction
                 }
