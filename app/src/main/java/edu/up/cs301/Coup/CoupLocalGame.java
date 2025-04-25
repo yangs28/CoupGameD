@@ -90,7 +90,9 @@ public class CoupLocalGame extends LocalGame {
 
             if (action instanceof AssassinateAction) { //todo
                 GameAction[] tempHand = gameState.getplayer0Hand();
+                GameAction[] oppHand = gameState.getplayer1Hand();
                 if (tempHand[0] instanceof Assassin || tempHand[1] instanceof Assassin) {
+                    if( !(oppHand[0] instanceof Contessa) || !(oppHand[1] instanceof Contessa)) {
                     if (gameState.getPlayer0Money() >= 3) {
                         gameState.setPlayer0Money(gameState.getPlayer0Money() - 3);
 
@@ -114,6 +116,7 @@ public class CoupLocalGame extends LocalGame {
                         Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
                         // Additional logic for AssassinateAction
                     }
+                }
                 }
             }
 
