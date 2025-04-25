@@ -82,7 +82,6 @@ public class CoupLocalGame extends LocalGame {
         Log.d("Ass", "Assassinate action was not called. Boolean makeDead 0 is " + gameState.checkDead()[0]);
 
 
-
         // Create a new Random instance
         Random rand = new Random();
 
@@ -92,31 +91,30 @@ public class CoupLocalGame extends LocalGame {
                 GameAction[] tempHand = gameState.getplayer0Hand();
                 GameAction[] oppHand = gameState.getplayer1Hand();
                 if (tempHand[0] instanceof Assassin || tempHand[1] instanceof Assassin) {
-                    if( !(oppHand[0] instanceof Contessa) || !(oppHand[1] instanceof Contessa)) {
-                    if (gameState.getPlayer0Money() >= 3) {
-                        gameState.setPlayer0Money(gameState.getPlayer0Money() - 3);
+                    if (!(oppHand[0] instanceof Contessa) || !(oppHand[1] instanceof Contessa)) {
+                        if (gameState.getPlayer0Money() >= 3) {
+                            gameState.setPlayer0Money(gameState.getPlayer0Money() - 3);
 
-                        // Grab the current dead cards
-                        boolean[] deadInfluences = gameState.checkDead();
+                            // Grab the current dead cards
+                            boolean[] deadInfluences = gameState.checkDead();
 
-                        // Randomly pick either 0 or 1 to kill
-                        Random random = new Random();
-                        int victim = random.nextInt(2);  // returns 0 or 1
+                            // Randomly pick either 0 or 1 to kill
+                            Random random = new Random();
+                            int victim = random.nextInt(2);  // returns 0 or 1
 
-                        // Keep choosing new victims until we find somebody alive
-                        while (deadInfluences[victim]) {
-                            victim = random.nextInt(2);
+                            // Keep choosing new victims until we find somebody alive
+                            while (deadInfluences[victim]) {
+                                victim = random.nextInt(2);
+                            }
+
+                            gameState.makeDead(victim);
+                            Log.d("Ass", "Assassinate action was called. Boolean makeDead 0 is " + gameState.checkDead()[0]);
+
+
+                            Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
+                            // Additional logic for AssassinateAction
                         }
-
-                        gameState.makeDead(victim);
-                        Log.d("Ass", "Assassinate action was called. Boolean makeDead 0 is " + gameState.checkDead()[0]);
-
-
-
-                        Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
-                        // Additional logic for AssassinateAction
                     }
-                }
                 }
             }
 
@@ -129,8 +127,8 @@ public class CoupLocalGame extends LocalGame {
             }
 
             if (action instanceof ChallengeAction) { //todo
-                    Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer0Money());
-                    // Additional logic for ChallengeAction
+                Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer0Money());
+                // Additional logic for ChallengeAction
             }
 
             if (action instanceof ExchangeAction) { //todo
@@ -172,9 +170,9 @@ public class CoupLocalGame extends LocalGame {
 
             if (action instanceof IncomeAction) {
 
-                    gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
-                    Log.d("Money", "Income action was called. Money is " + gameState.getPlayer0Money());
-                    // Additional logic for IncomeAction
+                gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
+                Log.d("Money", "Income action was called. Money is " + gameState.getPlayer0Money());
+                // Additional logic for IncomeAction
             }
 
             if (action instanceof StealAction) { //todo
@@ -203,7 +201,7 @@ public class CoupLocalGame extends LocalGame {
             }
 
             if (action instanceof CoupDeteAction) { //todo
-                if ( gameState.getPlayer0Money() >= 7) {
+                if (gameState.getPlayer0Money() >= 7) {
                     gameState.setPlayer0Money(gameState.getPlayer0Money() - 7);
 
                     // Grab the current dead cards
@@ -232,76 +230,65 @@ public class CoupLocalGame extends LocalGame {
 
         if (gameState.getPlayerId() == getPlayerIdx(players[1]) && players[1] instanceof CoupComputerPlayer1) {
 
-            if (action instanceof AssassinateAction) { //todo
+            if (action instanceof AssassinateAction) {
                 GameAction[] tempHand = gameState.getplayer1Hand();
-                if (tempHand[0] instanceof Assassin || tempHand[1] instanceof Assassin) {
-                    if (gameState.getPlayer1Money() >= 3) {
-                        gameState.setPlayer1Money(gameState.getPlayer1Money() - 3);
-                        Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer1Money());
-                        // Additional logic for AssassinateAction
+                if ((tempHand[0] instanceof Assassin || tempHand[1] instanceof Assassin)
+                        && gameState.getPlayer1Money() >= 3) {
+                    gameState.setPlayer1Money(gameState.getPlayer1Money() - 3);
+                    boolean[] deadInfluences = gameState.checkDead();
+                    Random random = new Random();
+                    int victim = random.nextInt(2);
+                    while (deadInfluences[victim]) {
+                        victim = random.nextInt(2);
                     }
+                    gameState.makeDead(victim);
+                    Log.d("Ass", "Assassinate action was called. Boolean makeDead 1 is " + gameState.checkDead()[1]);
+                    Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer1Money());
                 }
             }
 
-            if (action instanceof BlockAction) { //todo
+            if (action instanceof BlockAction) {
                 GameAction[] tempHand = gameState.getplayer1Hand();
                 if (tempHand[0] instanceof Contessa || tempHand[1] instanceof Contessa) {
                     Log.d("Money", "Block action was called. Money is " + gameState.getPlayer1Money());
-                    // Additional logic for BlockAction
                 }
             }
 
-            if (action instanceof ChallengeAction) { //todo
-                    Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer1Money());
-                    // Additional logic for ChallengeAction
+            if (action instanceof ChallengeAction) {
+                Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer1Money());
             }
 
-            if (action instanceof ExchangeAction) { //todo
-                    GameAction[] tempHand = gameState.getplayer0Hand();
-
-                    if (tempHand[0] instanceof Ambassador || tempHand[1] instanceof Ambassador) {
-                        //Creates a copy of the original deck
-                        GameAction[] deckCopy = gameState.getDeck();
-                        int deckSize = deckCopy.length;
-
-                        // pick two random cards from the deck
-                        int randCard1 = rand.nextInt(deckSize);
-                        int randCard2 = rand.nextInt(deckSize);
-                        //Ensures we get 2 unique cards
-
-                        while (randCard2 == randCard1) {
-                            randCard2 = rand.nextInt(deckSize);
-                        }
-
-                        //draw those two cards from the deck
-                        GameAction newCard1 = deckCopy[randCard1];
-                        GameAction newCard2 = deckCopy[randCard2];
-
-                        //Uses those cards to set the player's hand with a new hand
-                        gameState.setplayer2Hand(newCard1, newCard2);
-
-
+            if (action instanceof ExchangeAction) {
+                GameAction[] tempHand = gameState.getplayer1Hand();
+                if (tempHand[0] instanceof Ambassador || tempHand[1] instanceof Ambassador) {
+                    GameAction[] deckCopy = gameState.getDeck();
+                    int deckSize = deckCopy.length;
+                    int randCard1 = rand.nextInt(deckSize);
+                    int randCard2 = rand.nextInt(deckSize);
+                    while (randCard2 == randCard1) {
+                        randCard2 = rand.nextInt(deckSize);
+                    }
+                    GameAction newCard1 = deckCopy[randCard1];
+                    GameAction newCard2 = deckCopy[randCard2];
+                    gameState.setplayer2Hand(newCard1, newCard2);
                     Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer1Money());
-                    // Additional logic for ExchangeAction
                 }
             }
 
-            if (action instanceof ForeignAideAction) { //todo
+            if (action instanceof ForeignAideAction) {
                 GameAction[] tempHand = gameState.getplayer1Hand();
                 if (tempHand[0] instanceof Duke || tempHand[1] instanceof Duke) {
                     gameState.setPlayer1Money(gameState.getPlayer1Money() + 2);
                     Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer1Money());
-                    // Additional logic for ForeignAideAction
                 }
             }
 
             if (action instanceof IncomeAction) {
-                    gameState.setPlayer1Money(gameState.getPlayer1Money() + 1);
-                    Log.d("Money", "Income action was called. Money is " + gameState.getPlayer1Money());
-                    // Additional logic for IncomeAction
+                gameState.setPlayer1Money(gameState.getPlayer1Money() + 1);
+                Log.d("Money", "Income action was called. Money is " + gameState.getPlayer1Money());
             }
 
-            if (action instanceof StealAction) { //todo
+            if (action instanceof StealAction) {
                 GameAction[] tempHand = gameState.getplayer1Hand();
                 if (tempHand[0] instanceof Captain || tempHand[1] instanceof Captain
                         || tempHand[0] instanceof Ambassador || tempHand[1] instanceof Ambassador) {
@@ -313,24 +300,28 @@ public class CoupLocalGame extends LocalGame {
                         gameState.setPlayer1Money(gameState.getPlayer1Money() + 1);
                     }
                     Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer1Money());
-                    // Additional logic for StealAction
                 }
             }
 
-            if (action instanceof TaxAction) { //todo
+            if (action instanceof TaxAction) {
                 GameAction[] tempHand = gameState.getplayer1Hand();
                 if (tempHand[0] instanceof Duke || tempHand[1] instanceof Duke) {
                     gameState.setPlayer1Money(gameState.getPlayer1Money() + 3);
                     Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer1Money());
-                    // Additional logic for TaxAction
                 }
             }
 
-            if (action instanceof CoupDeteAction) { //todo
+            if (action instanceof CoupDeteAction) {
                 if (gameState.getPlayer1Money() >= 7) {
                     gameState.setPlayer1Money(gameState.getPlayer1Money() - 7);
+                    boolean[] deadInfluences = gameState.checkDead();
+                    Random random = new Random();
+                    int victim = random.nextInt(2);
+                    while (deadInfluences[victim]) {
+                        victim = random.nextInt(2);
+                    }
+                    gameState.makeDead(victim);
                     Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer1Money());
-                    // Additional logic for CoupAction
                 }
             }
 
