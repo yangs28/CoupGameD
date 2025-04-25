@@ -230,7 +230,7 @@ public class CoupLocalGame extends LocalGame {
 
         if (gameState.getPlayerId() == getPlayerIdx(players[1]) && players[1] instanceof CoupComputerPlayer1) {
 
-            if (action instanceof AssassinateAction) { //todo
+            if (action instanceof AssassinateAction) {
                 GameAction[] tempHand = gameState.getplayer1Hand();
                 GameAction[] oppHand = gameState.getplayer0Hand();
                 if (tempHand[0] instanceof Assassin || tempHand[1] instanceof Assassin) {
@@ -239,7 +239,7 @@ public class CoupLocalGame extends LocalGame {
                             gameState.setPlayer1Money(gameState.getPlayer1Money() - 3);
 
                             // Grab the current dead cards
-                            boolean[] deadInfluences = gameState.checkplayer0Dead();
+                            boolean[] deadInfluences = gameState.checkplayer1Dead();
 
                             // Randomly pick either 0 or 1 to kill
                             Random random = new Random();
@@ -250,7 +250,7 @@ public class CoupLocalGame extends LocalGame {
                                 victim = random.nextInt(2);
                             }
 
-                            gameState.make0Dead(victim);
+                            gameState.make1Dead(victim);
                             Log.d("Ass", "Assassinate action was called. Boolean makeDead 0 is " + gameState.checkplayer0Dead()[victim]);
                             Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer1Money());
                             // Additional logic for AssassinateAction
