@@ -79,6 +79,7 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
 			double probability = rng.nextDouble();
 			GameAction[] myHand = tempState.getplayer1Hand();
 			int myMoney = tempState.getPlayer1Money();
+			int oppMoney = tempState.getPlayer0Money();
 
 			// 1) Always try to Coup first (guranteed, no probability check)
 			if (myMoney >= 7) {
@@ -108,8 +109,8 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
 				ForeignAideAction foreignAide = new ForeignAideAction(this);
 				this.game.sendAction(foreignAide);
 
-			// 6) Then Steal (Always use steal if other actions not present)
-			} else if ((myHand[0] instanceof Captain || myHand[1] instanceof Captain)) {
+			// 6) Then Steal (RNG for steal since it can be blocked)
+			} else if ((myHand[0] instanceof Captain || myHand[1] instanceof Captain && probability < 0.5 && oppMoney > 0)) {
 				StealAction steal = new StealAction(this);
 				this.game.sendAction(steal);
 
