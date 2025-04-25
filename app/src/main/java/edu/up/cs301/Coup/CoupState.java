@@ -42,6 +42,16 @@ public class CoupState extends GameState {
 	private GameAction[] deck;
 	private GameAction[] player0Hand;
 	private GameAction[] player1Hand;
+	//This boolean checks to see if the card in the Deck is drawn. If it has been drawn we cannot draw from that position
+	private boolean[] isDrawn;
+	//This boolean checks to see if the card has been killed and can no longer be drawn
+	private boolean[] isKilled;
+	private boolean[] isDead;
+
+	int temphand1;
+	int temphand2;
+	int temphand3;
+	int temphand4;
 
 	private int gameStage;
 
@@ -55,6 +65,12 @@ public class CoupState extends GameState {
 		player0Hand = new GameAction[2];
 		player1Hand = new GameAction[2];
 		deck = new GameAction[15];
+		isDrawn = new boolean[15];
+		isKilled = new boolean[15];
+
+		this.isDead = new boolean[2];
+
+
 
 		for(int k = 0; k<15;k++){
 			if(k<=2){deck[k]=new Ambassador(null);}
@@ -63,13 +79,26 @@ public class CoupState extends GameState {
 			else if(k<=11){deck[k]=new Contessa(null);}
 			else{deck[k]=new Duke(null);}
 		}
+
 		Random r = new Random();
 
-		player0Hand[0] = deck[r.nextInt(14)];
-		player0Hand[1] = deck[r.nextInt(14)];
 
-		player1Hand[0] = deck[r.nextInt(14)];
-		player1Hand[1] = deck[r.nextInt(14)];
+		int temphand1 = r.nextInt(14);
+		int temphand2 = r.nextInt(14);
+		int temphand3 = r.nextInt(14);
+		int temphand4 = r.nextInt(14);
+
+		player0Hand[0] = deck[temphand1];
+		player0Hand[1] = deck[temphand2];
+		isDrawn[temphand1] = true;
+		isDrawn[temphand2] = true;
+
+
+		player1Hand[0] = deck[temphand3];
+		player1Hand[1] = deck[temphand4];
+		isDrawn[temphand3] = true;
+		isDrawn[temphand4] = true;
+
 	}
 
 
@@ -83,6 +112,8 @@ public class CoupState extends GameState {
 		this.player0Hand = _player0Hand.clone();
 		this.player1Hand = _player1Hand.clone();
 		this.deck = _deck.clone();
+
+
 	}
 
 	/**
@@ -111,6 +142,24 @@ public class CoupState extends GameState {
 		for (int i = 0; i < orig.deck.length; i++) {
 			this.deck[i] = orig.deck[i];
 		}
+
+		// Copy drawn flags
+		this.isDrawn = new boolean[orig.isDrawn.length];
+		System.arraycopy(orig.isDrawn, 0, this.isDrawn, 0, orig.isDrawn.length);
+
+		// Copy killed flags
+		this.isKilled = new boolean[orig.isKilled.length];
+		System.arraycopy(orig.isKilled, 0, this.isKilled, 0, orig.isKilled.length);
+
+		// Copy dead flags
+		this.isDead = new boolean[orig.isDead.length];
+		System.arraycopy(orig.isDead, 0, this.isDead, 0, orig.isDead.length);
+
+		// Copy temporary hand indices
+		this.temphand1 = orig.temphand1;
+		this.temphand2 = orig.temphand2;
+		this.temphand3 = orig.temphand3;
+		this.temphand4 = orig.temphand4;
 
 
 	}
@@ -255,6 +304,18 @@ public class CoupState extends GameState {
 	public void setplayer2Hand(GameAction card1, GameAction card2){
 		player1Hand[0] = card1;
 		player1Hand[1] = card2;
+	}
+
+	public void setIsDead(int x) {
+		isDead[x] = true;
+	}
+
+	public void makeDead(int x) {
+		isDead[x] = true;
+	}
+
+	public boolean[] checkDead() {
+		return isDead;
 	}
 
 	public void setPlayerId(int _playerId) {

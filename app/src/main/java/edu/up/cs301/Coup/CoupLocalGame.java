@@ -79,6 +79,8 @@ public class CoupLocalGame extends LocalGame {
         Log.d("Player", "Player idx[0] is " + getPlayerIdx(players[0]));
         Log.d("Player", "Player idx[1] is " + getPlayerIdx(players[1]));
         Log.d("Player", "PLayer ID is " + gameState.getPlayerId());
+        Log.d("Ass", "Assassinate action was not called. Boolean makeDead 0 is " + gameState.checkDead()[0]);
+
 
 
         // Create a new Random instance
@@ -91,6 +93,12 @@ public class CoupLocalGame extends LocalGame {
                 if (tempHand[0] instanceof Assassin || tempHand[1] instanceof Assassin) {
                     if (gameState.getPlayer0Money() >= 3) {
                         gameState.setPlayer0Money(gameState.getPlayer0Money() - 3);
+                        gameState.makeDead(0);
+                        gameState.makeDead(1);
+                        Log.d("Ass", "Assassinate action was called. Boolean makeDead 0 is " + gameState.checkDead()[0]);
+
+
+
                         Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer0Money());
                         // Additional logic for AssassinateAction
                     }

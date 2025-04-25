@@ -60,6 +60,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 	private ImageView cardLeft = null;
 	private ImageView cardRight = null;
+	private ImageView deckButton = null;
 
 
 
@@ -104,8 +105,6 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		// Construct the action and send it to the game
 		GameAction action = null;
 
-
-
 		//General
 		if (button.getId() == R.id.taxButton) {
 			game.sendAction(new TaxAction(this));
@@ -130,6 +129,10 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 			game.sendAction(new CoupDeteAction(this));
 			Log.d("Click", "Coup action was called");
 		}
+		else if(button.getId() == R.id.cardBackCenter) {
+			//game.sendAction(new IncomeAction(this));
+		}
+
 	}// onClick
 
 	/**
@@ -149,8 +152,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		}
 
 		// update our state; then update the display
-		this.state = (CoupState)info;
-		updateDisplay();
+		state = (CoupState)info;
 
 		//Creates a temporary variable of the Left and Right card
 		GameAction tempLeft  = this.state.getplayer0Hand()[0];
@@ -182,6 +184,21 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		} else if (tempRight instanceof Duke) {
 			cardRight.setImageResource(R.drawable.bduke);
 		}
+
+		Log.d("Ass", "This.state.checkdead 0 is " + state.checkDead()[0]);
+
+		if (state.checkDead()[0] == true) {
+				Log.d("Ass", "Updating cardLeft to bduke");
+				cardLeft.setImageResource(R.drawable.bduke);
+			}
+
+			if(state.checkDead()[1] == true) {
+				Log.d("Ass", "Updating deckButton to bduke");
+				deckButton.setImageResource(R.drawable.bduke);
+			}
+
+			updateDisplay();
+
 
 
 
@@ -265,6 +282,9 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		this.cardLeft = (ImageView) activity.findViewById(R.id.playerCharacterCardLeft);
 		this.cardRight = (ImageView) activity.findViewById(R.id.playerCharacterCardRight);
+
+		this.deckButton = (ImageView) activity.findViewById(R.id.cardBackCenter);
+		deckButton.setOnClickListener(this);
 
 	}
 
