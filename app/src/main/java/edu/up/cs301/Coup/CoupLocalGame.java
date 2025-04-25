@@ -230,22 +230,35 @@ public class CoupLocalGame extends LocalGame {
 
         if (gameState.getPlayerId() == getPlayerIdx(players[1]) && players[1] instanceof CoupComputerPlayer1) {
 
-            if (action instanceof AssassinateAction) {
+            if (action instanceof AssassinateAction) { //todo
                 GameAction[] tempHand = gameState.getplayer1Hand();
-                if ((tempHand[0] instanceof Assassin || tempHand[1] instanceof Assassin)
-                        && gameState.getPlayer1Money() >= 3) {
-                    gameState.setPlayer1Money(gameState.getPlayer1Money() - 3);
-                    boolean[] deadInfluences = gameState.checkplayer1Dead();
-                    Random random = new Random();
-                    int victim = random.nextInt(2);
-                    while (deadInfluences[victim]) {
-                        victim = random.nextInt(2);
+                GameAction[] oppHand = gameState.getplayer0Hand();
+                if (tempHand[0] instanceof Assassin || tempHand[1] instanceof Assassin) {
+                    if (!(oppHand[0] instanceof Contessa) || !(oppHand[1] instanceof Contessa)) {
+                        if (gameState.getPlayer1Money() >= 3) {
+                            gameState.setPlayer1Money(gameState.getPlayer1Money() - 3);
+
+                            // Grab the current dead cards
+                            boolean[] deadInfluences = gameState.checkplayer0Dead();
+
+                            // Randomly pick either 0 or 1 to kill
+                            Random random = new Random();
+                            int victim = random.nextInt(2);  // returns 0 or 1
+
+                            // Keep choosing new victims until we find somebody alive
+                            while (deadInfluences[victim]) {
+                                victim = random.nextInt(2);
+                            }
+
+                            gameState.make0Dead(victim);
+                            Log.d("Ass", "Assassinate action was called. Boolean makeDead 0 is " + gameState.checkplayer0Dead()[victim]);
+                            Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer1Money());
+                            // Additional logic for AssassinateAction
+                        }
                     }
-                    gameState.make1Dead(victim);
-                    Log.d("Ass", "Assassinate action was called. Boolean makeDead 1 is " + gameState.checkplayer1Dead()[victim]);
-                    Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer1Money());
                 }
             }
+
 
             if (action instanceof BlockAction) {
                 GameAction[] tempHand = gameState.getplayer1Hand();
@@ -333,9 +346,9 @@ public class CoupLocalGame extends LocalGame {
     }
 
 
-        /**
-         * send the updated state to a given player
-         */
+    /**
+     * send the updated state to a given player
+     */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
         // this is a perfect-information game, so we'll make a
