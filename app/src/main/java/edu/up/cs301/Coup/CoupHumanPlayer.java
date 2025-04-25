@@ -60,6 +60,10 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 	private ImageView cardLeft = null;
 	private ImageView cardRight = null;
+	private ImageView oppCardLeft = null;
+	private ImageView oppCardRight = null;
+
+
 	private ImageView deckButton = null;
 
 
@@ -189,12 +193,12 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		if (state.checkDead()[0] == true) {
 				Log.d("Ass", "Updating cardLeft to bduke");
-				cardLeft.setImageResource(R.drawable.killed);
+				oppCardLeft.setImageResource(R.drawable.opponent_killed);
 			}
 
 			if(state.checkDead()[1] == true) {
 				Log.d("Ass", "Updating deckButton to bduke");
-				cardRight.setImageResource(R.drawable.killed);
+				oppCardRight.setImageResource(R.drawable.opponent_killed);
 			}
 
 			updateDisplay();
@@ -285,6 +289,10 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		this.deckButton = (ImageView) activity.findViewById(R.id.cardBackCenter);
 		deckButton.setOnClickListener(this);
+
+		this.oppCardLeft = (ImageView) activity.findViewById(R.id.cardBackLeft);
+		this.oppCardRight = (ImageView) activity.findViewById(R.id.cardBackRight);
+
 
 	}
 

@@ -45,18 +45,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="10dp"
-                        android:clipToOutline="false"
-                        android:src="@drawable/bcardback" />
+                        android:padding="5dp"
+                        android:src="@drawable/bcardback"
+                        tools:ignore="VisualLintBounds"/>
 
                     <ImageView
                         android:id="@+id/cardBackRight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="10dp"
-                        android:clipToOutline="false"
-                        android:src="@drawable/bcardback" />
+                        android:padding="5dp"
+                        android:src="@drawable/bcardback"
+                        tools:ignore="VisualLintBounds"/>
 
                 </LinearLayout>
 
