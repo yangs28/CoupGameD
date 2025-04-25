@@ -1,5 +1,7 @@
 package edu.up.cs301.Coup;
 
+import java.util.Random;
+
 import edu.up.cs301.Characters.Ambassador;
 import edu.up.cs301.Characters.Assassin;
 import edu.up.cs301.Characters.Captain;
@@ -73,37 +75,41 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
 
 		if(tempState.getPlayerId() == this.playerNum) {
 
+			Random rng = new Random();
+			double probability = rng.nextDouble();
 			GameAction[] myHand = tempState.getplayer1Hand();
 			int myMoney = tempState.getPlayer1Money();
 
-			// 1) Always try to Coup first
+			// 1) Always try to Coup first (guranteed, no probability check)
 			if (myMoney >= 7) {
 				CoupDeteAction coup = new CoupDeteAction(this);
 				this.game.sendAction(coup);
 
-			// 2) Then Assassinate if possible
+			// 2) Then Assassinate if possible (70% chance)
 			} else if ((myHand[0] instanceof Assassin || myHand[1] instanceof Assassin)
-					&& myMoney >= 3) {
+					&& myMoney >= 3
+					&& probability < 0.7) {
 				AssassinateAction assassinate = new AssassinateAction(this);
 				this.game.sendAction(assassinate);
 
-			// 3) Then Exchange
-			} else if (myHand[0] instanceof Ambassador || myHand[1] instanceof Ambassador) {
+			// 3) Then Exchange (30% chance)
+			} else if ((myHand[0] instanceof Ambassador || myHand[1] instanceof Ambassador)
+					&& probability < 0.3) {
 				ExchangeAction exchange = new ExchangeAction(this);
 				this.game.sendAction(exchange);
 
-			// 4) Then Tax
-			} else if (myHand[0] instanceof Duke || myHand[1] instanceof Duke) {
+			// 4) Then Tax (Always use tax as it's the best way to make money)
+			} else if ((myHand[0] instanceof Duke || myHand[1] instanceof Duke)) {
 				TaxAction tax = new TaxAction(this);
 				this.game.sendAction(tax);
 
-			// 5) Then Foreign Aid
-			} else if (myHand[0] instanceof Duke || myHand[1] instanceof Duke) {
+			// 5) Then Foreign Aid (Always use Foreign Aid if other actions not present)
+			} else if (probability < 0.3) {
 				ForeignAideAction foreignAide = new ForeignAideAction(this);
 				this.game.sendAction(foreignAide);
 
-			// 6) Then Steal
-			} else if (myHand[0] instanceof Captain || myHand[1] instanceof Captain) {
+			// 6) Then Steal (Always use steal if other actions not present)
+			} else if ((myHand[0] instanceof Captain || myHand[1] instanceof Captain)) {
 				StealAction steal = new StealAction(this);
 				this.game.sendAction(steal);
 
@@ -112,6 +118,7 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
 				IncomeAction inc = new IncomeAction(this);
 				this.game.sendAction(inc);
 			}
+
 
 
 		}
