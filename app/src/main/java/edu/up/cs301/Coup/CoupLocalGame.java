@@ -235,14 +235,14 @@ public class CoupLocalGame extends LocalGame {
                 if ((tempHand[0] instanceof Assassin || tempHand[1] instanceof Assassin)
                         && gameState.getPlayer1Money() >= 3) {
                     gameState.setPlayer1Money(gameState.getPlayer1Money() - 3);
-                    boolean[] deadInfluences = gameState.checkplayer0Dead();
+                    boolean[] deadInfluences = gameState.checkplayer1Dead();
                     Random random = new Random();
                     int victim = random.nextInt(2);
                     while (deadInfluences[victim]) {
                         victim = random.nextInt(2);
                     }
-                    gameState.make0Dead(victim);
-                    Log.d("Ass", "Assassinate action was called. Boolean makeDead 1 is " + gameState.checkplayer0Dead()[1]);
+                    gameState.make1Dead(victim);
+                    Log.d("Ass", "Assassinate action was called. Boolean makeDead 1 is " + gameState.checkplayer1Dead()[victim]);
                     Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer1Money());
                 }
             }
@@ -314,13 +314,13 @@ public class CoupLocalGame extends LocalGame {
             if (action instanceof CoupDeteAction) {
                 if (gameState.getPlayer1Money() >= 7) {
                     gameState.setPlayer1Money(gameState.getPlayer1Money() - 7);
-                    boolean[] deadInfluences = gameState.checkplayer0Dead();
+                    boolean[] deadInfluences = gameState.checkplayer1Dead();
                     Random random = new Random();
                     int victim = random.nextInt(2);
                     while (deadInfluences[victim]) {
                         victim = random.nextInt(2);
                     }
-                    gameState.make0Dead(victim);
+                    gameState.make1Dead(victim);
                     Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer1Money());
                 }
             }
@@ -330,12 +330,12 @@ public class CoupLocalGame extends LocalGame {
         }
 
         return false;
-    } // makeMove
+    }
 
 
-    /**
-     * send the updated state to a given player
-     */
+        /**
+         * send the updated state to a given player
+         */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
         // this is a perfect-information game, so we'll make a
@@ -361,6 +361,11 @@ public class CoupLocalGame extends LocalGame {
         if (gameState.checkplayer0Dead()[0] == true && gameState.checkplayer0Dead()[1] == true) {
             Log.d("Over", "It's so over");
             return "The game is over! Player 1 won by killing all Influences! ";
+        }
+
+        if (gameState.checkplayer1Dead()[0] == true && gameState.checkplayer1Dead()[1] == true) {
+            Log.d("Over", "It's so over");
+            return "You lost! The computer won by killing all of the human player's Influences! ";
         }
 
         return null;
