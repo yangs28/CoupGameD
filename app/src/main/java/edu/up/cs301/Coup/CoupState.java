@@ -322,6 +322,10 @@ public class CoupState extends GameState {
 		this.playerId = _playerId;
 	}
 
+	public CoupState getGameState() {
+		return this;
+	}
+
 
 	//An overwritten toString method that returns the state of the game
 	@Override

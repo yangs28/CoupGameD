@@ -323,7 +323,9 @@ public class CoupLocalGame extends LocalGame {
     protected void sendUpdatedStateTo(GamePlayer p) {
         // this is a perfect-information game, so we'll make a
         // complete copy of the state to send to the player
-        p.sendInfo(new CoupState(this.gameState));
+
+        GameState tempState = gameState.getGameState();
+        p.sendInfo(tempState);
 
     }//sendUpdatedSate
 
@@ -336,8 +338,14 @@ public class CoupLocalGame extends LocalGame {
      */
     @Override
     protected String checkIfGameOver() {
+        Log.d("Over", "We're so back");
 
-        return "false";
+        if(gameState.checkDead()[0] == true && gameState.checkDead()[1] == true) {
+            Log.d("Over", "It's so over");
+            return "The game is over! Player 1 won by assassinating all Influences! ";
+        }
+
+        return null;
     }
 
 }
