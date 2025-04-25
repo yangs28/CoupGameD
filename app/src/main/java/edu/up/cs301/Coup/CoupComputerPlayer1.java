@@ -1,7 +1,16 @@
 package edu.up.cs301.Coup;
 
+import edu.up.cs301.Characters.Ambassador;
+import edu.up.cs301.Characters.Assassin;
+import edu.up.cs301.Characters.Captain;
+import edu.up.cs301.Characters.Duke;
 import edu.up.cs301.CoupActions.AssassinateAction;
+import edu.up.cs301.CoupActions.CoupDeteAction;
+import edu.up.cs301.CoupActions.ExchangeAction;
 import edu.up.cs301.CoupActions.IncomeAction;
+import edu.up.cs301.CoupActions.StealAction;
+import edu.up.cs301.CoupActions.TaxAction;
+import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.GameFramework.utilities.Tickable;
@@ -63,9 +72,30 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
 
 		if(tempState.getPlayerId() == this.playerNum) {
 
+			GameAction[] myHand = tempState.getplayer1Hand();
+			int myMoney = tempState.getPlayer1Money();
 
-			IncomeAction inc = new IncomeAction(this);
-			this.game.sendAction(inc);
+			if (myHand[0] instanceof Duke || myHand[1] instanceof Duke) {
+				TaxAction tax = new TaxAction(this);
+				this.game.sendAction(tax);
+			} else if ((myHand[0] instanceof Assassin || myHand[1] instanceof Assassin)
+					&& myMoney >= 3) {
+				AssassinateAction assassinate = new AssassinateAction(this);
+				this.game.sendAction(assassinate);
+			} else if (myHand[0] instanceof Captain || myHand[1] instanceof Captain) {
+				StealAction steal = new StealAction(this);
+				this.game.sendAction(steal);
+			} else if (myHand[0] instanceof Ambassador || myHand[1] instanceof Ambassador) {
+				ExchangeAction exchange = new ExchangeAction(this);
+				this.game.sendAction(exchange);
+			} else if (myMoney >= 7) {
+				CoupDeteAction coup = new CoupDeteAction(this);
+				this.game.sendAction(coup);
+			} else {
+				IncomeAction inc = new IncomeAction(this);
+				this.game.sendAction(inc);
+			}
+
 		}
 
 	}
