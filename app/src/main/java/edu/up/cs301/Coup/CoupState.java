@@ -143,19 +143,24 @@ public class CoupState extends GameState {
 			this.deck[i] = orig.deck[i];
 		}
 
-		// Copy drawn flags
+
 		this.isDrawn = new boolean[orig.isDrawn.length];
-		System.arraycopy(orig.isDrawn, 0, this.isDrawn, 0, orig.isDrawn.length);
+		for (int i = 0; i < orig.isDrawn.length; i++) {
+			this.isDrawn[i] = orig.isDrawn[i];
+		}
 
-		// Copy killed flags
 		this.isKilled = new boolean[orig.isKilled.length];
-		System.arraycopy(orig.isKilled, 0, this.isKilled, 0, orig.isKilled.length);
+		for (int i = 0; i < orig.isKilled.length; i++) {
+			this.isKilled[i] = orig.isKilled[i];
+		}
 
-		// Copy dead flags
 		this.player0isDead = new boolean[orig.player0isDead.length];
-		System.arraycopy(orig.player0isDead, 0, this.player0isDead, 0, orig.player0isDead.length);
+		for (int i = 0; i < orig.player0isDead.length; i++) {
+			this.player0isDead[i] = orig.player0isDead[i];
+		}
 
-		// Copy temporary hand indices
+
+		// Copy temporary hands
 		this.temphand1 = orig.temphand1;
 		this.temphand2 = orig.temphand2;
 		this.temphand3 = orig.temphand3;
