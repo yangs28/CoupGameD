@@ -159,6 +159,11 @@ public class CoupState extends GameState {
 			this.player0isDead[i] = orig.player0isDead[i];
 		}
 
+		this.player1isDead = new boolean[orig.player1isDead.length];
+		for (int i = 0; i < orig.player1isDead.length; i++) {
+			this.player1isDead[i] = orig.player1isDead[i];
+		}
+
 
 		// Copy temporary hands
 		this.temphand1 = orig.temphand1;
