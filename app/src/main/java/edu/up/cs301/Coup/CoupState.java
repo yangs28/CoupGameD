@@ -46,10 +46,12 @@ public class CoupState extends GameState {
 	private boolean[] isDrawn;
 	//This boolean checks to see if the card has been killed and can no longer be drawn
 	private boolean[] isKilled;
+	//These two boolean arrays check for the status of player0 and player1's dead Influences respectively
 	private boolean[] player0isDead;
 	private boolean[] player1isDead;
 
-	//Stores the position of each separate card in use
+	//Stores the position of each separate card in use. This allows us to reference those
+	//positions from the Deck later and prevent them from being redrawn
 	int temphand1;
 	int temphand2;
 	int temphand3;
@@ -58,7 +60,7 @@ public class CoupState extends GameState {
 	private int gameStage;
 
 
-	//Default constructor for the game state. Initializes everything as zero
+	//Default constructor for the game state. Initializes all starting values
 	public CoupState() {
 		//Initializes both players money as 0 for the beginning of every game
 		player0Money = 0;
@@ -73,6 +75,7 @@ public class CoupState extends GameState {
 		isDrawn = new boolean[15];
 		isKilled = new boolean[15];
 
+		//Initializes the Life status of both players. Set as false (not dead) by default
 		this.player0isDead = new boolean[2];
 		this.player1isDead = new boolean[2];
 
@@ -87,15 +90,16 @@ public class CoupState extends GameState {
 			else{deck[k]=new Duke(null);}
 		}
 
+		//New rng for calculations
 		Random r = new Random();
 
-		//Randomly sets the 4 cards that will be used in the game
+		//Randomly grabs 4 cards from the deck to be used by both players
 		int temphand1 = r.nextInt(14);
 		int temphand2 = r.nextInt(14);
 		int temphand3 = r.nextInt(14);
 		int temphand4 = r.nextInt(14);
 
-
+		//Sets player 1 and player 2 hands. Sets those cards as being drawn
 		player0Hand[0] = deck[temphand1];
 		player0Hand[1] = deck[temphand2];
 		isDrawn[temphand1] = true;
@@ -110,7 +114,7 @@ public class CoupState extends GameState {
 	}
 
 
-	//Constructor that sets the values
+	//Constructor that initializes everything with custom values
 	public CoupState(int _player0Money, int _player1Money, int _playerId, GameAction[] _player0Hand, GameAction[] _player1Hand, GameAction[] _deck) {
 		//Initializes ID and money
 		this.player0Money = _player0Money;
@@ -120,8 +124,6 @@ public class CoupState extends GameState {
 		this.player0Hand = _player0Hand.clone();
 		this.player1Hand = _player1Hand.clone();
 		this.deck = _deck.clone();
-
-
 	}
 
 	/**
@@ -206,11 +208,12 @@ public class CoupState extends GameState {
 	public int getPlayerId() {
 		return playerId;
 	}
-
+	//Grabs the current hand of either players
 	public GameAction[] getplayer0Hand(){
 		return player0Hand;
 	}
 
+	//Sets the hand to be a certain Influence
 	public void setplayer0Hand(GameAction card1, GameAction card2){
 		player0Hand[0] = card1;
 		player0Hand[1] = card2;
@@ -229,6 +232,7 @@ public class CoupState extends GameState {
 		player1Hand[1] = card2;
 	}
 
+	//The makeDead methods sets a specific card to be killed
 	public void make0Dead(int x) {
 		player0isDead[x] = true;
 	}
@@ -236,7 +240,7 @@ public class CoupState extends GameState {
 	public void make1Dead(int x) {
 		player1isDead[x] = true;
 	}
-
+	//Returns a copy of the isDead array to check which Influences are dead
 	public boolean[] checkplayer0Dead() {
 		return player0isDead;
 	}
