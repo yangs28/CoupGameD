@@ -59,12 +59,12 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
      */
     @Override
     protected void receiveInfo(GameInfo info) {
-        //Automatically performs an Income action for now.
         //NOTE: Rare bug with thread.sleep. Conflicts with game and causes a turn error. Mechanism unknown.
 
         if(!(info instanceof CoupState)) {
             return;
         }
+
 
         tempSmartState = (CoupState) info;
 
@@ -77,9 +77,12 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
 
             Random rng = new Random();
             double probability = rng.nextDouble();
+            //Retrieves copy of your own hand
             GameAction[] myHand = tempSmartState.getplayer1Hand();
+            //Checks AI and Opponent money values
             int myMoney = tempSmartState.getPlayer1Money();
             int oppMoney = tempSmartState.getPlayer0Money();
+            //Checks your hand for dead Influences
             boolean[] myDead = tempSmartState.checkplayer0Dead();
 
             // 1) Always try to Coup first (guranteed, no probability check)
