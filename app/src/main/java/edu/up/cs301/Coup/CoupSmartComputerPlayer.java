@@ -22,13 +22,12 @@ import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.GameFramework.utilities.Tickable;
 
 /**
- * A computer-version of a counter-player.  Since this is such a simple game,
- * it just sends "+" and "-" commands with equal probability, at an average
- * rate of one per second.
+ * A smarter computer-version of a coup-player. This smarter version
+ * uses a chain of ideal steps with a probability to try different
+ * paths depending on its cards and a RNG
  *
- * @author Steven R. Vegdahl
- * @author Andrew M. Nuxoll
- * @version September 2013
+ * @author Sean Yang, Clint Sizemore, Kanoa Martin
+ * @version 4-24-25
  */
 public class CoupSmartComputerPlayer extends GameComputerPlayer implements Tickable {
 
@@ -107,7 +106,8 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
                 this.game.sendAction(coup);
 
                 // 2) Then Assassinate if possible (70% chance)
-            } else if (((myHand[0] instanceof Assassin && myDead[0] == false) || (myHand[1] instanceof Assassin && myDead[1] == false))
+            }
+            else if (((myHand[0] instanceof Assassin && myDead[0] == false) || (myHand[1] instanceof Assassin && myDead[1] == false))
                     && myMoney >= 3
                     && probability < 0.7) {
                 assCall = true;
@@ -115,13 +115,15 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
                 this.game.sendAction(assassinate);
 
                 // 3) Then Exchange (30% chance)
-            } else if (((myHand[0] instanceof Ambassador && myDead[0] == false) || (myHand[1] instanceof Ambassador && myDead[1] == false))
+            }
+            else if (((myHand[0] instanceof Ambassador && myDead[0] == false) || (myHand[1] instanceof Ambassador && myDead[1] == false))
                     && probability < 0.3) {
                 ExchangeAction exchange = new ExchangeAction(this);
                 this.game.sendAction(exchange);
 
                 // 4) Then Tax (Always use tax as it's the best way to make money)
-            } else if ((myHand[0] instanceof Duke && myDead[0] == false) || (myHand[1] instanceof Duke && myDead[1] == false)) {
+            }
+            else if ((myHand[0] instanceof Duke && myDead[0] == false) || (myHand[1] instanceof Duke && myDead[1] == false)) {
                 TaxAction tax = new TaxAction(this);
                 this.game.sendAction(tax);
 
@@ -162,7 +164,7 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
      */
     protected void timerTicked() {
 
-        //CLINT REMOVED THIS SO IT STOP MOVING RANDOMLY
+        //CLINT REMOVED THIS SO IT STOPS MOVING RANDOMLY (CounterGame code)
 
         // 5% of the time, increment or decrement the counter
 		/*if (Math.random() >= 0.05) return; // do nothing 95% of the time

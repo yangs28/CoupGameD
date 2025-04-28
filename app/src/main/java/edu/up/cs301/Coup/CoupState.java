@@ -21,7 +21,7 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
  * Win game after 4 turns.
  *
  * @author Sean Yang, Clint Sizemore, Kanoa Martin
- * @version 2-28-25
+ * @version 4-24-25
  */
 public class CoupState extends GameState {
 
@@ -36,6 +36,7 @@ public class CoupState extends GameState {
 	private int playerId;
 	//Initializes the deck
 	private GameAction[] deck;
+	//Initializes each players hands
 	private GameAction[] player0Hand;
 	private GameAction[] player1Hand;
 	//This boolean checks to see if the card in the Deck is drawn. If it has been drawn we cannot draw from that position
@@ -45,7 +46,7 @@ public class CoupState extends GameState {
 	private boolean[] player0isDead;
 	private boolean[] player1isDead;
 
-
+	//Stores the position of each separate card in use
 	int temphand1;
 	int temphand2;
 	int temphand3;
@@ -56,10 +57,13 @@ public class CoupState extends GameState {
 
 	//Default constructor for the game state. Initializes everything as zero
 	public CoupState() {
+		//Initializes both players money as 0 for the beginning of every game
 		player0Money = 0;
 		player1Money = 0;
+		//Sets the first players turn
 		playerId = 0;
 
+		//Initializes both player hands and the deck
 		player0Hand = new GameAction[2];
 		player1Hand = new GameAction[2];
 		deck = new GameAction[15];
@@ -71,7 +75,7 @@ public class CoupState extends GameState {
 
 
 
-
+		//Creates a 3 of each type of card and adds to the deck
 		for(int k = 0; k<15;k++){
 			if(k<=2){deck[k]=new Ambassador(null);}
 			else if(k<=5){deck[k]=new Assassin(null);}
@@ -82,11 +86,12 @@ public class CoupState extends GameState {
 
 		Random r = new Random();
 
-
+		//Randomly sets the 4 cards that will be used in the game
 		int temphand1 = r.nextInt(14);
 		int temphand2 = r.nextInt(14);
 		int temphand3 = r.nextInt(14);
 		int temphand4 = r.nextInt(14);
+
 
 		player0Hand[0] = deck[temphand1];
 		player0Hand[1] = deck[temphand2];
@@ -173,101 +178,6 @@ public class CoupState extends GameState {
 
 
 	}
-
-/*
-	//generic actions
-	//every action can only be performed if you have less than 10 coins, otherwise yomi coup
-	//actions that affect other players than the player performing it take an additional player variable
-	public boolean makeIncomeAction(GameAction action, GamePlayer player){
-
-		//gain one coin
-		if(playerId == 0 && getPlayer0Money() <10){
-			setPlayer0Money(getPlayer0Money()+1);
-		}
-		else if(playerId == 1 && getPlayer1Money() <10){
-			setPlayer1Money(getPlayer1Money()+1);
-		}
-		else{return false;}
-		return true;
-	}
-
-	public boolean makeAideAction(GameAction action, GamePlayer player){
-		//gain 2 coins
-		if(playerId == 0 && getPlayer0Money() <10){
-			setPlayer0Money(getPlayer0Money()+2);
-		}
-		else if(playerId == 1 && getPlayer1Money() <10){
-			setPlayer1Money(getPlayer1Money()+2);
-		}
-		else{return false;}
-		return true;
-	}
-	public boolean makeCoupAction(GameAction action, GamePlayer player, GamePlayer victim){
-		//pay 7 coins
-		if(playerId == 0 && getPlayer0Money() >=7){
-			setPlayer0Money(getPlayer0Money()-7);
-		}
-		else if(playerId == 1 && getPlayer1Money() >=7){
-			setPlayer1Money(getPlayer1Money()-7);
-		}
-		else{return false;}
-		return true;
-	}
-
-	//class actions
-	public boolean makeAssnAction(GameAction action, GamePlayer player, GamePlayer victim){
-		//pay 3 coins
-		if(playerId == 0 && getPlayer0Money() >=3 && getPlayer0Money() <10){
-			setPlayer0Money(getPlayer0Money()-3);
-		}
-		else if(playerId == 1 && getPlayer1Money() >=3 && getPlayer1Money() < 10){
-			setPlayer1Money(getPlayer1Money()-3);
-		}
-		else{return false;}
-		return true;
-	}
-	public boolean makeTaxAction(GameAction action, GamePlayer player){
-		//gain 2 coins
-		if(playerId == 0 && getPlayer0Money() <10){
-			setPlayer0Money(getPlayer0Money()+2);
-		}
-		else if(playerId == 1 && getPlayer1Money() < 10){
-			setPlayer1Money(getPlayer1Money()+2);
-		}
-		else{return false;}
-		return true;
-	}
-	public boolean makeStealAction(GameAction action, GamePlayer player, GamePlayer victim){
-		//remove 2 coins from another player, gain 2 coins
-		if(playerId == 0 && getPlayer0Money() <10){
-			setPlayer0Money(getPlayer0Money()+2);
-			setPlayer1Money(getPlayer1Money()-2);
-
-		}
-		else if(playerId == 1 && getPlayer1Money() < 10){
-			setPlayer1Money(getPlayer1Money()+2);
-			setPlayer0Money(getPlayer0Money()-2);
-
-		}
-		else{return false;}
-		return true;}
-
-	public boolean makeExcAction(GameAction action, GamePlayer player){
-		if(playerId == 0 && getPlayer0Money() <10){
-			return false;
-		}
-		else if(playerId == 1 && getPlayer1Money() < 10){
-			return false;
-		}
-		else{return true;}
-	}
-
-	//reactions
-	public boolean makeBlockAction(GameAction action, GamePlayer player){return false;}
-	public boolean makeChalAction(GameAction action, GamePlayer player){return false;}
-*/
-
-
 
 
 

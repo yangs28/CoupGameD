@@ -19,18 +19,17 @@ import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.GameFramework.utilities.Tickable;
 
 /**
- * A computer-version of a counter-player.  Since this is such a simple game,
- * it just sends "+" and "-" commands with equal probability, at an average
- * rate of one per second. 
- * 
- * @author Steven R. Vegdahl
- * @author Andrew M. Nuxoll
- * @version September 2013
+ * A computer-version of a coup-player.
+ * With the multiple actions to choose from, this computer randomly chooses
+ * an action to make, with different actions taking priority
+ *
+ * @author Sean Yang, Clint Sizemore, Kanoa Martin
+ * @version 4-24-25
  */
 public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable {
 	
     /**
-     * Constructor for objects of class CounterComputerPlayer1
+     * Constructor for objects of class CoupComputerPlayer1
      * 
      * @param name
      * 		the player's name

@@ -24,13 +24,12 @@ import android.util.Log;
 import java.util.Random;
 
 /**
- * A class that represents the state of a game. In our counter game, the only
- * relevant piece of information is the value of the game's counter. The
- * CounterState object is therefore very simple.
+ * A class that represents the state of a game. For the coup game
+ * this contains all of the actions that can be used, and records
+ * when a move is made
  *
- * @author Steven R. Vegdahl
- * @author Andrew M. Nuxoll
- * @version July 2013
+ * @author Sean Yang, Clint Sizemore, Kanoa Martin
+ * @version 4-24-25
  */
 public class CoupLocalGame extends LocalGame {
 
@@ -74,8 +73,9 @@ public class CoupLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
-        Log.i("action", action.getClass().toString());
 
+        //Log calls for action state reports
+        Log.i("action", action.getClass().toString());
         Log.d("Player", "Player idx[0] is " + getPlayerIdx(players[0]));
         Log.d("Player", "Player idx[1] is " + getPlayerIdx(players[1]));
         Log.d("Player", "PLayer ID is " + gameState.getPlayerId());
@@ -87,7 +87,7 @@ public class CoupLocalGame extends LocalGame {
 
         if (gameState.getPlayerId() == getPlayerIdx(players[0]) && players[0] instanceof CoupHumanPlayer) {
 
-            if (action instanceof AssassinateAction) { //todo
+            if (action instanceof AssassinateAction) {
                 GameAction[] tempHand = gameState.getplayer0Hand();
                 GameAction[] oppHand = gameState.getplayer1Hand();
                 if (tempHand[0] instanceof Assassin && gameState.checkplayer1Dead()[0] == false || tempHand[1] instanceof Assassin && gameState.checkplayer1Dead()[1] == false) {
@@ -117,23 +117,25 @@ public class CoupLocalGame extends LocalGame {
                     }
                 }
             }
-
-            if (action instanceof BlockAction) { //todo
+            //Code for when each type of action is called
+            if (action instanceof BlockAction) {
                 GameAction[] tempHand = gameState.getplayer0Hand();
-                if (tempHand[0] instanceof Contessa && gameState.checkplayer1Dead()[0] == false || tempHand[1] instanceof Contessa && gameState.checkplayer1Dead()[1] == false) {
+                if (tempHand[0] instanceof Contessa && gameState.checkplayer1Dead()[0] == false
+                        || tempHand[1] instanceof Contessa && gameState.checkplayer1Dead()[1] == false) {
                     Log.d("Money", "Block action was called. Money is " + gameState.getPlayer0Money());
                     // Additional logic for BlockAction
                 }
             }
 
-            if (action instanceof ChallengeAction) { //todo
+            if (action instanceof ChallengeAction) {
                 Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer0Money());
                 // Additional logic for ChallengeAction
             }
 
-            if (action instanceof ExchangeAction) { //todo
+            if (action instanceof ExchangeAction) {
                 GameAction[] tempHand = gameState.getplayer0Hand();
-                if (tempHand[0] instanceof Ambassador && gameState.checkplayer1Dead()[0] == false || tempHand[1] instanceof Ambassador && gameState.checkplayer1Dead()[1] == false) {
+                if (tempHand[0] instanceof Ambassador && gameState.checkplayer1Dead()[0] == false
+                        || tempHand[1] instanceof Ambassador && gameState.checkplayer1Dead()[1] == false) {
                     //Creates a copy of the original deck
                     GameAction[] deckCopy = gameState.getDeck();
                     int deckSize = deckCopy.length;
@@ -159,7 +161,7 @@ public class CoupLocalGame extends LocalGame {
                 }
             }
 
-            if (action instanceof ForeignAideAction) { //todo
+            if (action instanceof ForeignAideAction) {
                 GameAction[] tempHand = gameState.getplayer0Hand();
                 if (tempHand[0] instanceof Duke && gameState.checkplayer1Dead()[0] == false || tempHand[1] instanceof Duke && gameState.checkplayer1Dead()[1] == false) {
                     gameState.setPlayer0Money(gameState.getPlayer0Money() + 2);
@@ -175,10 +177,14 @@ public class CoupLocalGame extends LocalGame {
                 // Additional logic for IncomeAction
             }
 
-            if (action instanceof StealAction) { //todo
+            if (action instanceof StealAction) {
                 GameAction[] tempHand = gameState.getplayer0Hand();
-                if (tempHand[0] instanceof Captain && gameState.checkplayer1Dead()[0] == false || tempHand[1] instanceof Captain && gameState.checkplayer1Dead()[1] == false
-                        || tempHand[0] instanceof Ambassador && gameState.checkplayer1Dead()[0] == false || tempHand[1] instanceof Ambassador && gameState.checkplayer1Dead()[1] == false) {
+                //checks for any potential blocks
+                if (tempHand[0] instanceof Captain && gameState.checkplayer1Dead()[0] == false
+                        || tempHand[1] instanceof Captain && gameState.checkplayer1Dead()[1] == false
+                         || tempHand[0] instanceof Ambassador && gameState.checkplayer1Dead()[0] == false
+                          || tempHand[1] instanceof Ambassador && gameState.checkplayer1Dead()[1] == false) {
+                    //then checks if the opposition player has enough money to steal
                     if (gameState.getPlayer1Money() >= 2) {
                         gameState.setPlayer1Money(gameState.getPlayer1Money() - 2);
                         gameState.setPlayer0Money(gameState.getPlayer0Money() + 2);
@@ -191,16 +197,17 @@ public class CoupLocalGame extends LocalGame {
                 }
             }
 
-            if (action instanceof TaxAction) { //todo
+            if (action instanceof TaxAction) {
                 GameAction[] tempHand = gameState.getplayer0Hand();
-                if (tempHand[0] instanceof Duke && gameState.checkplayer1Dead()[0] == false || tempHand[1] instanceof Duke && gameState.checkplayer1Dead()[1] == false) {
+                if (tempHand[0] instanceof Duke && gameState.checkplayer1Dead()[0] == false
+                        || tempHand[1] instanceof Duke && gameState.checkplayer1Dead()[1] == false) {
                     gameState.setPlayer0Money(gameState.getPlayer0Money() + 3);
                     Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
                     // Additional logic for TaxAction
                 }
             }
 
-            if (action instanceof CoupDeteAction) { //todo
+            if (action instanceof CoupDeteAction) {
                 if (gameState.getPlayer0Money() >= 7) {
                     gameState.setPlayer0Money(gameState.getPlayer0Money() - 7);
 
@@ -269,16 +276,23 @@ public class CoupLocalGame extends LocalGame {
 
                 if (action instanceof ExchangeAction) {
                     GameAction[] tempHand = gameState.getplayer1Hand();
-                    if (tempHand[0] instanceof Ambassador && gameState.checkplayer0Dead()[0] == false || tempHand[1] instanceof Ambassador && gameState.checkplayer0Dead()[1] == false) {
+                    //Checks if the required card is in the hand
+                    if (tempHand[0] instanceof Ambassador && gameState.checkplayer0Dead()[0] == false
+                            || tempHand[1] instanceof Ambassador && gameState.checkplayer0Dead()[1] == false) {
+                        //Copies a card and gives it to user
                         GameAction[] deckCopy = gameState.getDeck();
                         int deckSize = deckCopy.length;
+                        //Picks two random cards from the deck
                         int randCard1 = rand.nextInt(deckSize);
                         int randCard2 = rand.nextInt(deckSize);
+                        //Ensures two unique cards
                         while (randCard2 == randCard1) {
                             randCard2 = rand.nextInt(deckSize);
                         }
+                        //Draws those two cards from the deck
                         GameAction newCard1 = deckCopy[randCard1];
                         GameAction newCard2 = deckCopy[randCard2];
+                        //Uses those cards to set the players hand with a new one
                         gameState.setplayer2Hand(newCard1, newCard2);
                         Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer1Money());
                     }
@@ -299,8 +313,12 @@ public class CoupLocalGame extends LocalGame {
 
                 if (action instanceof StealAction) {
                     GameAction[] tempHand = gameState.getplayer1Hand();
-                    if (tempHand[0] instanceof Captain && gameState.checkplayer0Dead()[0] == false || tempHand[1] instanceof Captain && gameState.checkplayer0Dead()[1] == false
-                            || tempHand[0] instanceof Ambassador && gameState.checkplayer0Dead()[0] == false || tempHand[1] instanceof Ambassador && gameState.checkplayer0Dead()[1] == false) {
+                    //Checks for any potential blocks
+                    if (tempHand[0] instanceof Captain && gameState.checkplayer0Dead()[0] == false
+                            || tempHand[1] instanceof Captain && gameState.checkplayer0Dead()[1] == false
+                             || tempHand[0] instanceof Ambassador && gameState.checkplayer0Dead()[0] == false
+                              || tempHand[1] instanceof Ambassador && gameState.checkplayer0Dead()[1] == false) {
+                        //Checks if the opposing player has enough money to steal
                         if (gameState.getPlayer0Money() >= 2) {
                             gameState.setPlayer0Money(gameState.getPlayer0Money() - 2);
                             gameState.setPlayer1Money(gameState.getPlayer1Money() + 2);
@@ -321,6 +339,7 @@ public class CoupLocalGame extends LocalGame {
                 }
 
                 if (action instanceof CoupDeteAction) {
+                    //Check if player has enough money
                     if (gameState.getPlayer1Money() >= 7) {
                         gameState.setPlayer1Money(gameState.getPlayer1Money() - 7);
                         boolean[] deadInfluences = gameState.checkplayer1Dead();
@@ -367,11 +386,10 @@ public class CoupLocalGame extends LocalGame {
     protected String checkIfGameOver() {
         Log.d("Over", "We're so back");
 
-
+        //Checks if a player has no cards left, and if so ends the game
         if (gameState.checkplayer0Dead()[0] == true && gameState.checkplayer0Dead()[1] == true) {
             Log.d("Over", "It's so over");
-            return "The game is over! Player 1 won by killing all Influences! ";
-        }
+            return "The game is over! Player 1 won by killing all Influences! ";}
 
         if (gameState.checkplayer1Dead()[0] == true && gameState.checkplayer1Dead()[1] == true) {
             Log.d("Over", "It's so over");
