@@ -37,7 +37,6 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
      * 		the player's name
      */
 
-	//monies
 
 	CoupState tempState;
 
@@ -60,34 +59,39 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
      */
 	@Override
 	protected void receiveInfo(GameInfo info) {
-		//Automatically performs an Income action for now.
 		//NOTE: Rare bug with thread.sleep. Conflicts with game and causes a turn error. Mechanism unknown.
 
+		//Sets the tempState variable to be a typecasted coupState of info
 		tempState = (CoupState) info;
 
-
+		//If the info given is not an instance of CoupState immediately return
 		if(!(info instanceof CoupState)) {
 			return;
 		}
-
+		//If the ID does not match the computer AI, immediately return (not your turn)
 		if(tempState.getPlayerId() != this.playerNum) {
 			return;
 		}
 
+		//If the ID does match the computer AI,
 		if(tempState.getPlayerId() == this.playerNum) {
-			Log.d("smart", "Smart id is " + this.playerNum);
+
+			//Create new RNG for randomized probability check
 			Random rng = new Random();
 			double probability = rng.nextDouble();
+			//Grabs copy of AI's hand, and the opponent and AI's money amount
 			GameAction[] myHand = tempState.getplayer1Hand();
 			int myMoney = tempState.getPlayer1Money();
 			int oppMoney = tempState.getPlayer0Money();
 
-			// 1) Always try to Coup first (guranteed, no probability check)
+
+			//Performs below actions based on a set hierarchy, with some RNG for blockable actions
+			// 1) Always try to Coup first (guaranteed, no probability check)
 			if (myMoney >= 7) {
 				CoupDeteAction coup = new CoupDeteAction(this);
 				this.game.sendAction(coup);
 
-			// 2) Then Assassinate if possible (70% chance)
+			// 2)Then Assassinate if possible (70% chance)
 			} else if ((myHand[0] instanceof Assassin || myHand[1] instanceof Assassin)
 					&& myMoney >= 3
 					&& probability < 0.7) {
