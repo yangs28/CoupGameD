@@ -24,9 +24,12 @@ import android.util.Log;
 import java.util.Random;
 
 /**
- * A class that represents the state of a game. For the coup game
+ * A class that represents the local state of a game. For the coup game
  * this contains all of the actions that can be used, and records
  * when a move is made. Also handles blocking, applicable actions and alternates turns between players
+ *
+ * Class will also modify the CoupState class by setting and changing values
+ * to reflect the changing state of the game
  *
  * @author Sean Yang, Clint Sizemore, Kanoa Martin
  * @version 4-24-25

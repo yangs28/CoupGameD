@@ -248,11 +248,12 @@ public class CoupState extends GameState {
 	public boolean[] checkplayer1Dead() {
 		return player1isDead;
 	}
-
+	//Sets relevant player ID
 	public void setPlayerId(int _playerId) {
 		this.playerId = _playerId;
 	}
 
+	//Returns a copy of this gameState
 	public CoupState getGameState() {
 		return this;
 	}

@@ -21,9 +21,10 @@ import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.GameFramework.utilities.Tickable;
 
 /**
- * A computer-version of a coup-player.
+ * The basic computer-version of a coup-player.
  * With the multiple actions to choose from, this computer randomly chooses
  * an action to make, with different actions taking priority
+ *
  *
  * @author Sean Yang, Clint Sizemore, Kanoa Martin
  * @version 4-24-25

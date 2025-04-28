@@ -16,7 +16,7 @@ import edu.up.cs301.GameFramework.LocalGame;
 import edu.up.cs301.GameFramework.gameConfiguration.*;
 
 /**
- * this is the primary activity for Counter game
+ * this is the primary activity for Coup game
  * 
  * @author Andrew M. Nuxoll
  * @author Steven R. Vegdahl

@@ -28,6 +28,8 @@ import edu.up.cs301.GameFramework.utilities.Tickable;
  * The computer will also review past actions to see which actions failed to obtain an estimate of the
  * player's hand, which will inform the computer player of what future actions to take
  *
+ * Features much more advanced decision-making compared to the basic AI
+ *
  * @author Sean Yang, Clint Sizemore, Kanoa Martin
  * @version 4-24-25
  */
