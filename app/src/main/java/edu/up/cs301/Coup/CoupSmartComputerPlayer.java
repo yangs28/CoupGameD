@@ -40,14 +40,15 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
      * 		the player's name
      */
 
-    //monies
-
+    //Copy of the retrieved CoupState
     CoupState tempSmartState;
     //assassinationBlockedCheck checks to see if a performed assasination action was blocked by the human player
     boolean assassinationBlockedCheck;
+    //The unfortunately named assCall boolean checks if an assassination action was performed. By default set to false
     boolean assCall = false;
     //playerDead checks to see the status of the human player's cards
     boolean[] playerDead;
+    //runOnce is a boolean used for a logic check to see if an assassination was performed successfully
     boolean runOnce = false;
 
 
@@ -58,6 +59,7 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
         // start the timer, ticking 20 times per second
         getTimer().setInterval(50);
         getTimer().start();
+        //Sets blocked check to be false initially (assassination was not blocked successfully)
         assassinationBlockedCheck = false;
     }
 
@@ -71,27 +73,39 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
     protected void receiveInfo(GameInfo info) {
         //NOTE: Rare bug with thread.sleep. Conflicts with game and causes a turn error. Mechanism unknown.
 
+        //Returns immediately if not an instance of CoupState. Fixes null object bug
         if(!(info instanceof CoupState)) {
             return;
         }
 
+        //Sets the CoupState to be from the info variable
         tempSmartState = (CoupState) info;
 
-
+        //If the ID does not match, just return
         if(tempSmartState.getPlayerId() != this.playerNum) {
             return;
         }
 
+        //If the ID does match,
         if(tempSmartState.getPlayerId() == this.playerNum) {
 
+            //Retrieves an initial copy of the opponent's starting hand to check their Life status
+            //In the beginning all of their Influences will be alive
             playerDead = tempSmartState.checkplayer1Dead();
-            Log.d("Block", "Status of assBlock is " + assassinationBlockedCheck);
+
+            //If an assassination was performed, call a helper method to compare the opponent's starting hand
+            //with their current hand after an assassination was performed
             if(assCall == true) {
+                //Runs only once to prevent a rare bug that breaks the logic checking
                 if(runOnce == false) {
+                    //If the opponent's hand was not changed, it means an assassination did not go through
+                    //This is because an assassination action would change the opponent's hand by killing one of their influences
+                    //Thus, we set this boolean to be true if the assassination is blocked so AI no longer performs ineffective assassinations
                     assassinationBlockedCheck = isAssassinationBlockedCheck();
                 }
             }
 
+            //RNG for probability check
             Random rng = new Random();
             double probability = rng.nextDouble();
             //Retrieves copy of your own hand
@@ -99,8 +113,11 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
             //Checks AI and Opponent money values
             int myMoney = tempSmartState.getPlayer1Money();
             int oppMoney = tempSmartState.getPlayer0Money();
-            //Checks your hand for dead Influences
+            //Checks your hand for dead Influences. Avoids calling ineffective actions from dead Influences
             boolean[] myDead = tempSmartState.checkplayer0Dead();
+
+            //Actions are still performed based on a hierarchy, but they account for dead Influences
+            //Leads to smarter decision-making so AI only prioritizes effective actions
 
             // 1) Always try to Coup first (guranteed, no probability check)
             if (myMoney >= 7) {
@@ -112,9 +129,12 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
             else if (((myHand[0] instanceof Assassin && myDead[0] == false) || (myHand[1] instanceof Assassin && myDead[1] == false))
                     && myMoney >= 3
                     && probability < 0.7
+                    //Updated logic of assassinate so we only perform assassinations if they are effective and not blocked previously
                     && assassinationBlockedCheck == false) {
+                //Sends new assassination action
                 AssassinateAction assassinate = new AssassinateAction(this);
                 this.game.sendAction(assassinate);
+                //Sets the unfortunately named variable to be true, indicating an assassination action has been called
                 assCall = true;
 
                 // 3) Then Exchange (30% chance)
@@ -151,11 +171,17 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
 
     }
 
+    //Helper method to check for if an assassination attempt by the AI was blocked
     public boolean isAssassinationBlockedCheck() {
+        //Compares the player's starting hand with their starting hand to check for change
         if (Arrays.equals(playerDead, tempSmartState.checkplayer1Dead())) {
+                //Sets runOnce to be true to avoid for repeating calling of this function
                 runOnce = true;
+                //If the starting hand and current hand has not changed after an assassination attempt,
+                //it means no cards were assassinated and the action failed, so return true
                 return true;
             }
+            //If the starting hand and current hand HAS changed, return false (meaning assassination attempt was successful)
             return false;
 
     }
