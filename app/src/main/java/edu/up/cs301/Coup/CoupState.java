@@ -11,8 +11,11 @@ import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
 
 /**
- * This contains the state for the Coup game. This stores the current state of the
- * game as well as all possible executable actions
+ * This contains the state for the Coup game. This stores the current state to inform
+ * other classes on the status of the two players
+ *
+ * Also stores which Influence a character has, whether or not those Influences
+ * have been killed, the Deck, as well as methods for killing Influences
  *
  * SPEEDRUN: To win quickly, you can
  * Draw the Assassin card

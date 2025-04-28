@@ -26,7 +26,7 @@ import java.util.Random;
 /**
  * A class that represents the state of a game. For the coup game
  * this contains all of the actions that can be used, and records
- * when a move is made
+ * when a move is made. Also handles blocking, applicable actions and alternates turns between players
  *
  * @author Sean Yang, Clint Sizemore, Kanoa Martin
  * @version 4-24-25

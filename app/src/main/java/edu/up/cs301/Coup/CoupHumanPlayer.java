@@ -25,17 +25,13 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 
 /**
- * A GUI of a counter-player. The GUI displays the current value of the counter,
- * and allows the human player to press the '+' and '-' buttons in order to
- * send moves to the game.
+ * The human version of a coup-player
+ * Responsible for handling inputs by the human player's actions from button presses,
+ * as well as updating the GUI with relevant graphics based on the type and status of the Influences
+ * Dead Influences, Influence types and currency values are displayed accordingly.
  *
- * Just for fun, the GUI is implemented so that if the player presses either button
- * when the counter-value is zero, the screen flashes briefly, with the flash-color
- * being dependent on whether the player is player 0 or player 1.
- *
- * @author Steven R. Vegdahl
- * @author Andrew M. Nuxoll
- * @version July 2013
+ * @author Sean Yang, Clint Sizemore, Kanoa Martin
+ * @version 4-24-25
  */
 public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener {
 
