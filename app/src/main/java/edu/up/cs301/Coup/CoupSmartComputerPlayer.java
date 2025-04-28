@@ -1,5 +1,8 @@
 package edu.up.cs301.Coup;
 
+import android.util.Log;
+
+import java.util.Arrays;
 import java.util.Random;
 
 import edu.up.cs301.Characters.Ambassador;
@@ -39,6 +42,11 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
     //monies
 
     CoupState tempSmartState;
+    //assassinationBlockedCheck checks to see if a performed assasination action was blocked by the human player
+    boolean assassinationBlockedCheck;
+    boolean assCall = false;
+    //playerDead checks to see the status of the human player's cards
+    boolean[] playerDead;
 
 
 
@@ -48,7 +56,7 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
         // start the timer, ticking 20 times per second
         getTimer().setInterval(50);
         getTimer().start();
-
+        assassinationBlockedCheck = false;
     }
 
     /**
@@ -65,7 +73,6 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
             return;
         }
 
-
         tempSmartState = (CoupState) info;
 
 
@@ -74,6 +81,15 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
         }
 
         if(tempSmartState.getPlayerId() == this.playerNum) {
+
+            playerDead = tempSmartState.checkplayer1Dead();
+
+            if(assCall = true) {
+                if (Arrays.equals(playerDead, tempSmartState.checkplayer1Dead())) {
+                    assassinationBlockedCheck = true;
+                    Log.d("Block", "Status of assBlock is " + assassinationBlockedCheck);
+                }
+            }
 
             Random rng = new Random();
             double probability = rng.nextDouble();
@@ -94,6 +110,7 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
             } else if (((myHand[0] instanceof Assassin && myDead[0] == false) || (myHand[1] instanceof Assassin && myDead[1] == false))
                     && myMoney >= 3
                     && probability < 0.7) {
+                assCall = true;
                 AssassinateAction assassinate = new AssassinateAction(this);
                 this.game.sendAction(assassinate);
 
@@ -125,12 +142,19 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
                 IncomeAction inc = new IncomeAction(this);
                 this.game.sendAction(inc);
             }
-
-
-
-
         }
 
+    }
+
+    public boolean isAssassinationBlockedCheck() {
+        if(assCall = true) {
+            if (Arrays.equals(playerDead, tempSmartState.checkplayer1Dead())) {
+                Log.d("Block", "Status of assBlock is " + assassinationBlockedCheck);
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 
     /**
