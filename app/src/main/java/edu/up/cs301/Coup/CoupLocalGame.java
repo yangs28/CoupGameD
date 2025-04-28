@@ -106,7 +106,7 @@ public class CoupLocalGame extends LocalGame {
                                 victim = random.nextInt(2);
                             }
 
-                            if (!(oppHand[0] instanceof Contessa) || !(oppHand[1] instanceof Contessa)) {
+                            if (!(oppHand[0] instanceof Contessa) && !(oppHand[1] instanceof Contessa)) {
                                 gameState.make0Dead(victim);
                             }
                             Log.d("Ass", "Assassinate action was called. Boolean makeDead 0 is " + gameState.checkplayer0Dead()[0]);
@@ -234,7 +234,7 @@ public class CoupLocalGame extends LocalGame {
             return true;
         }
 
-            if (gameState.getPlayerId() == getPlayerIdx(players[1]) && players[1] instanceof CoupComputerPlayer1) {
+            if (gameState.getPlayerId() == getPlayerIdx(players[1]) && (players[1] instanceof CoupComputerPlayer1 || players[1] instanceof CoupSmartComputerPlayer)) {
 
                 if (action instanceof AssassinateAction) {
                     GameAction[] tempHand = gameState.getplayer1Hand();
@@ -254,7 +254,8 @@ public class CoupLocalGame extends LocalGame {
                                 while (deadInfluences[victim]) {
                                     victim = random.nextInt(2);
                                 }
-                                if (!(oppHand[0] instanceof Contessa) || !(oppHand[1] instanceof Contessa)) {
+                                //Checks to see there is no Contessa. If no Contessa we kill
+                                if (!(oppHand[0] instanceof Contessa) && !(oppHand[1] instanceof Contessa)) {
                                     gameState.make1Dead(victim);
                                     Log.d("Ass", "Assassinate action was called. Boolean makeDead 0 is " + gameState.checkplayer0Dead()[victim]);
                                     Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer1Money());

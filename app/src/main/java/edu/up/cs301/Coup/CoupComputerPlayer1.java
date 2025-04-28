@@ -1,5 +1,7 @@
 package edu.up.cs301.Coup;
 
+import android.util.Log;
+
 import java.util.Random;
 
 import edu.up.cs301.Characters.Ambassador;
@@ -73,7 +75,7 @@ public class CoupComputerPlayer1 extends GameComputerPlayer implements Tickable 
 		}
 
 		if(tempState.getPlayerId() == this.playerNum) {
-
+			Log.d("smart", "Smart id is " + this.playerNum);
 			Random rng = new Random();
 			double probability = rng.nextDouble();
 			GameAction[] myHand = tempState.getplayer1Hand();
