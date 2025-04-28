@@ -12,11 +12,7 @@ import android.widget.TextView;
 
 
 /**
- * A smarter computer-version of a coup-player.
- * This computer will prioritize certain actions based on a hierarchy. It draws information from the
- * player and the computer's hand to determine which actions to perform and prioritize.
- * The computer will also review past actions to see which actions failed to obtain an estimate of the
- * player's hand, which will inform the computer player of what future actions to take
+ * A GUI version of the computer player. Responsible for updating the GUI
  *
  * @author Sean Yang, Clint Sizemore, Kanoa Martin
  * @version 4-24-25

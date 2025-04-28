@@ -22,9 +22,11 @@ import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.GameFramework.utilities.Tickable;
 
 /**
- * A smarter computer-version of a coup-player. This smarter version
- * uses a chain of ideal steps with a probability to try different
- * paths depending on its cards and a RNG
+ * A smarter computer-version of a coup-player.
+ * This computer will prioritize certain actions based on a hierarchy. It draws information from the
+ * player and the computer's hand to determine which actions to perform and prioritize.
+ * The computer will also review past actions to see which actions failed to obtain an estimate of the
+ * player's hand, which will inform the computer player of what future actions to take
  *
  * @author Sean Yang, Clint Sizemore, Kanoa Martin
  * @version 4-24-25
