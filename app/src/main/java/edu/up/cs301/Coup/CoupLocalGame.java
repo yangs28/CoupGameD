@@ -161,11 +161,9 @@ public class CoupLocalGame extends LocalGame {
 
             if (action instanceof ForeignAideAction) { //todo
                 GameAction[] tempHand = gameState.getplayer0Hand();
-                if (tempHand[0] instanceof Duke && gameState.checkplayer1Dead()[0] == false || tempHand[1] instanceof Duke && gameState.checkplayer1Dead()[1] == false) {
                     gameState.setPlayer0Money(gameState.getPlayer0Money() + 2);
                     Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer0Money());
                     // Additional logic for ForeignAideAction
-                }
             }
 
             if (action instanceof IncomeAction) {
@@ -287,10 +285,8 @@ public class CoupLocalGame extends LocalGame {
 
                 if (action instanceof ForeignAideAction) {
                     GameAction[] tempHand = gameState.getplayer1Hand();
-                    if (tempHand[0] instanceof Duke && gameState.checkplayer0Dead()[0] == false || tempHand[1] instanceof Duke && gameState.checkplayer0Dead()[1] == false) {
                         gameState.setPlayer1Money(gameState.getPlayer1Money() + 2);
                         Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer1Money());
-                    }
                 }
 
                 if (action instanceof IncomeAction) {
