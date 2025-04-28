@@ -12,17 +12,15 @@ import android.widget.TextView;
 
 
 /**
-* A computer-version of a counter-player.  Since this is such a simple game,
-* it just sends "+" and "-" commands with equal probability, at an average
-* rate of one per second. This computer player does, however, have an option to
-* display the game as it is progressing, so if there is no human player on the
-* device, this player will display a GUI that shows the value of the counter
-* as the game is being played.
-* 
-* @author Steven R. Vegdahl
-* @author Andrew M. Nuxoll
-* @version September 2013
-*/
+ * A smarter computer-version of a coup-player.
+ * This computer will prioritize certain actions based on a hierarchy. It draws information from the
+ * player and the computer's hand to determine which actions to perform and prioritize.
+ * The computer will also review past actions to see which actions failed to obtain an estimate of the
+ * player's hand, which will inform the computer player of what future actions to take
+ *
+ * @author Sean Yang, Clint Sizemore, Kanoa Martin
+ * @version 4-24-25
+ */
 public class CoupComputerPlayer2 extends CoupComputerPlayer1 {
 	
 	/*
