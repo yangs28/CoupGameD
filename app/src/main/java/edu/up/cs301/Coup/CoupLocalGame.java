@@ -180,26 +180,33 @@ public class CoupLocalGame extends LocalGame {
 
             if (action instanceof StealAction) {
                 GameAction[] tempHand = gameState.getplayer0Hand();
-                // Checks for any potential blocks (must have a live Captain)
-                if ((tempHand[0] instanceof Captain && gameState.checkplayer1Dead()[0] == false) || (tempHand[1] instanceof Captain && gameState.checkplayer1Dead()[1] == false)) {
-                    // then checks if the opposing player has enough money to steal
-                    if (gameState.getPlayer1Money() >= 2) {
-                        gameState.setPlayer1Money(gameState.getPlayer1Money() - 2);
-                        gameState.setPlayer0Money(gameState.getPlayer0Money() + 2);
-                    } else if (gameState.getPlayer1Money() >= 1) {
-                        gameState.setPlayer1Money(gameState.getPlayer1Money() - 1);
-                        gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
+                GameAction[] oppHand = gameState.getplayer1Hand();
+                // Checks for any potential blocks (must have a live Captain and no live Captain/Ambassador on opponent)
+                if (((tempHand[0] instanceof Captain && gameState.checkplayer1Dead()[0] == false) || (tempHand[1] instanceof Captain && gameState.checkplayer1Dead()[1] == false))
+                ) {
+                    if (!(oppHand[0] instanceof Ambassador) && !(oppHand[1] instanceof Ambassador)) {
+                        if (!(oppHand[0] instanceof Captain) && !(oppHand[1] instanceof Captain)) {
+
+                            // then checks if the opposing player has enough money to steal
+                            if (gameState.getPlayer1Money() >= 2) {
+                                gameState.setPlayer1Money(gameState.getPlayer1Money() - 2);
+                                gameState.setPlayer0Money(gameState.getPlayer0Money() + 2);
+                            } else if (gameState.getPlayer1Money() >= 1) {
+                                gameState.setPlayer1Money(gameState.getPlayer1Money() - 1);
+                                gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
+                            }
+                            Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
+                            // Additional logic for StealAction
+                        }
                     }
-                    Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer0Money());
-                    // Additional logic for StealAction
                 }
             }
 
 
+
             if (action instanceof TaxAction) {
                 GameAction[] tempHand = gameState.getplayer0Hand();
-                if (tempHand[0] instanceof Duke && gameState.checkplayer1Dead()[0] == false
-                        || tempHand[1] instanceof Duke && gameState.checkplayer1Dead()[1] == false) {
+                if (tempHand[0] instanceof Duke && gameState.checkplayer1Dead()[0] == false || tempHand[1] instanceof Duke && gameState.checkplayer1Dead()[1] == false) {
                     gameState.setPlayer0Money(gameState.getPlayer0Money() + 3);
                     Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer0Money());
                     // Additional logic for TaxAction
@@ -316,19 +323,26 @@ public class CoupLocalGame extends LocalGame {
 
                 if (action instanceof StealAction) {
                     GameAction[] tempHand = gameState.getplayer1Hand();
+                    GameAction[] oppHand  = gameState.getplayer0Hand();
                     // Checks for any potential blocks (must have a live Captain)
                     if ((tempHand[0] instanceof Captain && gameState.checkplayer0Dead()[0] == false) || (tempHand[1] instanceof Captain && gameState.checkplayer0Dead()[1] == false)) {
-                        // Checks if the opposing player has enough money to steal
-                        if (gameState.getPlayer0Money() >= 2) {
-                            gameState.setPlayer0Money(gameState.getPlayer0Money() - 2);
-                            gameState.setPlayer1Money(gameState.getPlayer1Money() + 2);
-                        } else if (gameState.getPlayer0Money() >= 1) {
-                            gameState.setPlayer0Money(gameState.getPlayer0Money() - 1);
-                            gameState.setPlayer1Money(gameState.getPlayer1Money() + 1);
+                        // Opponent must have no live Captain or Ambassador
+                        if (!(oppHand[0] instanceof Captain && gameState.checkplayer0Dead()[0] == false) && !(oppHand[1] instanceof Captain && gameState.checkplayer0Dead()[1] == false)
+                                && !(oppHand[0] instanceof Ambassador && gameState.checkplayer0Dead()[0] == false) && !(oppHand[1] instanceof Ambassador && gameState.checkplayer0Dead()[1] == false)) {
+                            // then checks if the opposing player has enough money to steal
+                            if (gameState.getPlayer0Money() >= 2) {
+                                gameState.setPlayer0Money(gameState.getPlayer0Money() - 2);
+                                gameState.setPlayer1Money(gameState.getPlayer1Money() + 2);
+                            } else if (gameState.getPlayer0Money() >= 1) {
+                                gameState.setPlayer0Money(gameState.getPlayer0Money() - 1);
+                                gameState.setPlayer1Money(gameState.getPlayer1Money() + 1);
+                            }
+                            Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer1Money());
+                            // Additional logic for StealAction
                         }
-                        Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer1Money());
                     }
                 }
+
 
 
                 if (action instanceof TaxAction) {
