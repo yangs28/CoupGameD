@@ -80,6 +80,7 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
             GameAction[] myHand = tempState.getplayer1Hand();
             int myMoney = tempState.getPlayer1Money();
             int oppMoney = tempState.getPlayer0Money();
+            boolean[] myDead = tempState.checkplayer0Dead();
 
             // 1) Always try to Coup first (guranteed, no probability check)
             if (myMoney >= 7) {
@@ -87,30 +88,32 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
                 this.game.sendAction(coup);
 
                 // 2) Then Assassinate if possible (70% chance)
-            } else if ((myHand[0] instanceof Assassin || myHand[1] instanceof Assassin)
+            } else if (((myHand[0] instanceof Assassin && myDead[0] == false) || (myHand[1] instanceof Assassin && myDead[1] == false))
                     && myMoney >= 3
                     && probability < 0.7) {
                 AssassinateAction assassinate = new AssassinateAction(this);
                 this.game.sendAction(assassinate);
 
                 // 3) Then Exchange (30% chance)
-            } else if ((myHand[0] instanceof Ambassador || myHand[1] instanceof Ambassador)
+            } else if (((myHand[0] instanceof Ambassador && myDead[0] == false) || (myHand[1] instanceof Ambassador && myDead[1] == false))
                     && probability < 0.3) {
                 ExchangeAction exchange = new ExchangeAction(this);
                 this.game.sendAction(exchange);
 
                 // 4) Then Tax (Always use tax as it's the best way to make money)
-            } else if ((myHand[0] instanceof Duke || myHand[1] instanceof Duke)) {
+            } else if ((myHand[0] instanceof Duke && myDead[0] == false) || (myHand[1] instanceof Duke && myDead[1] == false)) {
                 TaxAction tax = new TaxAction(this);
                 this.game.sendAction(tax);
 
                 // 5) Then Foreign Aid (Always use Foreign Aid if other actions not present)
-            } else if (probability < 0.3) {
+            } else if (((myHand[0] instanceof Duke && myDead[0] == false) || (myHand[1] instanceof Duke && myDead[1] == false))
+                    && probability < 0.3) {
                 ForeignAideAction foreignAide = new ForeignAideAction(this);
                 this.game.sendAction(foreignAide);
 
                 // 6) Then Steal (RNG for steal since it can be blocked)
-            } else if ((myHand[0] instanceof Captain || myHand[1] instanceof Captain && probability < 0.5 && oppMoney > 0)) {
+            } else if (((myHand[0] instanceof Captain && myDead[0] == false) || (myHand[1] instanceof Captain && myDead[1] == false))
+                    && probability < 0.5 && oppMoney > 0) {
                 StealAction steal = new StealAction(this);
                 this.game.sendAction(steal);
 
@@ -119,6 +122,7 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
                 IncomeAction inc = new IncomeAction(this);
                 this.game.sendAction(inc);
             }
+
 
 
 
