@@ -184,8 +184,8 @@ public class CoupLocalGame extends LocalGame {
                 // Checks for any potential blocks (must have a live Captain and no live Captain/Ambassador on opponent)
                 if (((tempHand[0] instanceof Captain && gameState.checkplayer1Dead()[0] == false) || (tempHand[1] instanceof Captain && gameState.checkplayer1Dead()[1] == false))
                 ) {
-                    if (!(oppHand[0] instanceof Ambassador) && !(oppHand[1] instanceof Ambassador)) {
-                        if (!(oppHand[0] instanceof Captain) && !(oppHand[1] instanceof Captain)) {
+                    if (!(oppHand[0] instanceof Ambassador && gameState.checkplayer1Dead()[0] == false) && !(oppHand[1] instanceof Ambassador && gameState.checkplayer1Dead()[1] == false)) {
+                        if (!(oppHand[0] instanceof Captain && gameState.checkplayer1Dead()[0] == false) && !(oppHand[1] instanceof Captain && gameState.checkplayer1Dead()[1] == false)) {
 
                             // then checks if the opposing player has enough money to steal
                             if (gameState.getPlayer1Money() >= 2) {
