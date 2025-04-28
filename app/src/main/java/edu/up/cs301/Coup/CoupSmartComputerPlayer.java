@@ -47,6 +47,7 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
     boolean assCall = false;
     //playerDead checks to see the status of the human player's cards
     boolean[] playerDead;
+    boolean runOnce = false;
 
 
 
@@ -83,11 +84,10 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
         if(tempSmartState.getPlayerId() == this.playerNum) {
 
             playerDead = tempSmartState.checkplayer1Dead();
-
-            if(assCall = true) {
-                if (Arrays.equals(playerDead, tempSmartState.checkplayer1Dead())) {
-                    assassinationBlockedCheck = true;
-                    Log.d("Block", "Status of assBlock is " + assassinationBlockedCheck);
+            Log.d("Block", "Status of assBlock is " + assassinationBlockedCheck);
+            if(assCall == true) {
+                if(runOnce == false) {
+                    assassinationBlockedCheck = isAssassinationBlockedCheck();
                 }
             }
 
@@ -109,10 +109,11 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
                 // 2) Then Assassinate if possible (70% chance)
             } else if (((myHand[0] instanceof Assassin && myDead[0] == false) || (myHand[1] instanceof Assassin && myDead[1] == false))
                     && myMoney >= 3
-                    && probability < 0.7) {
-                assCall = true;
+                    && probability < 0.7
+                    && assassinationBlockedCheck == false) {
                 AssassinateAction assassinate = new AssassinateAction(this);
                 this.game.sendAction(assassinate);
+                assCall = true;
 
                 // 3) Then Exchange (30% chance)
             } else if (((myHand[0] instanceof Ambassador && myDead[0] == false) || (myHand[1] instanceof Ambassador && myDead[1] == false))
@@ -147,14 +148,12 @@ public class CoupSmartComputerPlayer extends GameComputerPlayer implements Ticka
     }
 
     public boolean isAssassinationBlockedCheck() {
-        if(assCall = true) {
-            if (Arrays.equals(playerDead, tempSmartState.checkplayer1Dead())) {
-                Log.d("Block", "Status of assBlock is " + assassinationBlockedCheck);
+        if (Arrays.equals(playerDead, tempSmartState.checkplayer1Dead())) {
+                runOnce = true;
                 return true;
             }
             return false;
-        }
-        return false;
+
     }
 
     /**
