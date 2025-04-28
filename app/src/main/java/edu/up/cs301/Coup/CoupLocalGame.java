@@ -163,13 +163,16 @@ public class CoupLocalGame extends LocalGame {
 
             if (action instanceof ForeignAideAction) {
                 GameAction[] tempHand = gameState.getplayer0Hand();
+                GameAction[] oppHand = gameState.getplayer1Hand();
+                if (!(oppHand[0] instanceof Duke && gameState.checkplayer1Dead()[0] == false) && !(oppHand[1] instanceof Duke && gameState.checkplayer1Dead()[1] == false)) {
                     gameState.setPlayer0Money(gameState.getPlayer0Money() + 2);
                     Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer0Money());
                     // Additional logic for ForeignAideAction
+                }
             }
 
-            if (action instanceof IncomeAction) {
 
+            if (action instanceof IncomeAction) {
                 gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
                 Log.d("Money", "Income action was called. Money is " + gameState.getPlayer0Money());
                 // Additional logic for IncomeAction
@@ -299,9 +302,14 @@ public class CoupLocalGame extends LocalGame {
 
                 if (action instanceof ForeignAideAction) {
                     GameAction[] tempHand = gameState.getplayer1Hand();
+                    GameAction[] oppHand = gameState.getplayer0Hand();
+                    if (!(oppHand[0] instanceof Duke && gameState.checkplayer0Dead()[0] == false) && !(oppHand[1] instanceof Duke && gameState.checkplayer0Dead()[1] == false)) {
                         gameState.setPlayer1Money(gameState.getPlayer1Money() + 2);
                         Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer1Money());
+                        // Additional logic for ForeignAideAction
+                    }
                 }
+
 
                 if (action instanceof IncomeAction) {
                     gameState.setPlayer1Money(gameState.getPlayer1Money() + 1);
