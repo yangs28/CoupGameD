@@ -227,7 +227,7 @@ public class CoupLocalGame extends LocalGame {
             return true;
         }
 
-            if (gameState.getPlayerId() == getPlayerIdx(players[1]) && players[1] instanceof CoupComputerPlayer1) {
+            if (gameState.getPlayerId() == getPlayerIdx(players[1]) && (players[1] instanceof CoupComputerPlayer1 || players[1] instanceof CoupSmartComputerPlayer)) {
 
                 if (action instanceof AssassinateAction) {
                     GameAction[] tempHand = gameState.getplayer1Hand();
