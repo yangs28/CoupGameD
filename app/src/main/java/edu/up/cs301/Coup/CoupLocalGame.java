@@ -180,12 +180,9 @@ public class CoupLocalGame extends LocalGame {
 
             if (action instanceof StealAction) {
                 GameAction[] tempHand = gameState.getplayer0Hand();
-                //checks for any potential blocks
-                if (tempHand[0] instanceof Captain && gameState.checkplayer1Dead()[0] == false
-                        || tempHand[1] instanceof Captain && gameState.checkplayer1Dead()[1] == false
-                         || tempHand[0] instanceof Ambassador && gameState.checkplayer1Dead()[0] == false
-                          || tempHand[1] instanceof Ambassador && gameState.checkplayer1Dead()[1] == false) {
-                    //then checks if the opposition player has enough money to steal
+                // Checks for any potential blocks (must have a live Captain)
+                if ((tempHand[0] instanceof Captain && gameState.checkplayer1Dead()[0] == false) || (tempHand[1] instanceof Captain && gameState.checkplayer1Dead()[1] == false)) {
+                    // then checks if the opposing player has enough money to steal
                     if (gameState.getPlayer1Money() >= 2) {
                         gameState.setPlayer1Money(gameState.getPlayer1Money() - 2);
                         gameState.setPlayer0Money(gameState.getPlayer0Money() + 2);
@@ -197,6 +194,7 @@ public class CoupLocalGame extends LocalGame {
                     // Additional logic for StealAction
                 }
             }
+
 
             if (action instanceof TaxAction) {
                 GameAction[] tempHand = gameState.getplayer0Hand();
@@ -318,12 +316,9 @@ public class CoupLocalGame extends LocalGame {
 
                 if (action instanceof StealAction) {
                     GameAction[] tempHand = gameState.getplayer1Hand();
-                    //Checks for any potential blocks
-                    if (tempHand[0] instanceof Captain && gameState.checkplayer0Dead()[0] == false
-                            || tempHand[1] instanceof Captain && gameState.checkplayer0Dead()[1] == false
-                             || tempHand[0] instanceof Ambassador && gameState.checkplayer0Dead()[0] == false
-                              || tempHand[1] instanceof Ambassador && gameState.checkplayer0Dead()[1] == false) {
-                        //Checks if the opposing player has enough money to steal
+                    // Checks for any potential blocks (must have a live Captain)
+                    if ((tempHand[0] instanceof Captain && gameState.checkplayer0Dead()[0] == false) || (tempHand[1] instanceof Captain && gameState.checkplayer0Dead()[1] == false)) {
+                        // Checks if the opposing player has enough money to steal
                         if (gameState.getPlayer0Money() >= 2) {
                             gameState.setPlayer0Money(gameState.getPlayer0Money() - 2);
                             gameState.setPlayer1Money(gameState.getPlayer1Money() + 2);
@@ -334,6 +329,7 @@ public class CoupLocalGame extends LocalGame {
                         Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer1Money());
                     }
                 }
+
 
                 if (action instanceof TaxAction) {
                     GameAction[] tempHand = gameState.getplayer1Hand();
