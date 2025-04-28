@@ -59,6 +59,11 @@ public class CoupMainActivity extends GameMainActivity {
 			public GamePlayer createPlayer(String name) {
 				return new CoupComputerPlayer2(name);
 			}});
+		// a smart computer player type (player type 3)
+		playerTypes.add(new GamePlayerType("Smart Computer Player") {
+			public GamePlayer createPlayer(String name) {
+				return new CoupSmartComputerPlayer(name);
+			}});
 
 		// Create a game configuration class for Counter:
 		// - player types as given above
