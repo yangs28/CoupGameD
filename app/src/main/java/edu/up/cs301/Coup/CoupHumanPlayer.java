@@ -1,7 +1,11 @@
 package edu.up.cs301.Coup;
 
+import edu.up.cs301.Characters.Ambassador;
+import edu.up.cs301.Characters.Assassin;
+import edu.up.cs301.Characters.Captain;
+import edu.up.cs301.Characters.Contessa;
+import edu.up.cs301.Characters.Duke;
 import edu.up.cs301.CoupActions.AssassinateAction;
-import edu.up.cs301.CoupActions.CoupAction;
 import edu.up.cs301.CoupActions.CoupDeteAction;
 import edu.up.cs301.CoupActions.ExchangeAction;
 import edu.up.cs301.CoupActions.ForeignAideAction;
@@ -16,10 +20,9 @@ import edu.up.cs301.GameFramework.infoMessage.GameInfo;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
-
-import org.w3c.dom.Text;
 
 /**
  * A GUI of a counter-player. The GUI displays the current value of the counter,
@@ -50,6 +53,14 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 	private TextView deckText = null;
 	private TextView player1DabloonsText = null;
 	private TextView player2DabloonsText = null;
+
+	private ImageView cardLeft = null;
+	private ImageView cardRight = null;
+	private ImageView oppCardLeft = null;
+	private ImageView oppCardRight = null;
+
+
+	private ImageView deckButton = null;
 
 
 
@@ -94,8 +105,6 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		// Construct the action and send it to the game
 		GameAction action = null;
 
-
-
 		//General
 		if (button.getId() == R.id.taxButton) {
 			game.sendAction(new TaxAction(this));
@@ -120,6 +129,10 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 			game.sendAction(new CoupDeteAction(this));
 			Log.d("Click", "Coup action was called");
 		}
+		else if(button.getId() == R.id.cardBackCenter) {
+			//game.sendAction(new IncomeAction(this));
+		}
+
 	}// onClick
 
 	/**
@@ -139,8 +152,66 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		}
 
 		// update our state; then update the display
-		this.state = (CoupState)info;
-		updateDisplay();
+		state = (CoupState)info;
+
+		//Creates a temporary variable of the Left and Right card
+		GameAction tempLeft  = this.state.getplayer0Hand()[0];
+		GameAction tempRight = this.state.getplayer0Hand()[1];
+
+		//Initializes the drawable
+		// left card
+		if (tempLeft instanceof Ambassador) {
+			cardLeft.setImageResource(R.drawable.bambassador);
+		} else if (tempLeft instanceof Contessa) {
+			cardLeft.setImageResource(R.drawable.bcontessa);
+		} else if (tempLeft instanceof Captain) {
+			cardLeft.setImageResource(R.drawable.bcaptain);
+		} else if (tempLeft instanceof Assassin) {
+			cardLeft.setImageResource(R.drawable.bassasin);
+		} else if (tempLeft instanceof Duke) {
+			cardLeft.setImageResource(R.drawable.bduke);
+		}
+
+		// right card
+		if (tempRight instanceof Ambassador) {
+			cardRight.setImageResource(R.drawable.bambassador);
+		} else if (tempRight instanceof Contessa) {
+			cardRight.setImageResource(R.drawable.bcontessa);
+		} else if (tempRight instanceof Captain) {
+			cardRight.setImageResource(R.drawable.bcaptain);
+		} else if (tempRight instanceof Assassin) {
+			cardRight.setImageResource(R.drawable.bassasin);
+		} else if (tempRight instanceof Duke) {
+			cardRight.setImageResource(R.drawable.bduke);
+		}
+
+		Log.d("Ass", "This.state.checkdead 0 is " + state.checkplayer0Dead()[0]);
+
+		if (state.checkplayer0Dead()[0] == true) {
+				Log.d("Ass", "Updating cardLeft to bduke");
+				oppCardLeft.setImageResource(R.drawable.opponent_killed);
+			}
+
+			if(state.checkplayer0Dead()[1] == true) {
+				Log.d("Ass", "Updating deckButton to bduke");
+				oppCardRight.setImageResource(R.drawable.opponent_killed);
+			}
+
+		if (state.checkplayer1Dead()[0] == true) {
+			Log.d("Ass", "Updating cardLeft to bduke");
+			cardLeft.setImageResource(R.drawable.killed);
+		}
+
+		if(state.checkplayer1Dead()[1] == true) {
+			Log.d("Ass", "Updating deckButton to bduke");
+			cardRight.setImageResource(R.drawable.killed);
+		}
+
+			updateDisplay();
+
+
+
+
 
 		//if(state != null) {
 		//	deckText.setText(String.valueOf(state.getPlayer0Money()));
@@ -218,6 +289,16 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		Button challenge = (Button) activity.findViewById(R.id.buttonChallenge);
 		challenge.setOnClickListener(this);
+
+		this.cardLeft = (ImageView) activity.findViewById(R.id.playerCharacterCardLeft);
+		this.cardRight = (ImageView) activity.findViewById(R.id.playerCharacterCardRight);
+
+		this.deckButton = (ImageView) activity.findViewById(R.id.cardBackCenter);
+		deckButton.setOnClickListener(this);
+
+		this.oppCardLeft = (ImageView) activity.findViewById(R.id.cardBackLeft);
+		this.oppCardRight = (ImageView) activity.findViewById(R.id.cardBackRight);
+
 
 	}
 

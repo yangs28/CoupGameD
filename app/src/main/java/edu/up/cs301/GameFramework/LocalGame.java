@@ -358,18 +358,18 @@ public abstract class LocalGame implements Game, Tickable {
      */
     private final void finishUpGame(String msg) {
 
-//        // set the game-stage to "over"
-//        gameStage = GameStage.GAME_OVER;
-//
-//        // set up the array and count so that we can keep track of
-//        // whether everyone has replied
-//        playersFinished = new boolean[players.length];
-//        playerFinishedCount = 0;
-//
-//        // send all players a "game over" message
-//        for (GamePlayer p : players) {
-//            p.sendInfo(new GameOverInfo(msg));
-//        }
+        // set the game-stage to "over"
+        gameStage = GameStage.GAME_OVER;
+
+        // set up the array and count so that we can keep track of
+        // whether everyone has replied
+        playersFinished = new boolean[players.length];
+        playerFinishedCount = 0;
+
+        // send all players a "game over" message
+        for (GamePlayer p : players) {
+            p.sendInfo(new GameOverInfo(msg));
+        }
     }
 
     /**

@@ -1,7 +1,5 @@
 package edu.up.cs301.Coup;
 
-import android.util.Log;
-
 import java.util.Random;
 
 import edu.up.cs301.Characters.Ambassador;
@@ -9,10 +7,8 @@ import edu.up.cs301.Characters.Assassin;
 import edu.up.cs301.Characters.Captain;
 import edu.up.cs301.Characters.Contessa;
 import edu.up.cs301.Characters.Duke;
-import edu.up.cs301.GameFramework.Game;
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.infoMessage.GameState;
-import edu.up.cs301.GameFramework.players.GamePlayer;
 
 /**
  * This contains the state for the Coup game. This stores the current state of the
@@ -42,6 +38,18 @@ public class CoupState extends GameState {
 	private GameAction[] deck;
 	private GameAction[] player0Hand;
 	private GameAction[] player1Hand;
+	//This boolean checks to see if the card in the Deck is drawn. If it has been drawn we cannot draw from that position
+	private boolean[] isDrawn;
+	//This boolean checks to see if the card has been killed and can no longer be drawn
+	private boolean[] isKilled;
+	private boolean[] player0isDead;
+	private boolean[] player1isDead;
+
+
+	int temphand1;
+	int temphand2;
+	int temphand3;
+	int temphand4;
 
 	private int gameStage;
 
@@ -55,6 +63,14 @@ public class CoupState extends GameState {
 		player0Hand = new GameAction[2];
 		player1Hand = new GameAction[2];
 		deck = new GameAction[15];
+		isDrawn = new boolean[15];
+		isKilled = new boolean[15];
+
+		this.player0isDead = new boolean[2];
+		this.player1isDead = new boolean[2];
+
+
+
 
 		for(int k = 0; k<15;k++){
 			if(k<=2){deck[k]=new Ambassador(null);}
@@ -63,15 +79,25 @@ public class CoupState extends GameState {
 			else if(k<=11){deck[k]=new Contessa(null);}
 			else{deck[k]=new Duke(null);}
 		}
+
 		Random r = new Random();
 
-		player0Hand[0] = deck[r.nextInt(14)];
-		player0Hand[1] = deck[r.nextInt(14)];
 
-		player1Hand[0] = deck[r.nextInt(14)];
-		player1Hand[1] = deck[r.nextInt(14)];
+		int temphand1 = r.nextInt(14);
+		int temphand2 = r.nextInt(14);
+		int temphand3 = r.nextInt(14);
+		int temphand4 = r.nextInt(14);
+
+		player0Hand[0] = deck[temphand1];
+		player0Hand[1] = deck[temphand2];
+		isDrawn[temphand1] = true;
+		isDrawn[temphand2] = true;
 
 
+		player1Hand[0] = deck[temphand3];
+		player1Hand[1] = deck[temphand4];
+		isDrawn[temphand3] = true;
+		isDrawn[temphand4] = true;
 
 	}
 
@@ -86,6 +112,8 @@ public class CoupState extends GameState {
 		this.player0Hand = _player0Hand.clone();
 		this.player1Hand = _player1Hand.clone();
 		this.deck = _deck.clone();
+
+
 	}
 
 	/**
@@ -114,6 +142,34 @@ public class CoupState extends GameState {
 		for (int i = 0; i < orig.deck.length; i++) {
 			this.deck[i] = orig.deck[i];
 		}
+
+
+		this.isDrawn = new boolean[orig.isDrawn.length];
+		for (int i = 0; i < orig.isDrawn.length; i++) {
+			this.isDrawn[i] = orig.isDrawn[i];
+		}
+
+		this.isKilled = new boolean[orig.isKilled.length];
+		for (int i = 0; i < orig.isKilled.length; i++) {
+			this.isKilled[i] = orig.isKilled[i];
+		}
+
+		this.player0isDead = new boolean[orig.player0isDead.length];
+		for (int i = 0; i < orig.player0isDead.length; i++) {
+			this.player0isDead[i] = orig.player0isDead[i];
+		}
+
+		this.player1isDead = new boolean[orig.player1isDead.length];
+		for (int i = 0; i < orig.player1isDead.length; i++) {
+			this.player1isDead[i] = orig.player1isDead[i];
+		}
+
+
+		// Copy temporary hands
+		this.temphand1 = orig.temphand1;
+		this.temphand2 = orig.temphand2;
+		this.temphand3 = orig.temphand3;
+		this.temphand4 = orig.temphand4;
 
 
 	}
@@ -241,12 +297,47 @@ public class CoupState extends GameState {
 	public GameAction[] getplayer0Hand(){
 		return player0Hand;
 	}
+
+	public void setplayer0Hand(GameAction card1, GameAction card2){
+		player0Hand[0] = card1;
+		player0Hand[1] = card2;
+	}
+
+	public GameAction[] getDeck() {
+		return deck;
+	}
+
 	public GameAction[] getplayer1Hand(){
 		return player1Hand;
 	}
 
+	public void setplayer2Hand(GameAction card1, GameAction card2){
+		player1Hand[0] = card1;
+		player1Hand[1] = card2;
+	}
+
+	public void make0Dead(int x) {
+		player0isDead[x] = true;
+	}
+
+	public void make1Dead(int x) {
+		player1isDead[x] = true;
+	}
+
+	public boolean[] checkplayer0Dead() {
+		return player0isDead;
+	}
+
+	public boolean[] checkplayer1Dead() {
+		return player1isDead;
+	}
+
 	public void setPlayerId(int _playerId) {
 		this.playerId = _playerId;
+	}
+
+	public CoupState getGameState() {
+		return this;
 	}
 
 
@@ -258,5 +349,7 @@ public class CoupState extends GameState {
 				" It is currently player " + (getPlayerId()) + "'s turn.";
 	}
 }
+
+
 
 
