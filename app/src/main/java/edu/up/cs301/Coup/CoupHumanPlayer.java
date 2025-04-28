@@ -88,8 +88,8 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 	}
 
 	/**
-	 * this method gets called when the user clicks the '+' or '-' button. It
-	 * creates a new CounterMoveAction to return to the parent activity.
+	 * This method gets called when the user clicks an action button (eg. Tax, Coup) on their GUI
+	 * Registers the button click and then sends the appropriate action to the game
 	 *
 	 * @param button
 	 * 		the button that was clicked
@@ -101,7 +101,8 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		// Construct the action and send it to the game
 		GameAction action = null;
 
-		//General
+		//Sends a relevant action to the game depending on button press
+		//(eg. tax button press, send a Tax action)
 		if (button.getId() == R.id.taxButton) {
 			game.sendAction(new TaxAction(this));
 			Log.d("Click", "Tax action was called");
@@ -138,9 +139,10 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 	 */
 	@Override
 	public void receiveInfo(GameInfo info) {
-		// ignore the message if it's not a CounterState message
+		// ignore the message if it's not a CoupState message
 		if (!(info instanceof CoupState)) return;
 
+		//Null check to prevent error, and sets the value of the currency to the correct amount
 		if(state != null) {
 			player1DabloonsText.setText(String.valueOf(state.getPlayer0Money()) + " francs");
 			player2DabloonsText.setText(String.valueOf(state.getPlayer1Money()) + " francs");
@@ -150,12 +152,13 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		// update our state; then update the display
 		state = (CoupState)info;
 
-		//Creates a temporary variable of the Left and Right card
+		//Creates a temporary variable of the Left and Right card for the human player's hand
 		GameAction tempLeft  = this.state.getplayer0Hand()[0];
 		GameAction tempRight = this.state.getplayer0Hand()[1];
 
-		//Initializes the drawable
-		// left card
+		//Initializes the drawable and changes the card graphic on the player to be the correct type
+
+		//Left card
 		if (tempLeft instanceof Ambassador) {
 			cardLeft.setImageResource(R.drawable.bambassador);
 		} else if (tempLeft instanceof Contessa) {
@@ -168,7 +171,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 			cardLeft.setImageResource(R.drawable.bduke);
 		}
 
-		// right card
+		//Right card
 		if (tempRight instanceof Ambassador) {
 			cardRight.setImageResource(R.drawable.bambassador);
 		} else if (tempRight instanceof Contessa) {
@@ -183,6 +186,9 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		Log.d("Ass", "This.state.checkdead 0 is " + state.checkplayer0Dead()[0]);
 
+		//The below code calls the checkDead methods to check the status of both player's cards
+		//Checks to see if the card has been killed due to Coup or Assassination
+		//If that card is dead, we replace the card graphic with the "Killed" graphic to indicate that card is deceased
 		if (state.checkplayer0Dead()[0] == true) {
 				Log.d("Ass", "Updating cardLeft to bduke");
 				oppCardLeft.setImageResource(R.drawable.opponent_killed);
@@ -202,16 +208,9 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 			Log.d("Ass", "Updating deckButton to bduke");
 			cardRight.setImageResource(R.drawable.killed);
 		}
+		//Updates display again
+		updateDisplay();
 
-			updateDisplay();
-
-
-
-
-
-		//if(state != null) {
-		//	deckText.setText(String.valueOf(state.getPlayer0Money()));
-		//}
 	}
 
 	/**
@@ -248,23 +247,24 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 
 		//testButton.setOnClickListener(this);
 
-		//deez nuts lmao
+		//Initializes all Text, Images, Buttons etc. with the correct element from the GUI
 
+		//Initializes misc text and currency text
 		deckText = (TextView)activity.findViewById(R.id.deckText);
 		player1DabloonsText = (TextView)activity.findViewById((R.id.playerDabloonsText));
 		player2DabloonsText = (TextView)activity.findViewById((R.id.secondPlayerDabloonsText));
 
-//
-		// Set this object as the listener for all buttons
+
+		//Initializes all action buttons. Sets listeners on them so they are clickable
 		Button taxButton = (Button) activity.findViewById(R.id.taxButton);
 		taxButton.setOnClickListener(this);
-//
+
 		Button incomeButton = (Button) activity.findViewById(R.id.incomeButton);
 		incomeButton.setOnClickListener(this);
-//
+
 		Button foreignAidButton = (Button) activity.findViewById(R.id.foreignAidButton);
 		foreignAidButton.setOnClickListener(this);
-//
+
 		Button assassinateButton = (Button) activity.findViewById(R.id.assassinateButton);
 		assassinateButton.setOnClickListener(this);
 
@@ -286,6 +286,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		Button challenge = (Button) activity.findViewById(R.id.buttonChallenge);
 		challenge.setOnClickListener(this);
 
+		//Initializes the left/right cards for both players, and sets them to be dynamic and changeable
 		this.cardLeft = (ImageView) activity.findViewById(R.id.playerCharacterCardLeft);
 		this.cardRight = (ImageView) activity.findViewById(R.id.playerCharacterCardRight);
 
