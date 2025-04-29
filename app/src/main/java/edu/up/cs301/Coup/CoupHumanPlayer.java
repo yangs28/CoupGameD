@@ -277,14 +277,7 @@ public class CoupHumanPlayer extends GameHumanPlayer implements OnClickListener 
 		Button coupButton = (Button) activity.findViewById(R.id.coupButton);
 		coupButton.setOnClickListener(this);
 
-		Button card1 = (Button) activity.findViewById(R.id.buttonCardOne);
-		card1.setOnClickListener(this);
 
-		Button card2 = (Button) activity.findViewById(R.id.buttonCardTwo);
-		card2.setOnClickListener(this);
-
-		Button challenge = (Button) activity.findViewById(R.id.buttonChallenge);
-		challenge.setOnClickListener(this);
 
 		//Initializes the left/right cards for both players, and sets them to be dynamic and changeable
 		this.cardLeft = (ImageView) activity.findViewById(R.id.playerCharacterCardLeft);
