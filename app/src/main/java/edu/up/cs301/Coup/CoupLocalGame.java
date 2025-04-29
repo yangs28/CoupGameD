@@ -36,16 +36,9 @@ import java.util.Random;
  */
 public class CoupLocalGame extends LocalGame {
 
-    // When a counter game is played, any number of players. The first player
-    // is trying to get the counter value to TARGET_MAGNITUDE; the second player,
-    // if present, is trying to get the counter to -TARGET_MAGNITUDE. The
-    // remaining players are neither winners nor losers, but can interfere by
-    // modifying the counter.
-    public static final int TARGET_MAGNITUDE = 10;
-
     // the game's state
     private CoupState gameState;
-
+    //Action check to see if an action was blocked by an opposing character
     private boolean wasBlocked = false;
 
     /**
@@ -84,7 +77,7 @@ public class CoupLocalGame extends LocalGame {
         Log.d("Player", "Player ID is " + gameState.getPlayerId());
         Log.d("Ass", "Assassinate action was not called. Boolean makeDead 0 is " + gameState.checkplayer0Dead()[0]);
 
-        // Create a new Random instance for any randomized choices
+        // Create a new Random instance for any actions that require randomized choices
         Random rand = new Random();
 
         // Only proceed if it's player 0's turn and the opponent is a human player
@@ -117,11 +110,6 @@ public class CoupLocalGame extends LocalGame {
                                 && !(oppHand[1] instanceof Contessa && !gameState.checkplayer1Dead()[1])) {
                             gameState.make0Dead(victim);
                         }
-
-                        Log.d("Ass", "Assassinate action was called. Boolean makeDead 0 is "
-                                + gameState.checkplayer0Dead()[0]);
-                        Log.d("Money", "Assassinate action was called. Money is "
-                                + gameState.getPlayer0Money());
                         // End of Assassinate handling
                     }
                 }
@@ -158,15 +146,14 @@ public class CoupLocalGame extends LocalGame {
                     int randCard1 = rand.nextInt(deckSize);
                     int randCard2 = rand.nextInt(deckSize);
                     while (randCard2 == randCard1) {
-                        randCard2 = rand.nextInt(deckSize);
+                        randCard2 = rand.nextInt(deckSize); //This code ensures we get two unique cards from the deck
                     }
+                    //Initializes two GameActions with those two cards
                     GameAction newCard1 = deckCopy[randCard1];
                     GameAction newCard2 = deckCopy[randCard2];
 
                     // Replace the human's hand with the new cards drawn from the deck
                     gameState.setplayer0Hand(newCard1, newCard2);
-                    Log.d("Money", "Exchange action was called. Money is "
-                            + gameState.getPlayer0Money());
                     // End of ExchangeAction handling
                 }
             }
@@ -178,8 +165,6 @@ public class CoupLocalGame extends LocalGame {
                 if (!(oppHand[0] instanceof Duke && !gameState.checkplayer1Dead()[0])
                         && !(oppHand[1] instanceof Duke && !gameState.checkplayer1Dead()[1])) {
                     gameState.setPlayer0Money(gameState.getPlayer0Money() + 2);
-                    Log.d("Money", "Foreign Aide action was called. Money is "
-                            + gameState.getPlayer0Money());
                     // End of ForeignAideAction handling
                 }
             }
@@ -187,8 +172,6 @@ public class CoupLocalGame extends LocalGame {
             // Handle Income action (always allowed)
             if (action instanceof IncomeAction) {
                 gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
-                Log.d("Money", "Income action was called. Money is "
-                        + gameState.getPlayer0Money());
                 // End of IncomeAction handling
             }
 
@@ -199,7 +182,7 @@ public class CoupLocalGame extends LocalGame {
                 // Must have a live Captain to attempt the steal
                 if ((tempHand[0] instanceof Captain && !gameState.checkplayer1Dead()[0])
                         || (tempHand[1] instanceof Captain && !gameState.checkplayer1Dead()[1])) {
-                    // Opponent must have no live Captain or Ambassador to block
+                    // Opponent must have no living Captain or Ambassador to block
                     if (!(oppHand[0] instanceof Ambassador && !gameState.checkplayer1Dead()[0])
                             && !(oppHand[1] instanceof Ambassador && !gameState.checkplayer1Dead()[1])
                             && !(oppHand[0] instanceof Captain && !gameState.checkplayer1Dead()[0])
@@ -212,8 +195,6 @@ public class CoupLocalGame extends LocalGame {
                             gameState.setPlayer1Money(gameState.getPlayer1Money() - 1);
                             gameState.setPlayer0Money(gameState.getPlayer0Money() + 1);
                         }
-                        Log.d("Money", "Steal action was called. Money is "
-                                + gameState.getPlayer0Money());
                         // End of StealAction handling
                     }
                 }
@@ -224,9 +205,7 @@ public class CoupLocalGame extends LocalGame {
                 GameAction[] tempHand = gameState.getplayer0Hand();
                 if ((tempHand[0] instanceof Duke && !gameState.checkplayer1Dead()[0])
                         || (tempHand[1] instanceof Duke && !gameState.checkplayer1Dead()[1])) {
-                    gameState.setPlayer0Money(gameState.getPlayer0Money() + 3);
-                    Log.d("Money", "Tax action was called. Money is "
-                            + gameState.getPlayer0Money());
+                    gameState.setPlayer0Money(gameState.getPlayer0Money() + 3); //Adds 3 coins to player upon successful Tax
                     // End of TaxAction handling
                 }
             }
@@ -244,10 +223,8 @@ public class CoupLocalGame extends LocalGame {
                     while (deadInfluences[victim]) {
                         victim = random.nextInt(2);
                     }
+                    //Kills the Influence
                     gameState.make0Dead(victim);
-
-                    Log.d("Money", "Coup action was called. Money is "
-                            + gameState.getPlayer0Money());
                     // End of CoupDeteAction handling
                 }
             }
@@ -258,13 +235,13 @@ public class CoupLocalGame extends LocalGame {
         }
 
 
-        // Only proceed if it's player 1's turn and the opponent is a computer player
+        //Only proceed if it's player 1's turn and the opponent is a computer player.
         if (gameState.getPlayerId() == getPlayerIdx(players[1]) && (players[1] instanceof CoupComputerPlayer1 || players[1] instanceof CoupSmartComputerPlayer)) {
 
             // Handle an assassination attempt from the computer player
             if (action instanceof AssassinateAction) {
-                GameAction[] tempHand = gameState.getplayer1Hand();   // computer player's face-down cards
-                GameAction[] oppHand  = gameState.getplayer0Hand();   // human's face-down cards
+                GameAction[] tempHand = gameState.getplayer1Hand();   // computer player's cards
+                GameAction[] oppHand  = gameState.getplayer0Hand();   // human's cards
                 // Check computer has a live Assassin and enough coins to assassinate
                 if ((tempHand[0] instanceof Assassin && !gameState.checkplayer0Dead()[0])
                         || (tempHand[1] instanceof Assassin && !gameState.checkplayer0Dead()[1])) {
@@ -284,14 +261,11 @@ public class CoupLocalGame extends LocalGame {
                             victim = random.nextInt(2);
                         }
 
-                        // Only kill if the human has no Contessa to block. Still deducts cost if blocked
+                        //Only kill if the human has no Contessa to block. Still deducts cost if blocked
                         if (!(oppHand[0] instanceof Contessa && !gameState.checkplayer0Dead()[0])
                                 && !(oppHand[1] instanceof Contessa && !gameState.checkplayer0Dead()[1])) {
                             gameState.make1Dead(victim);
                         }
-
-                        Log.d("Ass", "Assassinate action was called. Boolean makeDead 0 is " + gameState.checkplayer0Dead()[victim]); // log result
-                        Log.d("Money", "Assassinate action was called. Money is " + gameState.getPlayer1Money()); // log new money
                         // End of AssassinateAction handling
                     }
                 }
@@ -303,14 +277,12 @@ public class CoupLocalGame extends LocalGame {
                 // If computer has a live Contessa, they successfully block
                 if ((tempHand[0] instanceof Contessa && !gameState.checkplayer0Dead()[0])
                         || (tempHand[1] instanceof Contessa && !gameState.checkplayer0Dead()[1])) {
-                    Log.d("Money", "Block action was called. Money is " + gameState.getPlayer1Money()); // log block
                     // End of BlockAction handling
                 }
             }
 
             // Handle any challenge action from the computer player
             if (action instanceof ChallengeAction) {
-                Log.d("Money", "Challenge action was called. Money is " + gameState.getPlayer1Money()); // log challenge
                 // End of ChallengeAction handling
             }
 
@@ -335,7 +307,6 @@ public class CoupLocalGame extends LocalGame {
                     GameAction newCard2 = deckCopy[randCard2];
                     // Uses those cards to set the computer's hand with a new one
                     gameState.setplayer2Hand(newCard1, newCard2);
-                    Log.d("Money", "Exchange action was called. Money is " + gameState.getPlayer1Money()); // log exchange
                     // End of ExchangeAction handling
                 }
             }
@@ -348,7 +319,6 @@ public class CoupLocalGame extends LocalGame {
                 if (!(oppHand[0] instanceof Duke && !gameState.checkplayer0Dead()[0])
                         && !(oppHand[1] instanceof Duke && !gameState.checkplayer0Dead()[1])) {
                     gameState.setPlayer1Money(gameState.getPlayer1Money() + 2); // gain 2 coins
-                    Log.d("Money", "Foreign Aide action was called. Money is " + gameState.getPlayer1Money()); // log foreign aid
                     // End of ForeignAideAction handling
                 }
             }
@@ -356,7 +326,6 @@ public class CoupLocalGame extends LocalGame {
             // Handle Income action (always allowed)
             if (action instanceof IncomeAction) {
                 gameState.setPlayer1Money(gameState.getPlayer1Money() + 1); // gain 1 coin
-                Log.d("Money", "Income action was called. Money is " + gameState.getPlayer1Money()); // log income
                 // End of IncomeAction handling
             }
 
@@ -381,7 +350,6 @@ public class CoupLocalGame extends LocalGame {
                             gameState.setPlayer0Money(gameState.getPlayer0Money() - 1); // steal one coin
                             gameState.setPlayer1Money(gameState.getPlayer1Money() + 1);
                         }
-                        Log.d("Money", "Steal action was called. Money is " + gameState.getPlayer1Money()); // log steal
                         // End of StealAction handling
                     }
                 }
@@ -390,21 +358,20 @@ public class CoupLocalGame extends LocalGame {
             // Handle Tax action if computer claims Duke
             if (action instanceof TaxAction) {
                 GameAction[] tempHand = gameState.getplayer1Hand(); // computer player's cards
-                // Check for live Duke before taxing
+                // Check that AI has a live Duke before taxing
                 if ((tempHand[0] instanceof Duke && !gameState.checkplayer0Dead()[0])
                         || (tempHand[1] instanceof Duke && !gameState.checkplayer0Dead()[1])) {
                     gameState.setPlayer1Money(gameState.getPlayer1Money() + 3); // gain 3 coins
-                    Log.d("Money", "Tax action was called. Money is " + gameState.getPlayer1Money()); // log tax
                     // End of TaxAction handling
                 }
             }
 
             // Handle a Coup action from the computer player
             if (action instanceof CoupDeteAction) {
-                // Check if computer has enough money. If yes, deducts 7 points from the AI
+                //Check if computer has enough money. If yes, deducts 7 points from the AI
                 if (gameState.getPlayer1Money() >= 7) {
                     gameState.setPlayer1Money(gameState.getPlayer1Money() - 7); // pay cost
-                    boolean[] deadInfluences = gameState.checkplayer1Dead(); // computer dead influences
+                    boolean[] deadInfluences = gameState.checkplayer1Dead();
                     //Picks a random, living Influence to execute (man this game is kind of violent)
                     Random random = new Random();
                     int victim = random.nextInt(2);
@@ -412,12 +379,12 @@ public class CoupLocalGame extends LocalGame {
                         victim = random.nextInt(2);
                     }
                     gameState.make1Dead(victim); // execute the coup and kills that Influence
-                    Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer1Money()); // log coup
+                    Log.d("Money", "Coup action was called. Money is " + gameState.getPlayer1Money());
                     // End of CoupDeteAction handling
                 }
             }
 
-            gameState.setPlayerId(getPlayerIdx(players[0])); // switch to human turn
+            gameState.setPlayerId(getPlayerIdx(players[0])); //Switch turns
             return true;
         }
 
