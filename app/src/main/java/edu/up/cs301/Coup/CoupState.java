@@ -1,5 +1,6 @@
 package edu.up.cs301.Coup;
 
+import java.io.Serializable;
 import java.util.Random;
 
 import edu.up.cs301.Characters.Ambassador;
@@ -26,7 +27,7 @@ import edu.up.cs301.GameFramework.infoMessage.GameState;
  * @author Sean Yang, Clint Sizemore, Kanoa Martin
  * @version 4-24-25
  */
-public class CoupState extends GameState {
+public class CoupState extends GameState implements Serializable {
 
 	// to satisfy Serializable interface
 	private static final long serialVersionUID = 7737393762469851826L;

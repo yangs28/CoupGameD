@@ -1,10 +1,12 @@
 package edu.up.cs301.CoupActions;
 
+import java.io.Serializable;
+
 import edu.up.cs301.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.GameFramework.players.GamePlayer;
 
 //an action to spend 7 coins and eliminate a player's influence
-public class CoupAction extends GameAction {
+public class CoupAction extends GameAction implements Serializable {
 
 
     private boolean isBlockable;

@@ -2,6 +2,8 @@ package edu.up.cs301.GameFramework.infoMessage;
 
 import static edu.up.cs301.GameFramework.utilities.Saving.SEPARATOR;
 
+import java.io.Serializable;
+
 /**
  * The state of the game. This class should be subclassed so that it holds
  * all state information for the particular game being implemented. For
@@ -11,7 +13,7 @@ import static edu.up.cs301.GameFramework.utilities.Saving.SEPARATOR;
  * @author Steven R. Vegdahl
  * @version July 2013
  */
-public abstract class GameState extends GameInfo {
+public abstract class GameState extends GameInfo implements Serializable {
     //Tag for logging
     private static final String TAG = "GameState";
     // to satisfy the Serializable interface
