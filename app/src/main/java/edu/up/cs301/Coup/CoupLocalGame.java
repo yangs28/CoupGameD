@@ -419,6 +419,7 @@ public class CoupLocalGame extends LocalGame {
         Log.d("Over", "We're so back");
 
         //Checks if a player has no cards left, and if so ends the game
+        //Checks which player won and gives a custom message accordingly
         if (gameState.checkplayer0Dead()[0] == true && gameState.checkplayer0Dead()[1] == true) {
             Log.d("Over", "It's so over");
             return "The game is over! Player 1 won by killing all Influences! ";}
